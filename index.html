@@ -1,0 +1,2857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiana Louie — UX/UI Designer & Marketing Strategist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET & BASE ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+:root {
+  --cream:       #F8F4EE;
+  --beige:       #EDE8DF;
+  --sand:        #D8CEBC;
+  --sage:        #7A9E7E;
+  --sage-light:  #C5D9C6;
+  --sage-dark:   #4A6E4E;
+  --sky:         #89B4C8;
+  --sky-light:   #C8DEE8;
+  --sky-dark:    #3A7A9A;
+  --ink:         #2C2A24;
+  --ink-mid:     #5A5650;
+  --ink-light:   #9A9590;
+  --gold:        #C4944A;
+  --gold-light:  #EDD9B4;
+  --stamp-red:   #B84040;
+  --border:      rgba(44,42,36,0.12);
+  --nav-h:       72px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+.cursor {
+  width: 12px; height: 12px;
+  background: var(--sage);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, background 0.2s ease, width 0.2s ease, height 0.2s ease;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: normal;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--sage);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s ease, height 0.25s ease, opacity 0.2s ease;
+  opacity: 0.45;
+}
+body:hover .cursor, body:hover .cursor-ring { opacity: 1; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 56px;
+  background: rgba(248,244,238,0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+.nav-logo {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ink-mid); text-decoration: none;
+}
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 11.5px; font-weight: 500; letter-spacing: 0.1em;
+  text-decoration: none; color: var(--ink-mid);
+  text-transform: uppercase; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--sage-dark); }
+.nav-cta {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 9px 20px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  color: var(--ink); text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-cta:hover { background: var(--ink); color: var(--cream); }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: calc(var(--nav-h) + 60px) 56px 80px;
+  position: relative; overflow: hidden;
+  text-align: center;
+}
+.hero-grid-bg {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.04;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 47px, var(--ink) 47px, var(--ink) 48px),
+    repeating-linear-gradient(90deg, transparent, transparent 47px, var(--ink) 47px, var(--ink) 48px);
+}
+.hero-plane {
+  position: absolute; top: 100px; right: 100px;
+  font-size: 52px; opacity: 0.07;
+  animation: floatPlane 7s ease-in-out infinite;
+  transform: rotate(-28deg);
+  pointer-events: none;
+  user-select: none;
+}
+@keyframes floatPlane {
+  0%,100% { transform: rotate(-28deg) translateY(0px); }
+  50%      { transform: rotate(-28deg) translateY(-14px); }
+}
+.hero-tag {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 36px;
+  animation: fadeSlideDown 0.8s 0.2s ease both;
+}
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-tag-line { height: 1px; width: 44px; background: var(--sand); }
+.hero-tag span {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.38em;
+  color: var(--ink-light); text-transform: uppercase;
+}
+
+/* ── Split-flap departure board ── */
+.dep-board {
+  display: inline-block;
+  background: #0e0d0d;
+  border-radius: 16px;
+  padding: 28px 32px 32px;
+  margin: 36px 0 20px;
+  box-shadow:
+    0 0 0 4px #1c1c1c,
+    0 0 0 8px #252525,
+    0 16px 64px rgba(0,0,0,0.7),
+    0 4px 16px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.03);
+  cursor: pointer;
+}
+.dep-board-rows { display: flex; flex-direction: column; gap: 10px; }
+.dep-board-row  { display: flex; gap: 7px; align-items: center; justify-content: center; }
+
+/* individual tile */
+.sf-tile {
+  width: 58px; height: 80px;
+  border-radius: 7px;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 36px; font-weight: 400;
+  color: #F0E6CC;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    inset 0 -2px 0 rgba(0,0,0,0.6),
+    0 3px 8px rgba(0,0,0,0.5);
+  background-image: linear-gradient(to bottom, #242424 0%, #1f1f1f 49%, #161616 51%, #1b1b1b 100%);
+}
+.sf-tile::after {
+  content: ''; position: absolute; left: 0; right: 0;
+  top: 50%; height: 2px; background: #080808; z-index: 2;
+}
+.sf-tile .sf-char {
+  position: relative; z-index: 3; line-height: 1;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+  transition: font-family 0s;
+}
+/* while scrambling: monospace caps */
+.sf-tile .sf-char.enc {
+  color: #5A4E32;
+  font-family: 'DM Mono', monospace;
+  font-size: 30px;
+}
+/* when revealed: elegant serif, full brightness */
+.sf-tile .sf-char.rev {
+  color: #F2E8D0;
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  font-style: normal;
+}
+.sf-tile.sf-space {
+  background: transparent !important;
+  box-shadow: none; width: 20px;
+}
+.sf-tile.sf-space::after { display: none; }
+
+/* flip card top-half drop */
+@keyframes flipTop {
+  0%   { transform: rotateX(0deg); opacity: 1; }
+  100% { transform: rotateX(-90deg); opacity: 0.2; }
+}
+.sf-tile.flipping::before {
+  content: attr(data-prev);
+  position: absolute; top: 0; left: 0; right: 0; height: 50%;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 2px;
+  font-family: 'DM Mono', monospace; font-size: 30px; color: #5A4E32;
+  background-image: linear-gradient(#242424, #1f1f1f);
+  transform-origin: bottom center;
+  animation: flipTop 0.18s ease-in forwards;
+  z-index: 4; border-radius: 7px 7px 0 0; overflow: hidden;
+}
+
+.hero-role {
+  font-size: 15px; color: var(--ink-light);
+  letter-spacing: 0.06em; font-weight: 300;
+  margin-top: 14px; margin-bottom: 48px;
+  animation: fadeSlideUp 0.8s 2.6s ease both;
+}
+
+/* Boarding pass strip */
+.hero-bp {
+  display: inline-flex; align-items: stretch;
+  background: white; border-radius: 14px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(44,42,36,0.07);
+  animation: fadeSlideUp 0.8s 2.9s ease both;
+}
+.hbp-sec {
+  padding: 22px 28px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.hbp-sec + .hbp-sec { border-left: 1px dashed var(--sand); }
+.hbp-lbl { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.22em; color: var(--ink-light); text-transform: uppercase; margin-bottom: 5px; }
+.hbp-val { font-family: 'DM Mono', monospace; font-size: 22px; color: var(--ink); }
+.hbp-sub { font-family: 'DM Mono', monospace; font-size: 8.5px; color: var(--ink-light); margin-top: 3px; }
+.hbp-route { display: flex; align-items: center; gap: 10px; padding: 22px 20px; }
+.hbp-line  { width: 44px; height: 1px; background: var(--sand); }
+.hbp-plane-icon { color: var(--sage); font-size: 17px; }
+.hbp-tear {
+  width: 2px;
+  background: repeating-linear-gradient(180deg, var(--sand) 0, var(--sand) 6px, transparent 6px, transparent 14px);
+}
+.hbp-sm { padding: 22px 22px; }
+.hbp-sm .hbp-val { font-size: 16px; }
+
+/* ─── DECRYPTED TEXT ─── */
+.decrypt-char {
+  display: inline;
+  transition: color 0.1s;
+}
+.decrypt-char.revealed {
+  color: inherit;
+}
+.decrypt-char.encrypted {
+  color: var(--sage);
+  opacity: 0.7;
+}
+/* hero-name removed — name lives inside split-flap board */
+
+/* dep-char-decrypt superseded by sf-tile above */
+
+.scroll-cue {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  margin-top: 60px;
+  animation: fadeIn 1s 3.8s ease both;
+}
+@keyframes fadeIn { to { opacity: 1; } }
+.scroll-cue { opacity: 0; }
+.scroll-cue span { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.32em; color: var(--ink-light); text-transform: uppercase; }
+.scroll-dot { width: 5px; height: 5px; background: var(--sage); border-radius: 50%; animation: bounce 1.6s ease-in-out infinite; }
+@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
+
+/* ─── SHARED SECTION STYLES ─── */
+.section-wrap { max-width: 1120px; margin: 0 auto; padding: 110px 56px; }
+.section-tag {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 18px;
+}
+.st-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--ink-light); letter-spacing: 0.2em; }
+.st-line { width: 36px; height: 1px; background: var(--sand); }
+.st-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--sage); }
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(34px, 4.5vw, 56px);
+  font-weight: 600; line-height: 1.08;
+  color: var(--ink); margin-bottom: 56px;
+}
+.full-divider { border: none; border-top: 1px solid var(--border); }
+
+/* ── NEW passport stamp board ── */
+.passport-new {
+  background: #f7f5f0;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px 32px 24px;
+  position: relative;
+}
+.pn-header {
+  position: absolute; top: 20px; right: 28px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 0.22em;
+  color: var(--ink-light); text-transform: uppercase;
+}
+.pn-tabs {
+  display: flex; gap: 8px; margin-bottom: 28px;
+}
+.pn-tab {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11.5px; font-weight: 500;
+  padding: 7px 18px; border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer; transition: all 0.2s;
+  color: var(--ink-light); background: none;
+  letter-spacing: 0.03em;
+}
+.pn-tab:hover { background: var(--beige); }
+.pn-tab.active {
+  background: white; color: var(--ink);
+  border-color: var(--border);
+  box-shadow: 0 1px 4px rgba(44,42,36,0.07);
+}
+
+.pn-click-hint {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em;
+  color: var(--ink-light); text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.pn-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 8px 0 16px;
+}
+
+/* individual circular stamp */
+.pn-stamp {
+  width: 148px; height: 148px;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  position: relative;
+  background: white;
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+  user-select: none;
+}
+.pn-stamp:hover { transform: scale(1.07); box-shadow: 0 8px 24px rgba(44,42,36,0.1); }
+
+/* dashed border — green variant */
+.pn-stamp.green {
+  border: 2.5px dashed var(--sage);
+  box-shadow: 0 0 0 6px rgba(122,158,126,0.07);
+}
+/* dashed border — blue variant */
+.pn-stamp.blue {
+  border: 2.5px dashed var(--sky);
+  box-shadow: 0 0 0 6px rgba(137,180,200,0.07);
+}
+
+/* stamped / clicked state */
+.pn-stamp.stamped.green {
+  background: rgba(197,217,198,0.18);
+}
+.pn-stamp.stamped.blue {
+  background: rgba(200,222,232,0.18);
+}
+
+/* year badge bottom */
+.pn-stamp::after {
+  content: attr(data-year);
+  position: absolute; bottom: 10px; right: 14px;
+  font-family: 'DM Mono', monospace; font-size: 8px;
+  color: var(--ink-light); letter-spacing: 0.12em;
+}
+
+/* svg icon */
+.pn-stamp svg {
+  width: 28px; height: 28px;
+  pointer-events: none;
+}
+.pn-stamp.green svg { color: var(--sage-dark); stroke: var(--sage-dark); }
+.pn-stamp.blue  svg { color: var(--sky-dark);  stroke: var(--sky-dark); }
+
+/* stamp name */
+.pn-stamp-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  text-align: center; line-height: 1.35;
+  max-width: 100px;
+}
+.pn-stamp.green .pn-stamp-name { color: var(--sage-dark); }
+.pn-stamp.blue  .pn-stamp-name { color: var(--sky-dark); }
+
+/* verified label */
+.pn-stamp-verified {
+  font-family: 'DM Mono', monospace;
+  font-size: 7.5px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--ink-light);
+}
+
+/* year text inside stamp */
+.pn-stamp-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px; letter-spacing: 0.1em;
+  color: var(--ink-light); margin-top: 2px;
+}
+
+/* stamp ink-press animation on click */
+@keyframes inkPress {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(0.93); }
+  100% { transform: scale(1); }
+}
+.pn-stamp.stamped { animation: inkPress 0.3s ease; }
+
+/* footer bar */
+.pn-footer {
+  display: flex; justify-content: space-between;
+  padding-top: 16px; margin-top: 8px;
+  border-top: 1px solid var(--border);
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 0.18em;
+  color: var(--ink-light); text-transform: uppercase;
+}
+/* ── Programming Languages Modal ── */
+.prog-modal-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(44,42,36,0.45);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.prog-modal-overlay.open { opacity: 1; pointer-events: all; }
+.prog-modal-card {
+  background: white; border-radius: 20px;
+  padding: 32px; width: 100%; max-width: 480px; margin: 20px;
+  box-shadow: 0 24px 64px rgba(44,42,36,0.18);
+  position: relative;
+  transform: scale(0.94) translateY(12px);
+  transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1);
+}
+.prog-modal-overlay.open .prog-modal-card { transform: scale(1) translateY(0); }
+.prog-modal-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--beige); border: none;
+  font-size: 18px; color: var(--ink-mid);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s; line-height: 1;
+}
+.prog-modal-close:hover { background: var(--sand); }
+.prog-modal-top { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.prog-modal-stamp-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  border: 2px dashed var(--sage); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(197,217,198,0.15); color: var(--sage-dark);
+}
+.prog-modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 600; color: var(--ink); margin-bottom: 4px;
+}
+.prog-modal-verified {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.22em; color: var(--sage-dark); text-transform: uppercase;
+}
+.prog-modal-desc {
+  font-size: 14px; line-height: 1.7; color: var(--ink-mid); margin-bottom: 22px;
+}
+.prog-modal-section-label {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.22em; color: var(--ink-light);
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.prog-modal-langs { display: flex; flex-direction: column; gap: 10px; }
+.prog-lang-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: var(--beige); border-radius: 12px;
+  padding: 14px 16px; border: 1px solid var(--border); transition: background 0.2s;
+}
+.prog-lang-item:hover { background: var(--sand); }
+.prog-lang-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.prog-lang-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.prog-lang-desc { font-size: 12px; line-height: 1.5; color: var(--ink-mid); }
+
+/* ── Cert modal simple list ── */
+.cert-modal-list { display: flex; flex-direction: column; gap: 8px; }
+.cert-modal-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  background: var(--beige); border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 13.5px; font-weight: 500; color: var(--ink);
+  transition: background 0.2s;
+}
+.cert-modal-item:hover { background: var(--sand); }
+.cert-modal-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.cert-modal-dot.green { background: var(--sage); }
+.cert-modal-dot.blue  { background: var(--sky); }
+
+#about { background: var(--cream); }
+.about-grid { display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: start; }
+.about-text p {
+  font-size: 16px; line-height: 1.85; color: var(--ink-mid);
+  margin-bottom: 22px;
+}
+.about-text p:last-child { margin-bottom: 0; }
+.about-text strong { color: var(--ink); font-weight: 500; }
+.about-links { display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; }
+.about-link {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 10px 22px; border-radius: 5px;
+  text-decoration: none; transition: all 0.22s;
+}
+.about-link.primary { background: var(--sage-dark); color: white; }
+.about-link.primary:hover { background: var(--sage); }
+.about-link.ghost { border: 1px solid var(--border); color: var(--ink-mid); }
+.about-link.ghost:hover { background: var(--beige); border-color: var(--sand); }
+
+/* ─── FLIP CARD ─── */
+.flip-card-scene {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 2/3;
+  perspective: 1400px;
+  cursor: pointer;
+  align-self: start;
+}
+.flip-card-inner {
+  width: 100%; height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.flip-card-scene.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front,
+.flip-card-back {
+  position: absolute; inset: 0;
+  border-radius: 28px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+/* ── TiltedCard + GlareHover on ID card front ── */
+.flip-card-front {
+  background: #ffffff;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 80px rgba(44,42,36,0.14), 0 0 0 1px rgba(44,42,36,0.07);
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: box-shadow 0.3s ease;
+}
+
+/* ── TiltedCard component CSS (exact port) ── */
+.tilted-card-figure {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.tilted-card-mobile-alert {
+  position: absolute;
+  top: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  display: none;
+}
+@media (max-width: 640px) {
+  .tilted-card-mobile-alert { display: block; }
+  .tilted-card-caption { display: none; }
+}
+.tilted-card-inner {
+  position: relative;
+  transform-style: preserve-3d;
+}
+.tilted-card-img {
+  position: absolute;
+  top: 0; left: 0;
+  object-fit: cover;
+  border-radius: 15px;
+  will-change: transform;
+  transform: translateZ(0);
+}
+.tilted-card-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 2;
+  will-change: transform;
+  transform: translateZ(30px);
+}
+.tilted-card-caption {
+  pointer-events: none;
+  position: absolute;
+  left: 0; top: 0;
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 4px 10px;
+  font-size: 10px;
+  color: #2d2d2d;
+  opacity: 0;
+  z-index: 3;
+}
+
+/* ── GlareHover CSS (exact port — replays every hover) ── */
+.glare-hover {
+  width: var(--gh-width);
+  height: var(--gh-height);
+  background: var(--gh-bg);
+  border-radius: var(--gh-br);
+  border: 1px solid var(--gh-border);
+  overflow: hidden;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.glare-hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--gh-angle),
+    hsla(0, 0%, 0%, 0) 60%,
+    var(--gh-rgba) 70%,
+    hsla(0, 0%, 0%, 0),
+    hsla(0, 0%, 0%, 0) 100%
+  );
+  /* no transition by default — transition injected on hover so it resets instantly on leave */
+  transition: none;
+  background-size: var(--gh-size) var(--gh-size), 100% 100%;
+  background-repeat: no-repeat;
+  background-position: -100% -100%, 0 0;
+  pointer-events: none;
+  z-index: 10;
+  border-radius: var(--gh-br);
+}
+.glare-hover:hover { cursor: pointer; }
+/* On hover: add transition then sweep to end */
+.glare-hover:hover::before {
+  transition: var(--gh-duration) ease;
+  background-position: 100% 100%, 0 0;
+}
+
+/* tooltip caption that follows cursor */
+.fcf-cursor-tip {
+  position: fixed;
+  pointer-events: none;
+  z-index: 200;
+  background: rgba(44,42,36,0.82);
+  color: #F5E8C0;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 20px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+.fcf-cursor-tip.visible { opacity: 1; transform: translateY(0); }
+.fcf-top {
+  padding: 32px 32px 14px;
+  text-align: center;
+  position: relative; z-index: 2;
+  flex-shrink: 0;
+}
+.fcf-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.fcf-role {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px; font-weight: 500;
+  color: var(--sage-dark);
+  letter-spacing: 0.05em;
+}
+.fcf-photo-wrap {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+.fcf-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+  filter: none;
+}
+.fcf-deco { display: none; }
+.fcf-tap-hint {
+  position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em;
+  color: rgba(44,42,36,0.35); text-transform: uppercase; white-space: nowrap;
+  z-index: 3;
+  background: rgba(255,255,255,0.7);
+  padding: 4px 12px; border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+/* ── BACK: existing info card, cream background ── */
+.flip-card-back {
+  transform: rotateY(180deg);
+  background: white;
+  border: 1px solid var(--border);
+  display: flex; flex-direction: column;
+}
+.id-header {
+  background: var(--sage); padding: 20px 26px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-shrink: 0;
+}
+.id-header .org { color: rgba(255,255,255,0.8); font-size: 11px; letter-spacing: 0.15em; font-family: 'DM Mono', monospace; }
+.id-header .num { color: rgba(255,255,255,0.5); font-size: 10px; font-family: 'DM Mono', monospace; }
+.id-body { padding: 22px 26px; flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+.id-avatar {
+  width: 56px; height: 56px; border-radius: 8px;
+  background: var(--sage-light);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 22px; color: var(--sage-dark);
+  margin-bottom: 12px;
+}
+.id-name { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.id-role-tag { font-size: 12px; color: var(--sage-dark); font-weight: 500; letter-spacing: 0.07em; margin-bottom: 24px; }
+.id-rows { display: grid; gap: 10px; }
+.id-row label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.22em; color: var(--ink-light); text-transform: uppercase; display: block; margin-bottom: 2px; }
+.id-row span { font-size: 12px; color: var(--ink); line-height: 1.5; }
+.id-bc {
+  display: flex; align-items: flex-end; height: 36px; gap: 2.5px;
+  margin-top: auto; padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+.id-bc-bar { background: var(--ink); border-radius: 1px; width: 3px; }
+
+/* ── ID card stats bar ── */
+.id-stats {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 24px; padding-top: 20px;
+  border-top: 1px solid var(--border);
+  gap: 8px;
+}
+.id-stat { flex: 1; text-align: center; }
+.id-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 600; line-height: 1;
+  margin-bottom: 5px;
+}
+.id-stat-num.stat-sage  { color: var(--sage); }
+.id-stat-num.stat-sky   { color: var(--sky-dark); }
+.id-stat-num.stat-sand  { color: var(--ink-light); }
+.id-stat-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 7.5px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-light);
+  line-height: 1.4;
+}
+.id-stat-divider {
+  width: 1px; height: 36px;
+  background: var(--border); flex-shrink: 0;
+}
+.grad-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--sage-light); color: var(--sage-dark);
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  font-weight: 500; letter-spacing: 0.1em;
+  padding: 3px 10px; border-radius: 20px;
+  margin-left: 4px; white-space: nowrap;
+  vertical-align: middle;
+}
+.id-tap-hint {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.18em;
+  color: var(--ink-light); text-transform: uppercase; text-align: center;
+  padding: 10px 0 4px; flex-shrink: 0;
+}
+
+
+/* ─── SKILLS / PASSPORT ─── */
+#skills { background: var(--beige); }
+.passport {
+  display: grid; grid-template-columns: 260px 1fr;
+  background: white; border-radius: 22px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 6px 48px rgba(44,42,36,0.08);
+}
+.pp-cover {
+  background: var(--sage-dark);
+  padding: 44px 34px; position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.pp-cover-circle {
+  position: absolute; border: 2px solid rgba(255,255,255,0.07); border-radius: 50%;
+}
+.pp-cover-circle.c1 { width: 160px; height: 160px; top: -50px; right: -50px; }
+.pp-cover-circle.c2 { width: 220px; height: 220px; bottom: -80px; left: -60px; }
+.pp-cover-title { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.3em; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 44px; position: relative; }
+.pp-seal {
+  width: 84px; height: 84px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.22);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px; margin-bottom: 26px; position: relative;
+}
+.pp-cover-name { font-family: 'Playfair Display', serif; font-size: 20px; font-style: italic; color: rgba(255,255,255,0.95); position: relative; }
+.pp-cover-type { font-family: 'DM Mono', monospace; font-size: 8.5px; color: rgba(255,255,255,0.35); letter-spacing: 0.22em; margin-top: 10px; position: relative; }
+.pp-inner { padding: 44px 40px; }
+.pp-tabs { display: flex; gap: 6px; margin-bottom: 34px; flex-wrap: wrap; }
+.ptab {
+  font-family: 'DM Mono', monospace; font-size: 9.5px;
+  letter-spacing: 0.14em; padding: 9px 18px;
+  border-radius: 6px; cursor: pointer; text-transform: uppercase;
+  color: var(--ink-light); transition: all 0.2s;
+  border: 1px solid transparent; background: none;
+  font-family: 'DM Sans', sans-serif;
+}
+.ptab:hover:not(.active) { background: var(--beige); }
+.ptab.active { background: var(--sage-light); color: var(--sage-dark); border-color: var(--sage-light); }
+
+.stamps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.stamp {
+  aspect-ratio: 1; border: 2px solid var(--border);
+  border-radius: 6px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 9px;
+  cursor: pointer; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  background: var(--cream); position: relative; overflow: hidden;
+  user-select: none;
+}
+.stamp:hover { transform: scale(1.06) rotate(-1.5deg); border-color: var(--sage); }
+.stamp.stamped { background: var(--sage-light); border-color: var(--sage); }
+.stamp-icon { font-size: 26px; pointer-events: none; }
+.stamp-name { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.08em; color: var(--ink-mid); text-align: center; pointer-events: none; }
+.stamp-overlay {
+  position: absolute; inset: 0; display: flex;
+  align-items: center; justify-content: center;
+  pointer-events: none; opacity: 0; font-size: 40px;
+}
+.stamp.stamped .stamp-overlay { animation: stampAnim 0.5s ease forwards; }
+@keyframes stampAnim {
+  0%   { opacity: 0.8; transform: scale(1.6) rotate(-8deg); }
+  100% { opacity: 0; transform: scale(1) rotate(0deg); }
+}
+
+.cert-list { display: flex; flex-direction: column; gap: 12px; }
+.cert-item {
+  display: flex; align-items: center; gap: 16px;
+  padding: 15px 20px; background: var(--cream);
+  border-radius: 9px; border: 1px solid var(--border);
+  cursor: pointer; transition: all 0.25s;
+}
+.cert-item:hover { background: var(--sage-light); border-color: var(--sage-light); }
+.cert-medal { width: 40px; height: 40px; border-radius: 50%; background: var(--gold-light); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.cert-name { font-size: 13.5px; font-weight: 500; color: var(--ink); }
+.cert-issuer { font-family: 'DM Mono', monospace; font-size: 9.5px; color: var(--ink-light); margin-top: 3px; }
+
+/* ─── EXPERIENCE TIMELINE ─── */
+#experience { background: var(--cream); }
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px;
+  width: 2px; background: var(--sand);
+}
+.timeline-item { position: relative; margin-bottom: 52px; }
+.timeline-item:last-child { margin-bottom: 0; }
+.tl-dot {
+  position: absolute; left: -32px; top: 6px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--sage); border: 3px solid white;
+  box-shadow: 0 0 0 2px var(--sage);
+}
+.tl-period {
+  font-family: 'DM Mono', monospace; font-size: 9.5px;
+  letter-spacing: 0.18em; color: var(--ink-light);
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.tl-company { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.tl-role { font-size: 13px; font-weight: 500; color: var(--sage-dark); margin-bottom: 14px; }
+.tl-desc { font-size: 14px; line-height: 1.8; color: var(--ink-mid); max-width: 600px; }
+.tl-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.tl-tag { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; padding: 5px 12px; border-radius: 4px; background: var(--beige); color: var(--ink-mid); }
+
+/* ─── PROJECTS ─── */
+#projects { background: var(--beige); }
+.projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.bp-card {
+  background: white; border-radius: 14px;
+  border: 1px solid var(--border); overflow: hidden;
+  cursor: pointer; text-decoration: none; display: block;
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+}
+.bp-card:hover { transform: translateY(-8px) rotate(0.4deg); box-shadow: 0 24px 56px rgba(44,42,36,0.13); }
+.bp-color-bar { height: 6px; }
+.bp-card-top { padding: 22px 26px 16px; }
+.bp-carrier { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: var(--ink-light); text-transform: uppercase; margin-bottom: 9px; }
+.bp-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; color: var(--ink); line-height: 1.2; }
+.bp-route-row {
+  display: flex; align-items: center;
+  padding: 14px 26px;
+  border-top: 1px dashed var(--sand);
+  border-bottom: 1px dashed var(--sand);
+}
+.bp-airport { flex: 1; }
+.bp-airport .ap-code { font-family: 'DM Mono', monospace; font-size: 28px; color: var(--ink); line-height: 1; }
+.bp-airport .ap-city { font-family: 'DM Mono', monospace; font-size: 8.5px; color: var(--ink-light); margin-top: 3px; }
+.bp-arrow-icon { color: var(--sage); font-size: 20px; margin: 0 18px; }
+.bp-meta { display: flex; gap: 0; }
+.bp-meta-col { flex: 1; padding: 16px 26px; }
+.bp-meta-col + .bp-meta-col { border-left: 1px solid var(--border); }
+.bp-meta-lbl { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.16em; color: var(--ink-light); text-transform: uppercase; margin-bottom: 5px; }
+.bp-meta-val { font-size: 12.5px; color: var(--ink); font-weight: 500; }
+.bp-card-tags { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 26px 22px; }
+.bp-tag { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.09em; padding: 4px 11px; border-radius: 4px; background: var(--beige); color: var(--ink-mid); }
+
+/* ─── CASE STUDIES ─── */
+#case-studies { background: var(--cream); }
+.cs-item { margin-bottom: 80px; }
+.cs-item:last-child { margin-bottom: 0; }
+.cs-head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding-bottom: 28px; border-bottom: 1px solid var(--border);
+  margin-bottom: 36px; gap: 24px;
+}
+.cs-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--ink-light); letter-spacing: 0.2em; margin-bottom: 10px; }
+.cs-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: var(--ink); line-height: 1.15; }
+.cs-badge {
+  background: var(--sage-light); color: var(--sage-dark);
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.18em; padding: 7px 16px;
+  border-radius: 5px; white-space: nowrap;
+  text-transform: uppercase; flex-shrink: 0; align-self: flex-start;
+  margin-top: 4px;
+}
+.cs-flow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin-bottom: 34px; }
+.cs-step-box {
+  padding: 10px 20px; background: var(--beige);
+  border: 1px solid var(--border); border-radius: 7px;
+  font-size: 12.5px; font-weight: 500; color: var(--ink-mid);
+  white-space: nowrap; transition: all 0.2s;
+}
+.cs-step-box.active { background: var(--sage-dark); color: white; border-color: var(--sage-dark); }
+.cs-arrow { color: var(--sand); font-size: 14px; margin: 0 7px; }
+.cs-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.cs-card {
+  background: var(--beige); border-radius: 11px;
+  border: 1px solid var(--border); padding: 22px;
+}
+.cs-card-lbl { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.22em; color: var(--sage-dark); text-transform: uppercase; margin-bottom: 12px; }
+.cs-card-text { font-size: 13.5px; line-height: 1.75; color: var(--ink-mid); }
+.cs-outcome {
+  margin-top: 20px; padding: 20px 24px;
+  background: white; border-radius: 11px;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; gap: 20px;
+}
+.cs-outcome-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 4px; }
+.cs-outcome-stat { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 600; color: var(--ink); line-height: 1; }
+.cs-outcome-desc { font-size: 12px; color: var(--ink-mid); margin-top: 3px; }
+.cs-divider { height: 1px; background: var(--border); margin: 80px 0; }
+
+/* ─── CONTACT ─── */
+#contact { background: var(--ink); }
+.contact-wrap { max-width: 1120px; margin: 0 auto; padding: 110px 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+.contact-kicker { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.3em; color: rgba(255,255,255,0.3); text-transform: uppercase; margin-bottom: 18px; }
+.contact-h { font-family: 'Playfair Display', serif; font-size: clamp(36px,4vw,54px); font-weight: 600; color: white; line-height: 1.1; }
+.contact-h em { color: var(--sage-light); font-style: italic; }
+.contact-btns { display: flex; flex-direction: column; gap: 14px; margin-top: 44px; }
+.contact-btn {
+  display: flex; align-items: center; gap: 18px;
+  padding: 18px 22px; border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; text-decoration: none; color: white;
+  transition: all 0.22s; background: transparent;
+}
+.contact-btn:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.16); }
+.cb-icon { font-size: 22px; flex-shrink: 0; }
+.cb-lbl { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.16em; color: rgba(255,255,255,0.38); text-transform: uppercase; display: block; margin-bottom: 3px; }
+.cb-val { font-size: 14px; }
+.contact-stamp-side { display: flex; flex-direction: column; align-items: center; }
+.stamp-ring {
+  width: 160px; height: 160px; border-radius: 50%;
+  border: 3px solid var(--sage-light);
+  display: flex; align-items: center; justify-content: center;
+  animation: spinSlow 24s linear infinite;
+  margin-bottom: 24px; position: relative;
+}
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+.stamp-ring-inner { animation: spinSlow 24s linear infinite reverse; text-align: center; }
+.sri-main { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: var(--sage-light); }
+.sri-sub { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.18em; color: rgba(255,255,255,0.35); margin-top: 5px; }
+.stamp-ring-text {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+}
+.stamp-caption { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.22em; color: rgba(255,255,255,0.25); text-transform: uppercase; text-align: center; line-height: 1.8; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--ink);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 24px 56px;
+}
+.footer-inner { max-width: 1120px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.footer-txt { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; }
+
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.reveal.show { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  .nav-links { gap: 20px; }
+  .nav-cta { display: none; }
+  .section-wrap, .contact-wrap { padding: 80px 28px; }
+  .about-grid, .passport, .contact-wrap { grid-template-columns: 1fr; }
+  .projects-grid, .cs-cards { grid-template-columns: 1fr; }
+  .pp-cover { display: none; }
+  #hero { padding: 120px 16px 70px; }
+  .hero-bp { display: none; }
+  .dep-board { padding: 16px 14px; }
+  .sf-tile { width: 36px; height: 52px; font-size: 22px; }
+  .sf-tile.flipping::before { font-size: 22px; }
+  .sf-tile.sf-space { width: 12px; }
+  .dep-board-row { gap: 4px; }
+  .dep-board-rows { gap: 7px; }
+}
+@media (max-width: 600px) {
+  .sf-tile { width: 28px; height: 42px; font-size: 17px; }
+  .sf-tile.flipping::before { font-size: 17px; }
+  .sf-tile.sf-space { width: 9px; }
+  .dep-board { padding: 12px 10px; }
+  .dep-board-row { gap: 3px; }
+  .cs-head { flex-direction: column; }
+  .cs-flow { display: none; }
+  .stamps-grid { grid-template-columns: repeat(2, 1fr); }
+  footer .footer-txt:last-child { display: none; }
+  .about-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a class="nav-logo" href="#hero">KL · Portfolio</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#case-studies">Case Studies</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Let's Connect</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-plane" aria-hidden="true">✈</div>
+
+  <div class="hero-tag">
+    <div class="hero-tag-line"></div>
+    <span>Now Boarding · Flight KL-001</span>
+    <div class="hero-tag-line"></div>
+  </div>
+
+  <div class="dep-board" id="depBoard" aria-label="Kiana Louie — Portfolio">
+    <div class="dep-board-rows">
+      <div class="dep-board-row" id="boardRow1"></div>
+      <div class="dep-board-row" id="boardRow2"></div>
+    </div>
+  </div>
+
+  <p class="hero-role">UX/UI Designer &nbsp;·&nbsp; Marketing Strategist &nbsp;·&nbsp; Creative Thinker</p>
+
+  <div class="hero-bp" role="img" aria-label="Boarding pass: Creative to Design">
+    <div class="hbp-sec">
+      <div class="hbp-lbl">Origin</div>
+      <div class="hbp-val">CRV</div>
+      <div class="hbp-sub">Creative</div>
+    </div>
+    <div class="hbp-route">
+      <div class="hbp-line"></div>
+      <div class="hbp-plane-icon">✈</div>
+      <div class="hbp-line"></div>
+    </div>
+    <div class="hbp-sec">
+      <div class="hbp-lbl">Destination</div>
+      <div class="hbp-val">DSN</div>
+      <div class="hbp-sub">Design</div>
+    </div>
+    <div class="hbp-tear" aria-hidden="true"></div>
+    <div class="hbp-sec hbp-sm">
+      <div class="hbp-lbl">Gate</div>
+      <div class="hbp-val">A1</div>
+    </div>
+    <div class="hbp-sec hbp-sm">
+      <div class="hbp-lbl">Seat</div>
+      <div class="hbp-val">1A</div>
+    </div>
+    <div class="hbp-sec hbp-sm">
+      <div class="hbp-lbl">Class</div>
+      <div class="hbp-val">PRO</div>
+    </div>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true">
+    <span>Explore the journey</span>
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="section-tag reveal">
+      <span class="st-num">01</span>
+      <div class="st-line"></div>
+      <span class="st-label">Traveler Profile</span>
+    </div>
+    <h2 class="section-title reveal">About Me</h2>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a <strong>UX/UI designer and marketing strategist</strong> focused on creating thoughtful, intuitive digital experiences.</p>
+        <p>In every project, my process is guided by a few core questions that keep my work intentional and user-centered: <strong>What are we trying to solve with this? Why does this need to exist? Who are we designing this for? What should the experience feel like for them?</strong> These questions help me move from concept to structure with clarity and purpose.</p>
+        <p>I'm drawn to design that balances <strong>visual clarity with intention</strong> — work that feels refined, natural, and effortless to use. I see visual and digital experiences as something that shapes how we move through the world, often without us consciously noticing. My inspiration comes from everyday environments, especially <strong>cafés, travel, and thoughtful design details</strong>. Outside of work, I recharge through café hopping and exploring matcha spots, which helps me stay grounded and observant.</p>
+        <p>Outside of design, I'm interested in visual culture, branding in daily life, and emerging creative tools. I also enjoy <strong>vibe coding</strong> and use AI as a collaborative tool to support ideation, streamline workflows, and expand my approach to problem-solving and design thinking.</p>
+        <div class="about-links">
+          <a class="about-link primary" href="#projects">View Projects</a>
+          <a class="about-link ghost" href="#contact">Get in Touch</a>
+        </div>
+      </div>
+
+      <div class="flip-card-scene reveal reveal-delay-2" id="flipCard" onclick="this.classList.toggle('flipped'); if(this.classList.contains('flipped')) document.dispatchEvent(new Event('cardFlipped'));" role="button" aria-label="Click to flip card">
+        <div class="flip-card-inner">
+
+          <!-- FRONT: photo card with TiltedCard tilt + GlareHover sweep -->
+          <div class="flip-card-front" id="tiltedCardFront">
+            <div class="glare-hover" id="fcfGlare" style="
+              --gh-width: 100%;
+              --gh-height: 100%;
+              --gh-bg: transparent;
+              --gh-br: 28px;
+              --gh-border: transparent;
+              --gh-angle: -45deg;
+              --gh-duration: 650ms;
+              --gh-size: 250%;
+              --gh-rgba: rgba(255,255,255,0.28);
+              display: flex; flex-direction: column; width: 100%; height: 100%;
+            ">
+            <div class="fcf-top">
+              <div class="fcf-name">Kiana Louie</div>
+              <div class="fcf-role">UX/UI Designer &nbsp;·&nbsp; Marketing Strategist</div>
+            </div>
+            <div class="fcf-photo-wrap">
+              <div class="fcf-deco"></div>
+              <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAN9AowDASIAAhEBAxEB/8QAHAABAAIDAQEBAAAAAAAAAAAAAAQFAgMGBwEI/8QAQRAAAgICAQMDAwICBwYEBgMAAAECAwQRIQUSMQZBURMiYQdxIzIUMzRCgZGhFSRSYnKxCCWiwRYmQ4Ky0TVk4v/EABoBAQEBAQEBAQAAAAAAAAAAAAABAgMEBQb/xAAkEQEBAAIDAAICAwEBAQAAAAAAAQIRAyExBBIyQRMiUQUUYf/aAAwDAQACEQMRAD8A/GQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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" alt="Kiana Louie">
+            </div><!-- end fcf-photo-wrap -->
+            </div><!-- end glare-hover -->
+            <div class="fcf-tap-hint">Click to flip ↻</div>
+          </div>
+
+          <!-- BACK: info card (cream / existing style) -->
+          <div class="flip-card-back">
+            <div class="id-header">
+              <span class="org">Designer Portfolio · 2025</span>
+              <span class="num">ID-0042</span>
+            </div>
+            <div class="id-body">
+              <div class="id-avatar" aria-hidden="true">KL</div>
+              <div class="id-name">Kiana Louie</div>
+              <div class="id-role-tag">UX/UI Designer · Marketing Strategist</div>
+              <div class="id-rows">
+                <div class="id-row"><label>MBTI</label><span>ENFP-T</span></div>
+                <div class="id-row"><label>Specialization</label><span>User Experience, Brand Strategy</span></div>
+                <div class="id-row"><label>Based in</label><span>San Francisco, CA</span></div>
+                <div class="id-row"><label>Education</label><span>University of California, Riverside — B.S. Business Administration, concentrating in Information Systems &amp; Marketing <span class="grad-pill">🎓 June 2026</span></span></div>
+                <div class="id-row"><label>Open to</label><span>Full-time · Freelance · Remote</span></div>
+                <div class="id-row"><label>Status</label><span>✦ Available for new projects</span></div>
+              </div>
+              <div class="id-stats">
+                <div class="id-stat">
+                  <div class="id-stat-num stat-sage" data-target="12" data-suffix="+">0</div>
+                  <div class="id-stat-lbl">Projects Completed</div>
+                </div>
+                <div class="id-stat-divider"></div>
+                <div class="id-stat">
+                  <div class="id-stat-num stat-sky" data-target="8" data-suffix="+">0</div>
+                  <div class="id-stat-lbl">Clients Collaborated With</div>
+                </div>
+                <div class="id-stat-divider"></div>
+                <div class="id-stat">
+                  <div class="id-stat-num stat-sand" data-target="4">0</div>
+                  <div class="id-stat-lbl">Case Studies Completed</div>
+                </div>
+              </div>
+            </div>
+            <div class="id-tap-hint">Click to flip back ↺</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SKILLS ─── -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="section-tag reveal">
+      <span class="st-num">02</span>
+      <div class="st-line"></div>
+      <span class="st-label">Digital Passport</span>
+    </div>
+    <h2 class="section-title reveal">Skills & Expertise</h2>
+
+    <div class="passport-new reveal">
+      <!-- top right label -->
+      <div class="pn-header">DESIGNER'S PASSPORT</div>
+
+      <!-- stamp tabs -->
+      <div class="pn-tabs">
+        <button class="pn-tab active" onclick="switchPnTab('skills', this)">Hard Skills</button>
+        <button class="pn-tab" onclick="switchPnTab('software', this)">Software</button>
+        <button class="pn-tab" onclick="switchPnTab('certs', this)">Certifications</button>
+      </div>
+      <div class="pn-click-hint">✦ Click on any stamp to collect it</div>
+
+      <!-- HARD SKILLS stamps -->
+      <div class="pn-pane" id="pn-skills">
+        <div class="pn-grid">
+          <!-- UX Research — opens popup, stamps on close -->
+          <div class="pn-stamp green" id="uxResearchStamp" onclick="openStampModal('uxResearch', this)" style="cursor:pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <div class="pn-stamp-name">UX Research</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+          <div class="pn-stamp blue" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <div class="pn-stamp-name">Wireframing</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+          <div class="pn-stamp green" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20h20M5 20V10l7-7 7 7v10"/><path d="M9 20v-5h6v5"/></svg>
+            <div class="pn-stamp-name">Prototyping</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+          <div class="pn-stamp blue" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg>
+            <div class="pn-stamp-name">Marketing Strategy</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+          <!-- Data & Growth Analysis — opens popup, stamps on close -->
+          <div class="pn-stamp green" id="dataStamp" onclick="openStampModal('data', this)" style="cursor:pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+            <div class="pn-stamp-name">Data & Growth Analysis</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+          <!-- Visual Design — opens popup, stamps on close -->
+          <div class="pn-stamp blue" id="visualDesignStamp" onclick="openStampModal('visualDesign', this)" style="cursor:pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 3a9 9 0 0 1 6.36 15.36"/><path d="M5.64 5.64A9 9 0 0 0 12 21"/></svg>
+            <div class="pn-stamp-name">Visual Design</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+          <!-- UI Design — opens popup, stamps on close -->
+          <div class="pn-stamp blue" id="uiDesignStamp" onclick="openStampModal('uiDesign', this)" style="cursor:pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+            <div class="pn-stamp-name">UI Design</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+          <!-- Programming Languages — opens popup, stamps on close -->
+          <div class="pn-stamp green" id="progLangStamp" onclick="openStampModal('prog', this)" style="cursor:pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <div class="pn-stamp-name">Programming Languages</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOFTWARE stamps -->
+      <div class="pn-pane" id="pn-software" style="display:none">
+        <div class="pn-grid">
+
+          <!-- Figma -->
+          <div class="pn-stamp green" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <path d="M19 28.5A9.5 9.5 0 1 1 28.5 19 9.5 9.5 0 0 1 19 28.5z" fill="#1ABCFE"/>
+              <path d="M9.5 47.5A9.5 9.5 0 0 1 19 38v9.5a9.5 9.5 0 0 1-9.5 0z" fill="#0ACF83"/>
+              <path d="M19 0.5H9.5A9.5 9.5 0 0 0 9.5 19H19V0.5z" fill="#FF7262"/>
+              <path d="M19 19H28.5A9.5 9.5 0 0 0 28.5 0.5H19V19z" fill="#F24E1E"/>
+              <path d="M19 19H9.5A9.5 9.5 0 0 0 9.5 38H19V19z" fill="#A259FF"/>
+            </svg>
+            <div class="pn-stamp-name">Figma</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Canva -->
+          <div class="pn-stamp blue" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm-1.5 5.5c-2.485 0-4.5 2.015-4.5 4.5s2.015 4.5 4.5 4.5c1.42 0 2.688-.66 3.53-1.69l1.47 1.47A6.48 6.48 0 0 1 10.5 18C6.91 18 4 15.09 4 11.5S6.91 5 10.5 5c1.63 0 3.11.6 4.24 1.59l-1.44 1.44A4.48 4.48 0 0 0 10.5 7.5zm5.75 1.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z" fill="#7D2AE7"/>
+            </svg>
+            <div class="pn-stamp-name">Canva</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Affinity -->
+          <div class="pn-stamp green" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <path d="M12 2L2 19.5h20L12 2zm0 3.5l7.5 13H4.5L12 5.5zm-1 5v4h2v-4h-2zm0 5v2h2v-2h-2z" fill="#1B72BE"/>
+            </svg>
+            <div class="pn-stamp-name">Affinity</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Framer -->
+          <div class="pn-stamp blue" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <path d="M4 0h16v8h-8L4 0zm0 8h8l8 8H4V8zm0 8h8v8L4 16z" fill="#0055FF"/>
+            </svg>
+            <div class="pn-stamp-name">Framer</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Readymag -->
+          <div class="pn-stamp green" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M7 8h4a2 2 0 0 1 0 4H7V8zm0 4h5l3 4H7v-4z"/>
+            </svg>
+            <div class="pn-stamp-name">Readymag</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Tableau -->
+          <div class="pn-stamp blue" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <path d="M11.5 2v3.5H8.5V7h3V10.5H13V7h3V5.5h-3V2h-1.5zm-8 6.5V10H7v1.5H3.5V13H7v1.5H3.5V16H7v1.5H2v-8.5h1.5zm17 0H22v8.5h-5V16h3.5v-1.5H17V13h3.5v-1.5H17V10h3.5V8.5zM11.5 14V17.5H8.5V19h3V22.5H13V19h3v-1.5h-3V14h-1.5z" fill="#E97627"/>
+            </svg>
+            <div class="pn-stamp-name">Tableau</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Microsoft Excel -->
+          <div class="pn-stamp green" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <path d="M21.17 1.5H8.83A.83.83 0 0 0 8 2.33V6H2.83A.83.83 0 0 0 2 6.83v10.34c0 .46.37.83.83.83H8v3.67c0 .46.37.83.83.83h12.34c.46 0 .83-.37.83-.83V2.33a.83.83 0 0 0-.83-.83zM8 15.5H4v-2h4v2zm0-3.5H4V9.5h4V12zm0-3.5H4V6.5h4V8.5zm5.5 10H9.67V15.5H13.5V18.5zm0-4.5H9.67V11.5H13.5V14zm0-4H9.67V7.5H13.5V10zm6 9H15V16.5h4.5V19zm0-4H15V12.5h4.5V15zm0-4H15V8.5h4.5V11zm0-4H15V4.5h4.5V7z" fill="#217346"/>
+              <path d="M5 8l2.5 4L5 16h1.7l1.8-3 1.8 3H12L9.5 12 12 8h-1.7L8.5 11 6.7 8H5z" fill="white"/>
+            </svg>
+            <div class="pn-stamp-name">Excel</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Google Analytics -->
+          <div class="pn-stamp blue" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <path d="M22 12.5a3.5 3.5 0 0 1-3.5 3.5 3.5 3.5 0 0 1-3.5-3.5V5a3.5 3.5 0 0 1 3.5-3.5A3.5 3.5 0 0 1 22 5v7.5z" fill="#F9AB00"/>
+              <path d="M13 19a3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3z" fill="#E37400"/>
+              <path d="M7.5 12.5A3.5 3.5 0 0 1 4 16a3.5 3.5 0 0 1-3.5-3.5v-7A3.5 3.5 0 0 1 4 2a3.5 3.5 0 0 1 3.5 3.5v7z" fill="#E37400"/>
+            </svg>
+            <div class="pn-stamp-name">Google Analytics</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- GitHub -->
+          <div class="pn-stamp green" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="#181717"/>
+            </svg>
+            <div class="pn-stamp-name">GitHub</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Claude -->
+          <div class="pn-stamp blue" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <path d="M17.5 2.5C14.5 2.5 12 5 12 8c0 1.5.5 2.8 1.4 3.8L6 20.5l1.5 1 7.5-9.2c.5.1 1 .2 1.5.2 3 0 5.5-2.5 5.5-5.5S20.5 2.5 17.5 2.5zM6.5 2.5C4 2.5 2 4.5 2 7s2 4.5 4.5 4.5c.5 0 1-.1 1.5-.2l2.5 3 1.5-1-2.6-3.1C9.8 9.3 10 8.2 10 7c0-2.5-1.5-4.5-3.5-4.5z" fill="#CC785C"/>
+            </svg>
+            <div class="pn-stamp-name">Claude AI</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- draw.io -->
+          <div class="pn-stamp green" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <path d="M4 2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm1 3v3h3V5H5zm10 0v3h3V5h-3zM5 16v3h3v-3H5zm10 0v3h3v-3h-3zM9 9.5v5h6v-5H9z" fill="#F08705"/>
+              <path d="M11 11h2v3h-2z" fill="white"/>
+            </svg>
+            <div class="pn-stamp-name">draw.io</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Anaconda Python -->
+          <div class="pn-stamp blue" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l7 4.5-7 4.5z" fill="#44A833"/>
+              <path d="M9.5 7.5h1v4h-1V7.5zm0 5h1v4h-1v-4zm3-2.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0z" fill="#white"/>
+              <path d="M12 4c-1.5 0-2.8.5-3.8 1.4C9 6 9.5 7 9.5 8.1V12c0 2.2 1.8 4 4 4s4-1.8 4-4V8.1C17.5 5.8 15 4 12 4z" fill="#3EB049"/>
+              <path d="M12 4c1.5 0 2.8.5 3.8 1.4C15 6 14.5 7 14.5 8.1V12c0 2.2-1.8 4-4 4s-4-1.8-4-4V8.1C6.5 5.8 9 4 12 4z" fill="#2D8A3E" opacity="0.5"/>
+            </svg>
+            <div class="pn-stamp-name">Anaconda</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Google Colab -->
+          <div class="pn-stamp green" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <path d="M16.9 4.8C14.3 2.2 10.6 1.1 7.1 1.9L10.5 5.3c2-.3 4.1.4 5.6 1.9 2.2 2.2 2.5 5.6.9 8.1l3.1 3.1C22.5 14.4 21.6 9.5 16.9 4.8z" fill="#F9AB00"/>
+              <path d="M7.1 17.7c-2.2-2.2-2.5-5.6-.9-8.1L3.1 6.5C.5 10.6 1.4 15.5 6.1 20.2c2.6 2.6 6.3 3.7 9.8 2.9L12.5 19.7c-2 .3-4.1-.4-5.4-2z" fill="#F9AB00"/>
+              <path d="M16.9 4.8l-3.4 3.4c.7.8 1.1 1.8 1.1 2.8 0 2.5-2 4.5-4.5 4.5-1 0-2-.3-2.8-1L3.9 17.9c1.4 1.4 3.3 2.3 5.3 2.3 4.2 0 7.5-3.4 7.5-7.5 0-3-1.7-5.5-4.2-6.9l4.4-1z" fill="#E37400" opacity="0.3"/>
+              <circle cx="9.5" cy="11" r="3" fill="none" stroke="#F9AB00" stroke-width="1.5"/>
+            </svg>
+            <div class="pn-stamp-name">Google Colab</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- HubSpot -->
+          <div class="pn-stamp blue" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <path d="M18.164 7.931V5.085a2.198 2.198 0 0 0 1.257-1.976V3.06a2.199 2.199 0 0 0-2.196-2.196h-.048A2.199 2.199 0 0 0 14.98 3.06v.048a2.199 2.199 0 0 0 1.257 1.977v2.846a6.232 6.232 0 0 0-2.9 1.242L5.574 3.57a2.43 2.43 0 0 0 .07-.55 2.438 2.438 0 1 0-2.438 2.438c.46 0 .888-.13 1.254-.353l7.635 5.533a6.232 6.232 0 0 0-.876 3.188 6.26 6.26 0 0 0 1.078 3.512l-2.313 2.313a1.885 1.885 0 0 0-.55-.088 1.9 1.9 0 1 0 1.9 1.9 1.885 1.885 0 0 0-.088-.55l2.285-2.285a6.27 6.27 0 0 0 3.657 1.168 6.287 6.287 0 1 0-4.02-11.063zm.013 9.657a3.37 3.37 0 1 1 0-6.741 3.37 3.37 0 0 1 0 6.741z" fill="#FF7A59"/>
+            </svg>
+            <div class="pn-stamp-name">HubSpot</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Notion -->
+          <div class="pn-stamp green" onclick="togglePnStamp(this)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+              <path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z" fill="#000000"/>
+            </svg>
+            <div class="pn-stamp-name">Notion</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CERTIFICATIONS -->
+      <div class="pn-pane" id="pn-certs" style="display:none">
+        <div class="pn-grid">
+
+          <!-- Global Career Acceleration Program -->
+          <div class="pn-stamp green" id="gcapStamp" onclick="openStampModal('gcap', this)" style="cursor:pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            <div class="pn-stamp-name">Global Career Acceleration</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Stukent -->
+          <div class="pn-stamp blue" id="stukentStamp" onclick="openStampModal('stukent', this)" style="cursor:pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            <div class="pn-stamp-name">Stukent</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Semrush -->
+          <div class="pn-stamp green" id="semrushStamp" onclick="openStampModal('semrush', this)" style="cursor:pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            <div class="pn-stamp-name">Semrush</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Adobe -->
+          <div class="pn-stamp blue" id="adobeStamp" onclick="openStampModal('adobe', this)" style="cursor:pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            <div class="pn-stamp-name">Adobe</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Google -->
+          <div class="pn-stamp green" id="googleCertStamp" onclick="openStampModal('googleCert', this)" style="cursor:pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            <div class="pn-stamp-name">Google</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+          <!-- Google UX Design -->
+          <div class="pn-stamp blue" id="googleUXStamp" onclick="openStampModal('googleUX', this)" style="cursor:pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            <div class="pn-stamp-name">Google UX Design</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- footer bar -->
+      <div class="pn-footer">
+        <span id="pn-count">STAMPS COLLECTED: 15</span>
+        <span>STATUS: ACTIVE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EXPERIENCE ─── -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="section-tag reveal">
+      <span class="st-num">03</span>
+      <div class="st-line"></div>
+      <span class="st-label">Flight Log</span>
+    </div>
+    <h2 class="section-title reveal">Experience</h2>
+
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-period">Feb 2026 — Present</div>
+        <div class="tl-company">Bubble</div>
+        <div class="tl-role">Bubble Campus Ambassador</div>
+        <div class="tl-desc">Represented Bubble as a Campus Ambassador, supporting brand awareness and community engagement through digital content creation and campus-based activations. Created and shared social media content showcasing Bubble products, routines, and brand messaging to increase visibility and engagement. Completed platform-based challenges through SocialLadder, including content creation and product feedback, while promoting products using personalized discount codes to track engagement and drive sales. Participated in product testing opportunities and provided feedback to support brand development, while actively engaging with peers and online audiences to strengthen community interest and brand presence.</div>
+        <div class="tl-tags">
+          <span class="tl-tag">Brand Awareness</span>
+          <span class="tl-tag">Content Creation</span>
+          <span class="tl-tag">Social Media</span>
+          <span class="tl-tag">Community Engagement</span>
+        </div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="tl-dot"></div>
+        <div class="tl-period">Feb 2026 — Present</div>
+        <div class="tl-company">Olive & June</div>
+        <div class="tl-role">Campus Ambassador — Campus Collective</div>
+        <div class="tl-desc">Represented Olive & June as a Campus Ambassador within the Campus Collective program, supporting marketing campaigns and audience engagement across digital and campus initiatives. Created and published branded social media content to increase awareness, engagement, and alignment with ongoing brand campaigns. Executed campus and digital marketing activations while completing weekly deliverables and providing product feedback through SocialLadder. Leveraged referral links and personalized discount codes to track performance and support conversions, while also assisting with campus events, product launches, and brand activations. Participated in product testing and shared insights to inform marketing strategies and product development.</div>
+        <div class="tl-tags">
+          <span class="tl-tag">Brand Marketing</span>
+          <span class="tl-tag">Content Creation</span>
+          <span class="tl-tag">Campus Activations</span>
+          <span class="tl-tag">Social Media</span>
+        </div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="tl-dot"></div>
+        <div class="tl-period">2025 — 2026</div>
+        <div class="tl-company">Global Career Accelerator</div>
+        <div class="tl-role">UX/UI & Digital Project Intern</div>
+        <div class="tl-desc">Collaborated on digital product and marketing initiatives, focusing on user-centered design and performance-driven improvements. Designed a fully responsive landing page, applying UX/UI best practices to enhance clarity, navigation, and overall user engagement. Conducted user research and developed personas to inform interface decisions and content structure, while integrating SEO and analytics insights to optimize layout and user flow.</div>
+        <div class="tl-tags">
+          <span class="tl-tag">Product Design</span>
+          <span class="tl-tag">User Research</span>
+          <span class="tl-tag">Figma</span>
+          <span class="tl-tag">SEO & Analytics</span>
+        </div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="tl-dot"></div>
+        <div class="tl-period">2023 — Present</div>
+        <div class="tl-company">Studio Kiana Louie</div>
+        <div class="tl-role">Freelance UX/UI Designer & Strategist</div>
+        <div class="tl-desc">Independent practice working with early-stage startups and established brands on digital product design, brand identity, and marketing campaigns. Delivered end-to-end UX across web and mobile platforms.</div>
+        <div class="tl-tags">
+          <span class="tl-tag">Product Design</span>
+          <span class="tl-tag">Brand Identity</span>
+          <span class="tl-tag">Figma</span>
+          <span class="tl-tag">Strategy</span>
+        </div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-2">
+        <div class="tl-dot"></div>
+        <div class="tl-period">2017 — Present</div>
+        <div class="tl-company">The Leibel</div>
+        <div class="tl-role">Founder & Designer</div>
+        <div class="tl-desc">Founded and manage a custom graduation ribbon lei business, overseeing brand development, product design, and customer experience. Created a cohesive visual identity and refined the ordering process to improve clarity and engagement. Manage client communication, production, and fulfillment with a focus on detail and presentation.</div>
+        <div class="tl-tags">
+          <span class="tl-tag">Brand Identity</span>
+          <span class="tl-tag">Product Design</span>
+          <span class="tl-tag">Customer Experience</span>
+          <span class="tl-tag">Operations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ─── -->
+<section id="projects">
+  <div class="section-wrap">
+    <div class="section-tag reveal">
+      <span class="st-num">04</span>
+      <div class="st-line"></div>
+      <span class="st-label">Boarding Passes</span>
+    </div>
+    <h2 class="section-title reveal">Projects</h2>
+
+    <div class="projects-grid">
+      <a class="bp-card reveal" href="#case-studies" tabindex="0">
+        <div class="bp-color-bar" style="background:var(--sage)"></div>
+        <div class="bp-card-top">
+          <div class="bp-carrier">UX Design Project</div>
+          <div class="bp-title">Wellness App Redesign</div>
+        </div>
+        <div class="bp-route-row">
+          <div class="bp-airport"><div class="ap-code">RSH</div><div class="ap-city">Research</div></div>
+          <div class="bp-arrow-icon">→</div>
+          <div class="bp-airport" style="text-align:right"><div class="ap-code">LNC</div><div class="ap-city">Launch</div></div>
+        </div>
+        <div class="bp-meta">
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Role</div><div class="bp-meta-val">Lead Designer</div></div>
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Duration</div><div class="bp-meta-val">3 months</div></div>
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Year</div><div class="bp-meta-val">2024</div></div>
+        </div>
+        <div class="bp-card-tags">
+          <span class="bp-tag">Figma</span>
+          <span class="bp-tag">User Research</span>
+          <span class="bp-tag">iOS Design</span>
+        </div>
+      </a>
+
+      <a class="bp-card reveal reveal-delay-1" href="#case-studies" tabindex="0">
+        <div class="bp-color-bar" style="background:var(--sky)"></div>
+        <div class="bp-card-top">
+          <div class="bp-carrier">Brand Strategy</div>
+          <div class="bp-title">Boutique Hotel Identity</div>
+        </div>
+        <div class="bp-route-row">
+          <div class="bp-airport"><div class="ap-code">DSC</div><div class="ap-city">Discovery</div></div>
+          <div class="bp-arrow-icon">→</div>
+          <div class="bp-airport" style="text-align:right"><div class="ap-code">BRD</div><div class="ap-city">Brand</div></div>
+        </div>
+        <div class="bp-meta">
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Role</div><div class="bp-meta-val">Brand Strategist</div></div>
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Duration</div><div class="bp-meta-val">6 weeks</div></div>
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Year</div><div class="bp-meta-val">2024</div></div>
+        </div>
+        <div class="bp-card-tags">
+          <span class="bp-tag">Illustrator</span>
+          <span class="bp-tag">Strategy</span>
+          <span class="bp-tag">Identity</span>
+        </div>
+      </a>
+
+      <a class="bp-card reveal reveal-delay-2" href="#" tabindex="0">
+        <div class="bp-color-bar" style="background:var(--gold)"></div>
+        <div class="bp-card-top">
+          <div class="bp-carrier">Marketing Campaign</div>
+          <div class="bp-title">Seasonal Social Campaign</div>
+        </div>
+        <div class="bp-route-row">
+          <div class="bp-airport"><div class="ap-code">STG</div><div class="ap-city">Strategy</div></div>
+          <div class="bp-arrow-icon">→</div>
+          <div class="bp-airport" style="text-align:right"><div class="ap-code">CMP</div><div class="ap-city">Campaign</div></div>
+        </div>
+        <div class="bp-meta">
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Role</div><div class="bp-meta-val">Art Director</div></div>
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Duration</div><div class="bp-meta-val">4 weeks</div></div>
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Year</div><div class="bp-meta-val">2023</div></div>
+        </div>
+        <div class="bp-card-tags">
+          <span class="bp-tag">Social Media</span>
+          <span class="bp-tag">Photoshop</span>
+          <span class="bp-tag">Content Strategy</span>
+        </div>
+      </a>
+
+      <a class="bp-card reveal reveal-delay-3" href="#" tabindex="0">
+        <div class="bp-color-bar" style="background:var(--stamp-red)"></div>
+        <div class="bp-card-top">
+          <div class="bp-carrier">Product Design</div>
+          <div class="bp-title">E-commerce Checkout Flow</div>
+        </div>
+        <div class="bp-route-row">
+          <div class="bp-airport"><div class="ap-code">AUD</div><div class="ap-city">Audit</div></div>
+          <div class="bp-arrow-icon">→</div>
+          <div class="bp-airport" style="text-align:right"><div class="ap-code">OPT</div><div class="ap-city">Optimized</div></div>
+        </div>
+        <div class="bp-meta">
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Role</div><div class="bp-meta-val">UX Researcher</div></div>
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Duration</div><div class="bp-meta-val">2 months</div></div>
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Year</div><div class="bp-meta-val">2023</div></div>
+        </div>
+        <div class="bp-card-tags">
+          <span class="bp-tag">A/B Testing</span>
+          <span class="bp-tag">Figma</span>
+          <span class="bp-tag">Analytics</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CASE STUDIES ─── -->
+<section id="case-studies">
+  <div class="section-wrap">
+    <div class="section-tag reveal">
+      <span class="st-num">05</span>
+      <div class="st-line"></div>
+      <span class="st-label">Flight Reports</span>
+    </div>
+    <h2 class="section-title reveal">Case Studies</h2>
+
+    <!-- Case Study 1 -->
+    <div class="cs-item reveal">
+      <div class="cs-head">
+        <div>
+          <div class="cs-num">Case Study 01</div>
+          <div class="cs-title">Wellness App Redesign</div>
+        </div>
+        <div class="cs-badge">UX Design</div>
+      </div>
+      <div class="cs-flow" aria-label="Design process">
+        <div class="cs-step-box active">Problem</div>
+        <div class="cs-arrow" aria-hidden="true">→</div>
+        <div class="cs-step-box">Research</div>
+        <div class="cs-arrow" aria-hidden="true">→</div>
+        <div class="cs-step-box">Process</div>
+        <div class="cs-arrow" aria-hidden="true">→</div>
+        <div class="cs-step-box">Wireframes</div>
+        <div class="cs-arrow" aria-hidden="true">→</div>
+        <div class="cs-step-box">Final Design</div>
+        <div class="cs-arrow" aria-hidden="true">→</div>
+        <div class="cs-step-box">Outcome</div>
+      </div>
+      <div class="cs-cards">
+        <div class="cs-card">
+          <div class="cs-card-lbl">Problem</div>
+          <div class="cs-card-text">Users were abandoning the app within 3 sessions due to confusing navigation and a lack of personalization, resulting in a 42% drop-off rate post-onboarding.</div>
+        </div>
+        <div class="cs-card">
+          <div class="cs-card-lbl">Research & Process</div>
+          <div class="cs-card-text">Conducted 12 user interviews and competitive analysis across 5 wellness apps. Synthesized 3 key personas. Iterated through 3 rounds of wireframes before high-fidelity prototyping.</div>
+        </div>
+        <div class="cs-card">
+          <div class="cs-card-lbl">Final Design</div>
+          <div class="cs-card-text">Redesigned onboarding flow with progressive disclosure, personalized home screen, and reduced cognitive load through clear visual hierarchy and micro-animation guidance.</div>
+        </div>
+      </div>
+      <div class="cs-outcome">
+        <div>
+          <div class="cs-outcome-label">Drop-off Reduced</div>
+          <div class="cs-outcome-stat">28%</div>
+          <div class="cs-outcome-desc">Improvement in onboarding completion</div>
+        </div>
+        <div style="width:1px; height:60px; background:var(--border);"></div>
+        <div>
+          <div class="cs-outcome-label">Session Duration</div>
+          <div class="cs-outcome-stat">+3.2m</div>
+          <div class="cs-outcome-desc">Average increase per session</div>
+        </div>
+        <div style="width:1px; height:60px; background:var(--border);"></div>
+        <div>
+          <div class="cs-outcome-label">App Store Rating</div>
+          <div class="cs-outcome-stat">4.6★</div>
+          <div class="cs-outcome-desc">Up from 3.2 pre-redesign</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-divider"></div>
+
+    <!-- Case Study 2 -->
+    <div class="cs-item reveal">
+      <div class="cs-head">
+        <div>
+          <div class="cs-num">Case Study 02</div>
+          <div class="cs-title">Boutique Hotel Brand Identity</div>
+        </div>
+        <div class="cs-badge">Brand Strategy</div>
+      </div>
+      <div class="cs-flow">
+        <div class="cs-step-box active">Discovery</div>
+        <div class="cs-arrow" aria-hidden="true">→</div>
+        <div class="cs-step-box">Positioning</div>
+        <div class="cs-arrow" aria-hidden="true">→</div>
+        <div class="cs-step-box">Visual System</div>
+        <div class="cs-arrow" aria-hidden="true">→</div>
+        <div class="cs-step-box">Guidelines</div>
+        <div class="cs-arrow" aria-hidden="true">→</div>
+        <div class="cs-step-box">Delivery</div>
+      </div>
+      <div class="cs-cards">
+        <div class="cs-card">
+          <div class="cs-card-lbl">Challenge</div>
+          <div class="cs-card-text">A new boutique hotel needed a complete brand identity to stand out in a saturated luxury market and attract a design-forward, experience-driven traveler.</div>
+        </div>
+        <div class="cs-card">
+          <div class="cs-card-lbl">Process</div>
+          <div class="cs-card-text">Developed mood boards, ran stakeholder workshops, defined brand archetypes, then created full logo suite, color palette, typography system, and brand voice guidelines.</div>
+        </div>
+        <div class="cs-card">
+          <div class="cs-card-lbl">Delivery</div>
+          <div class="cs-card-text">80-page brand guidelines document, complete asset library, social templates, and signage specifications handed off to in-house team with a two-week onboarding sprint.</div>
+        </div>
+      </div>
+      <div class="cs-outcome">
+        <div>
+          <div class="cs-outcome-label">Direct Bookings</div>
+          <div class="cs-outcome-stat">+31%</div>
+          <div class="cs-outcome-desc">Above projections, first quarter</div>
+        </div>
+        <div style="width:1px; height:60px; background:var(--border);"></div>
+        <div>
+          <div class="cs-outcome-label">Press Features</div>
+          <div class="cs-outcome-stat">2</div>
+          <div class="cs-outcome-desc">Design publications at launch</div>
+        </div>
+        <div style="width:1px; height:60px; background:var(--border);"></div>
+        <div>
+          <div class="cs-outcome-label">Timeline</div>
+          <div class="cs-outcome-stat">6wk</div>
+          <div class="cs-outcome-desc">Discovery to final handoff</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact" style="padding:0; margin:0;">
+  <div class="contact-wrap">
+    <div>
+      <div class="contact-kicker">Let's take off together</div>
+      <h2 class="contact-h">Ready to <em>board</em> your<br>next project?</h2>
+      <div class="contact-btns">
+        <a class="contact-btn" href="mailto:kianalouie@gmail.com">
+          <span class="cb-icon">✉</span>
+          <div><span class="cb-lbl">Email</span><span class="cb-val">kianalouie@gmail.com</span></div>
+        </a>
+        <a class="contact-btn" href="https://linkedin.com" target="_blank" rel="noopener">
+          <span class="cb-icon">in</span>
+          <div><span class="cb-lbl">LinkedIn</span><span class="cb-val">linkedin.com/in/kianalouie</span></div>
+        </a>
+      </div>
+    </div>
+    <div class="contact-stamp-side">
+      <div class="stamp-ring" role="img" aria-label="Available for hire">
+        <div class="stamp-ring-inner">
+          <div class="sri-main">Available</div>
+          <div class="sri-sub">for hire · 2025</div>
+        </div>
+      </div>
+      <div class="stamp-caption">Passport Stamped<br>Open for New Journeys</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-txt">© 2025 Kiana Louie · Designed with intent</div>
+    <div class="footer-txt">Flight KL-001 · Cruising altitude: excellent</div>
+  </div>
+</footer>
+
+<script>
+/* ── Custom cursor ── */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+});
+(function tick() {
+  rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,.stamp,.bp-card,.flip-card-scene,.cert-item').forEach(el => {
+  el.addEventListener('mouseenter', () => { cur.style.transform='translate(-50%,-50%) scale(2.2)'; cur.style.background='var(--gold)'; ring.style.width='56px'; ring.style.height='56px'; });
+  el.addEventListener('mouseleave', () => { cur.style.transform='translate(-50%,-50%) scale(1)'; cur.style.background='var(--sage)'; ring.style.width='36px'; ring.style.height='36px'; });
+});
+
+/* ══════════════════════════════════════════════
+   DecryptedText — vanilla JS port of the React component
+   Supports: sequential reveal from 'start', hover re-trigger
+   ══════════════════════════════════════════════ */
+class DecryptedText {
+  constructor({
+    container,       // DOM element to render into
+    text,            // plain string to reveal
+    speed = 45,
+    maxIterations = 12,
+    sequential = true,
+    revealDirection = 'start',
+    characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+',
+    revealedClass = 'revealed',
+    encryptedClass = 'encrypted',
+    charClass = 'decrypt-char',
+    charTag = 'span',
+    renderChar,      // optional fn(char, index, isRevealed) => DOM node
+    onDone,
+    startDelay = 0,
+  }) {
+    this.container = container;
+    this.text = text;
+    this.speed = speed;
+    this.maxIterations = maxIterations;
+    this.sequential = sequential;
+    this.revealDirection = revealDirection;
+    this.chars = characters.split('');
+    this.revealedClass = revealedClass;
+    this.encryptedClass = encryptedClass;
+    this.charClass = charClass;
+    this.charTag = charTag;
+    this.renderChar = renderChar;
+    this.onDone = onDone;
+    this.startDelay = startDelay;
+
+    this.revealedSet = new Set();
+    this.interval = null;
+    this.iteration = 0;
+    this.animating = false;
+    this.nodes = [];
+
+    this._build();
+    setTimeout(() => this.decrypt(), this.startDelay);
+  }
+
+  _rand() {
+    return this.chars[Math.floor(Math.random() * this.chars.length)];
+  }
+
+  _build() {
+    this.container.innerHTML = '';
+    this.nodes = [];
+    for (let i = 0; i < this.text.length; i++) {
+      const ch = this.text[i];
+      if (ch === '\n') {
+        this.container.appendChild(document.createElement('br'));
+        this.nodes.push(null);
+        continue;
+      }
+      let el;
+      if (this.renderChar) {
+        el = this.renderChar(ch, i, false);
+      } else {
+        el = document.createElement(this.charTag);
+        el.className = this.charClass + ' ' + this.encryptedClass;
+        el.textContent = ch === ' ' ? ' ' : this._rand();
+      }
+      this.container.appendChild(el);
+      this.nodes.push(el);
+    }
+  }
+
+  _getNextIndex() {
+    const len = this.text.length;
+    const revealed = this.revealedSet;
+    if (this.revealDirection === 'start') return revealed.size;
+    if (this.revealDirection === 'end') return len - 1 - revealed.size;
+    // center
+    const mid = Math.floor(len / 2);
+    const offset = Math.floor(revealed.size / 2);
+    const idx = revealed.size % 2 === 0 ? mid + offset : mid - offset - 1;
+    if (idx >= 0 && idx < len && !revealed.has(idx)) return idx;
+    for (let i = 0; i < len; i++) if (!revealed.has(i)) return i;
+    return 0;
+  }
+
+  _scramble() {
+    for (let i = 0; i < this.text.length; i++) {
+      const el = this.nodes[i];
+      if (!el) continue;
+      if (this.revealedSet.has(i) || this.text[i] === ' ') continue;
+      el.textContent = this._rand();
+    }
+  }
+
+  _revealIndex(i) {
+    const el = this.nodes[i];
+    if (!el) return;
+    this.revealedSet.add(i);
+    el.textContent = this.text[i];
+    el.classList.remove(this.encryptedClass);
+    el.classList.add(this.revealedClass);
+  }
+
+  decrypt() {
+    if (this.animating) return;
+    this.animating = true;
+    this.revealedSet = new Set();
+    this.iteration = 0;
+
+    // reset all to encrypted scramble
+    for (let i = 0; i < this.text.length; i++) {
+      const el = this.nodes[i];
+      if (!el) continue;
+      el.classList.remove(this.revealedClass);
+      el.classList.add(this.encryptedClass);
+      if (this.text[i] !== ' ') el.textContent = this._rand();
+    }
+
+    this.interval = setInterval(() => {
+      if (this.sequential) {
+        if (this.revealedSet.size < this.text.length) {
+          // skip spaces & newlines automatically
+          let next = this._getNextIndex();
+          while (next < this.text.length && (this.text[next] === ' ' || this.text[next] === '\n')) {
+            this.revealedSet.add(next);
+            next = this._getNextIndex();
+          }
+          if (next < this.text.length) {
+            this._revealIndex(next);
+          }
+          this._scramble();
+        } else {
+          this._finish();
+        }
+      } else {
+        this._scramble();
+        this.iteration++;
+        if (this.iteration >= this.maxIterations) {
+          this._finish();
+        }
+      }
+    }, this.speed);
+  }
+
+  _finish() {
+    clearInterval(this.interval);
+    this.animating = false;
+    // ensure all revealed
+    for (let i = 0; i < this.text.length; i++) {
+      const el = this.nodes[i];
+      if (!el) continue;
+      el.textContent = this.text[i];
+      el.classList.remove(this.encryptedClass);
+      el.classList.add(this.revealedClass);
+    }
+    if (this.onDone) this.onDone();
+  }
+
+  reset() {
+    clearInterval(this.interval);
+    this.animating = false;
+    this.revealedSet = new Set();
+    for (let i = 0; i < this.text.length; i++) {
+      const el = this.nodes[i];
+      if (!el) continue;
+      el.classList.remove(this.revealedClass);
+      el.classList.add(this.encryptedClass);
+      if (this.text[i] !== ' ') el.textContent = this._rand();
+    }
+  }
+}
+
+/* ── Split-flap board ── */
+(function buildDepBoard() {
+
+  const ROWS = ['Kiana Louie', ' Portfolio '];
+  const SCRAMBLE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#&*';
+  const TILE_MS    = 70;
+  const PRE_TICKS  = 6;
+  const ROW2_DELAY = 400;
+  const START_DELAY = 800;
+
+  function rand() {
+    return SCRAMBLE[Math.floor(Math.random() * SCRAMBLE.length)];
+  }
+
+  function buildRow(rowEl, text) {
+    rowEl.innerHTML = '';
+    const tiles = [];
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      const wrapper = document.createElement('div');
+      if (ch === ' ') {
+        wrapper.className = 'sf-tile sf-space';
+        rowEl.appendChild(wrapper);
+        tiles.push({ space: true });
+        continue;
+      }
+      wrapper.className = 'sf-tile';
+      const span = document.createElement('span');
+      span.className = 'sf-char enc';
+      span.textContent = rand();
+      wrapper.appendChild(span);
+      rowEl.appendChild(wrapper);
+      tiles.push({ el: wrapper, span, final: ch, locked: false, lockQueued: false });
+    }
+    return tiles;
+  }
+
+  function animateRow(tiles) {
+    let tick = 0;
+    const order = tiles.map((t, i) => i).filter(i => !tiles[i].space);
+    let next = 0;
+
+    const iv = setInterval(() => {
+      // scramble all still-free tiles
+      tiles.forEach(t => {
+        if (t.space || t.locked || t.lockQueued) return;
+        t.span.textContent = rand();
+      });
+
+      // after pre-scramble, lock one letter per tick
+      if (tick >= PRE_TICKS && next < order.length) {
+        const t = tiles[order[next++]];
+        t.lockQueued = true;
+        t.el.setAttribute('data-prev', t.span.textContent);
+        t.el.classList.add('flipping');
+        const finalChar = t.final; // capture now, not in timeout
+        setTimeout(() => {
+          t.el.classList.remove('flipping');
+          t.span.textContent = finalChar;
+          t.span.classList.remove('enc');
+          t.span.classList.add('rev');
+          t.locked = true;
+        }, 160);
+      }
+
+      tick++;
+
+      // done when every non-space is locked
+      if (next >= order.length && tiles.every(t => t.space || t.locked)) {
+        clearInterval(iv);
+        // hard-guarantee final state
+        tiles.forEach(t => {
+          if (t.space) return;
+          t.span.textContent = t.final;
+          t.span.classList.remove('enc');
+          t.span.classList.add('rev');
+        });
+      }
+    }, TILE_MS);
+
+    return iv;
+  }
+
+  const row1El = document.getElementById('boardRow1');
+  const row2El = document.getElementById('boardRow2');
+  let iv1, iv2;
+
+  function run() {
+    iv1 = animateRow(buildRow(row1El, ROWS[0]));
+    setTimeout(() => { iv2 = animateRow(buildRow(row2El, ROWS[1])); }, ROW2_DELAY);
+  }
+
+  setTimeout(run, START_DELAY);
+
+  document.getElementById('depBoard').addEventListener('mouseenter', () => {
+    clearInterval(iv1); clearInterval(iv2);
+    run();
+  });
+
+})();
+
+/* ── CountUp spring animation (ported from motion/react CountUp component) ── */
+(function initCountUp() {
+  /* Spring physics matching the React component:
+     damping = 20 + 40*(1/duration), stiffness = 100*(1/duration)
+     We simulate the spring with a simple exponential approach each frame */
+  function springCountUp(el) {
+    const target  = parseFloat(el.dataset.target) || 0;
+    const suffix  = el.dataset.suffix || '';
+    const from    = 0;
+    const duration = 2; // seconds
+
+    // spring constants
+    const stiffness = 100 * (1 / duration);   // 50
+    const damping   = 20 + 40 * (1 / duration); // 40
+
+    let value    = from;
+    let velocity = 0;
+    let started  = false;
+    let rafId;
+
+    function tick() {
+      const force    = -stiffness * (value - target);
+      const friction = -damping   * velocity;
+      const accel    = force + friction;
+
+      velocity += accel * (1 / 60);
+      value    += velocity * (1 / 60);
+
+      // snap when close enough
+      if (Math.abs(value - target) < 0.05 && Math.abs(velocity) < 0.05) {
+        value = target;
+        el.textContent = Math.round(value) + suffix;
+        return;
+      }
+
+      el.textContent = Math.round(value) + suffix;
+      rafId = requestAnimationFrame(tick);
+    }
+
+    // use IntersectionObserver to start when card back is visible
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !started) {
+          started = true;
+          observer.unobserve(el);
+          // small delay so user sees the 0 before it starts
+          setTimeout(() => requestAnimationFrame(tick), 200);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    el.textContent = '0' + suffix;
+    observer.observe(el);
+
+    // also re-trigger when the flip card is flipped to back
+    document.addEventListener('cardFlipped', () => {
+      if (started) return; // already ran
+      started = true;
+      observer.unobserve(el);
+      setTimeout(() => requestAnimationFrame(tick), 300);
+    });
+  }
+
+  document.querySelectorAll('.id-stat-num').forEach(el => springCountUp(el));
+})();
+
+/* ── Flip card click is handled inline via classList.toggle ── */
+
+/* ── Unified stamp modal system ── */
+const _stampModalMap = {
+  uxResearch:   { modalId: 'uxResearchModal',   stampEl: null },
+  data:         { modalId: 'dataModal',          stampEl: null },
+  prog:         { modalId: 'progModal',          stampEl: null },
+  visualDesign: { modalId: 'visualDesignModal',  stampEl: null },
+  uiDesign:     { modalId: 'uiDesignModal',      stampEl: null },
+  gcap:         { modalId: 'gcapModal',          stampEl: null },
+  stukent:      { modalId: 'stukentModal',       stampEl: null },
+  semrush:      { modalId: 'semrushModal',       stampEl: null },
+  adobe:        { modalId: 'adobeModal',         stampEl: null },
+  googleCert:   { modalId: 'googleCertModal',    stampEl: null },
+  googleUX:     { modalId: 'googleUXModal',      stampEl: null }
+};
+
+function openStampModal(key, stampEl) {
+  _stampModalMap[key].stampEl = stampEl;
+  document.getElementById(_stampModalMap[key].modalId).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeStampModal(key, event) {
+  const modalEl = document.getElementById(_stampModalMap[key].modalId);
+  if (event && event.target !== modalEl) return;
+  modalEl.classList.remove('open');
+  document.body.style.overflow = '';
+  const stampEl = _stampModalMap[key].stampEl;
+  if (stampEl && !stampEl.classList.contains('stamped')) {
+    stampEl.classList.add('stamped');
+    stampEl.style.animation = 'none';
+    void stampEl.offsetWidth;
+    stampEl.style.animation = '';
+  }
+  _stampModalMap[key].stampEl = null;
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    Object.keys(_stampModalMap).forEach(key => {
+      const el = document.getElementById(_stampModalMap[key].modalId);
+      if (el && el.classList.contains('open')) closeStampModal(key, null);
+    });
+  }
+});
+function switchPnTab(pane, btn) {
+  ['skills','software','certs'].forEach(p => {
+    document.getElementById('pn-' + p).style.display = p === pane ? 'flex' : 'none';
+  });
+  document.querySelectorAll('.pn-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  updateStampCount();
+}
+
+/* ── New passport stamp toggle ── */
+function togglePnStamp(el) {
+  el.classList.toggle('stamped');
+  // re-trigger animation
+  el.style.animation = 'none';
+  void el.offsetWidth;
+  el.style.animation = '';
+  updateStampCount();
+}
+
+function updateStampCount() {
+  const total = document.querySelectorAll('.pn-stamp').length;
+  const stamped = document.querySelectorAll('.pn-stamp.stamped').length;
+  const countEl = document.getElementById('pn-count');
+  if (countEl) countEl.textContent = 'STAMPS COLLECTED: ' + total;
+}
+
+/* ── Old passport tab switch (kept for compatibility) ── */
+function switchPassport(pane, btn) {}
+
+/* ── Old stamp (kept for compatibility) ── */
+function doStamp(el) {}
+
+/* ══════════════════════════════════════════
+   TiltedCard — vanilla JS port (spring tilt)
+   GlareHover sweep is handled purely via CSS
+   ══════════════════════════════════════════ */
+(function initTiltedCard() {
+  const scene    = document.getElementById('flipCard');
+  const front    = document.getElementById('tiltedCardFront');
+  if (!scene || !front) return;
+
+  // Spring physics matching motion/react: damping:30, stiffness:100, mass:2
+  function makeSpring(stiffness, damping, mass) {
+    let value = 0, velocity = 0, target = 0;
+    const dt = 1 / 60;
+    return {
+      set(t) { target = t; },
+      get()  { return value; },
+      tick() {
+        const force = -stiffness * (value - target) / mass;
+        const fric  = -damping  * velocity / mass;
+        velocity += (force + fric) * dt;
+        value    += velocity * dt;
+        return value;
+      }
+    };
+  }
+
+  const rotX   = makeSpring(100, 30, 2);
+  const rotY   = makeSpring(100, 30, 2);
+  const scaleS = makeSpring(100, 30, 2);
+  scaleS.set(1); rotX.set(0); rotY.set(0);
+
+  const AMPLITUDE   = 22;  /* TiltedCard rotateAmplitude prop = 22 */
+  const SCALE_HOVER = 1.04;
+  let rafId = null;
+  let hovering = false;
+
+  // cursor tooltip
+  const tip = document.createElement('div');
+  tip.className = 'fcf-cursor-tip';
+  tip.textContent = 'Click to flip ↻';
+  document.body.appendChild(tip);
+
+  // glare element — reset position instantly on leave so sweep replays every hover
+  const glareEl = document.getElementById('fcfGlare');
+
+  function animate() {
+    const rx = rotX.tick();
+    const ry = rotY.tick();
+    const sc = scaleS.tick();
+
+    if (!scene.classList.contains('flipped')) {
+      front.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) scale(${sc})`;
+    } else {
+      front.style.transform = '';
+    }
+
+    const stillMoving =
+      Math.abs(rx) > 0.01 || Math.abs(ry) > 0.01 ||
+      Math.abs(sc - (hovering ? SCALE_HOVER : 1)) > 0.001;
+
+    if (stillMoving || hovering) rafId = requestAnimationFrame(animate);
+    else rafId = null;
+  }
+
+  function startAnim() {
+    if (!rafId) rafId = requestAnimationFrame(animate);
+  }
+
+  front.addEventListener('mouseenter', () => {
+    if (scene.classList.contains('flipped')) return;
+    hovering = true;
+    scaleS.set(SCALE_HOVER);
+    tip.classList.add('visible');
+    startAnim();
+  });
+
+  front.addEventListener('mouseleave', () => {
+    hovering = false;
+    rotX.set(0); rotY.set(0); scaleS.set(1);
+    tip.classList.remove('visible');
+    front.style.boxShadow = '';
+
+    // Reset glare position instantly (no transition) so it replays fresh next hover
+    if (glareEl) {
+      glareEl.style.setProperty('--gh-duration', '0ms');
+      requestAnimationFrame(() => {
+        // allow browser to apply the no-transition frame, then restore duration
+        requestAnimationFrame(() => {
+          if (glareEl) glareEl.style.removeProperty('--gh-duration');
+        });
+      });
+    }
+
+    startAnim();
+  });
+
+  front.addEventListener('mousemove', e => {
+    if (scene.classList.contains('flipped')) return;
+    const rect = front.getBoundingClientRect();
+    const ox = e.clientX - rect.left - rect.width  / 2;
+    const oy = e.clientY - rect.top  - rect.height / 2;
+    rotX.set((oy / (rect.height / 2)) * -AMPLITUDE);
+    rotY.set((ox / (rect.width  / 2)) *  AMPLITUDE);
+
+    // dynamic shadow depth
+    const shadowX = rotY.get() * 0.8;
+    const shadowY = -rotX.get() * 0.8;
+    front.style.boxShadow = `${shadowX}px ${shadowY + 24}px 80px rgba(44,42,36,0.18), 0 0 0 1px rgba(44,42,36,0.07)`;
+
+    // follow-cursor tooltip
+    tip.style.left = (e.clientX + 16) + 'px';
+    tip.style.top  = (e.clientY - 20) + 'px';
+
+    startAnim();
+  });
+
+  scene.addEventListener('click', () => {
+    rotX.set(0); rotY.set(0); scaleS.set(1);
+    front.style.transform = '';
+    front.style.boxShadow = '';
+    tip.classList.remove('visible');
+    startAnim();
+  });
+})();
+
+/* ── Scroll reveal ── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); obs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+<!-- ─── UX Research Modal ─── -->
+<div id="uxResearchModal" class="prog-modal-overlay" onclick="closeStampModal('uxResearch', event)">
+  <div class="prog-modal-card">
+    <button class="prog-modal-close" onclick="closeStampModal('uxResearch', null)">×</button>
+    <div class="prog-modal-top">
+      <div class="prog-modal-stamp-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </div>
+      <div>
+        <div class="prog-modal-title">UX Research</div>
+        <div class="prog-modal-verified">STAMP VERIFIED</div>
+      </div>
+    </div>
+    <div class="prog-modal-section-label">METHODS & TECHNIQUES</div>
+    <div class="prog-modal-langs">
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sage-light); color:var(--sage-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">User Interviews</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sky-light); color:var(--sky-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">Surveys</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sage-light); color:var(--sage-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">User Personas</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sky-light); color:var(--sky-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">Usability Testing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Data & Growth Analysis Modal ─── -->
+<div id="dataModal" class="prog-modal-overlay" onclick="closeStampModal('data', event)">
+  <div class="prog-modal-card">
+    <button class="prog-modal-close" onclick="closeStampModal('data', null)">×</button>
+    <div class="prog-modal-top">
+      <div class="prog-modal-stamp-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+      </div>
+      <div>
+        <div class="prog-modal-title">Data & Growth Analysis</div>
+        <div class="prog-modal-verified">STAMP VERIFIED</div>
+      </div>
+    </div>
+    <div class="prog-modal-section-label">AREAS OF FOCUS</div>
+    <div class="prog-modal-langs">
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sage-light); color:var(--sage-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">Data Visualization</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sky-light); color:var(--sky-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><circle cx="9" cy="9" r="3"/><path d="M9 12v9"/><path d="M15 9h3a3 3 0 0 1 0 6h-3"/><path d="M15 12h3"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">Google Analytics</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sage-light); color:var(--sage-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">A/B Testing</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sky-light); color:var(--sky-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">SEO Strategy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Programming Languages Modal ─── -->
+<div id="progModal" class="prog-modal-overlay" onclick="closeStampModal('prog', event)">
+  <div class="prog-modal-card">
+    <button class="prog-modal-close" onclick="closeStampModal('prog', null)">×</button>
+    <div class="prog-modal-top">
+      <div class="prog-modal-stamp-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <div>
+        <div class="prog-modal-title">Programming Languages</div>
+        <div class="prog-modal-verified">STAMP VERIFIED</div>
+      </div>
+    </div>
+    <div class="prog-modal-section-label">RELATED LANGUAGES</div>
+    <div class="prog-modal-langs">
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:#E34F26; color:white;">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M4.136 3.012h15.729l-1.431 16.247-6.439 1.74-6.412-1.74zm12.26 3.148H7.58l.16 2.128h8.476l-.506 5.608-3.72 1.04-3.744-1.04-.26-2.928h2.016l.127 1.504 1.86.512 1.862-.512.193-2.32H7.691l-.506-5.992z"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">HTML</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:#1572B6; color:white;">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M4.136 3.012h15.729l-1.431 16.247-6.439 1.74-6.412-1.74zm12.25 3.148l.337-2.149H7.604l.938 10.12 5.46 1.507 5.434-1.507.506-5.655H9.966l-.17-1.907h9.572l.017-.409z"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">CSS</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:#3776AB; color:white;">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.26-.02.24.03.22.07.2.12.19.18.16.24.14.3.11.38.07.44.04.51.02.57v1.09l-.02.53-.04.44-.06.36-.08.29-.11.23-.14.17-.16.12-.19.08-.22.05-.24.02h-1.8v1.96h1.63l.56-.02.51-.06.46-.12.4-.18.36-.24.31-.31.27-.39.22-.46.17-.55.11-.63.05-.7.01-.79V6.92l-.01-.71-.05-.6-.1-.5-.15-.41-.2-.33-.24-.26-.27-.2-.3-.15-.31-.1-.32-.07-.3-.04-.28-.02h-.26l-.24.03-.21.06-.2.09-.17.12-.16.15-.14.18-.12.22-.1.26-.08.3-.06.35-.04.4-.02.43v.45l.02.47.05.48.08.48.1.47.13.45.16.43.18.4.21.36.23.33.24.29.26.25.27.21.28.17.29.12.29.08.29.04.28.01h.27l.26-.04.25-.08.23-.12.21-.15.19-.18.18-.22.15-.25.13-.29.11-.32.09-.35.06-.38.04-.41.02-.43V3.33l-.03-.38-.07-.35-.11-.31-.15-.28-.18-.25-.21-.21-.24-.18-.26-.14-.28-.11-.29-.07-.3-.05-.3-.02-.29.02z"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">Python</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:#276DC3; color:white;">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M3.1 15.4l1.6-9.2C5.1 4.5 6.7 3 8.5 3h7c1.8 0 3.4 1.5 3.8 3.2l1.6 9.2c.3 1.7-.7 3.1-2.1 3.1H5.2c-1.4 0-2.4-1.4-2.1-3.1zM9 12V8h1.5v3.5H13V8h1.5v4c0 .8-.7 1.5-1.5 1.5h-3c-.8 0-1.5-.7-1.5-1.5z"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">R</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:#336791; color:white;">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2C6.48 2 2 5.58 2 10c0 2.67 1.44 5.02 3.67 6.52L5 20l3.67-1.85C9.73 18.36 10.84 18.5 12 18.5c5.52 0 10-3.58 10-8S17.52 2 12 2zm0 14c-4.42 0-8-2.69-8-6s3.58-6 8-6 8 2.69 8 6-3.58 6-8 6zm-2-8v4h1.5V9.5H12V8zm2.5 0v4H16V8z"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">SQL</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Visual Design Modal ─── -->
+<div id="visualDesignModal" class="prog-modal-overlay" onclick="closeStampModal('visualDesign', event)">
+  <div class="prog-modal-card">
+    <button class="prog-modal-close" onclick="closeStampModal('visualDesign', null)">×</button>
+    <div class="prog-modal-top">
+      <div class="prog-modal-stamp-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><circle cx="12" cy="12" r="3"/><path d="M12 3a9 9 0 0 1 6.36 15.36"/><path d="M5.64 5.64A9 9 0 0 0 12 21"/></svg>
+      </div>
+      <div>
+        <div class="prog-modal-title">Visual Design</div>
+        <div class="prog-modal-verified">STAMP VERIFIED</div>
+      </div>
+    </div>
+    <div class="prog-modal-section-label">AREAS OF FOCUS</div>
+    <div class="prog-modal-langs">
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sky-light); color:var(--sky-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M4 7h16M4 12h10M4 17h6"/><circle cx="19" cy="17" r="2"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">Typography</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sage-light); color:var(--sage-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><circle cx="8" cy="12" r="4"/><circle cx="16" cy="12" r="4"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">Color Systems</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sky-light); color:var(--sky-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">Layout Aesthetics</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sage-light); color:var(--sage-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">Consistency & Branding</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── UI Design Modal ─── -->
+<div id="uiDesignModal" class="prog-modal-overlay" onclick="closeStampModal('uiDesign', event)">
+  <div class="prog-modal-card">
+    <button class="prog-modal-close" onclick="closeStampModal('uiDesign', null)">×</button>
+    <div class="prog-modal-top">
+      <div class="prog-modal-stamp-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      </div>
+      <div>
+        <div class="prog-modal-title">UI Design</div>
+        <div class="prog-modal-verified">STAMP VERIFIED</div>
+      </div>
+    </div>
+    <div class="prog-modal-section-label">AREAS OF FOCUS</div>
+    <div class="prog-modal-langs">
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sage-light); color:var(--sage-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M15 15l6 6M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">Visual Design</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sky-light); color:var(--sky-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">Interaction Design</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sage-light); color:var(--sage-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">Responsive Design</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sky-light); color:var(--sky-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="2" y="7" width="8" height="8" rx="1"/><rect x="14" y="7" width="8" height="8" rx="1"/><rect x="8" y="3" width="8" height="5" rx="1"/><rect x="8" y="16" width="8" height="5" rx="1"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">Component Design</div>
+        </div>
+      </div>
+      <div class="prog-lang-item">
+        <div class="prog-lang-icon" style="background:var(--sage-light); color:var(--sage-dark);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M4 4h16v4H4zM4 10h10v4H4zM4 16h6v4H4z"/></svg>
+        </div>
+        <div>
+          <div class="prog-lang-name">Visual Hierarchy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Cert Modals ─── -->
+
+<!-- Global Career Acceleration Program -->
+<div id="gcapModal" class="prog-modal-overlay" onclick="closeStampModal('gcap', event)">
+  <div class="prog-modal-card">
+    <button class="prog-modal-close" onclick="closeStampModal('gcap', null)">×</button>
+    <div class="prog-modal-top">
+      <div class="prog-modal-stamp-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <div>
+        <div class="prog-modal-title">Global Career Acceleration Program</div>
+        <div class="prog-modal-verified">STAMP VERIFIED</div>
+      </div>
+    </div>
+    <div class="prog-modal-section-label">CERTIFICATIONS EARNED</div>
+    <div class="cert-modal-list">
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>AI Professional Skills</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Data Visualization</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Intercultural Skills</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>UX/UI & Prototyping</div>
+    </div>
+  </div>
+</div>
+
+<!-- Stukent -->
+<div id="stukentModal" class="prog-modal-overlay" onclick="closeStampModal('stukent', event)">
+  <div class="prog-modal-card">
+    <button class="prog-modal-close" onclick="closeStampModal('stukent', null)">×</button>
+    <div class="prog-modal-top">
+      <div class="prog-modal-stamp-icon" style="border-color:var(--sky);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <div>
+        <div class="prog-modal-title">Stukent</div>
+        <div class="prog-modal-verified">STAMP VERIFIED</div>
+      </div>
+    </div>
+    <div class="prog-modal-section-label">CERTIFICATIONS EARNED</div>
+    <div class="cert-modal-list">
+      <div class="cert-modal-item"><span class="cert-modal-dot blue"></span>Digital Marketing</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot blue"></span>Digital Marketing Simternship — Classic</div>
+    </div>
+  </div>
+</div>
+
+<!-- Semrush -->
+<div id="semrushModal" class="prog-modal-overlay" onclick="closeStampModal('semrush', event)">
+  <div class="prog-modal-card">
+    <button class="prog-modal-close" onclick="closeStampModal('semrush', null)">×</button>
+    <div class="prog-modal-top">
+      <div class="prog-modal-stamp-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <div>
+        <div class="prog-modal-title">Semrush</div>
+        <div class="prog-modal-verified">STAMP VERIFIED</div>
+      </div>
+    </div>
+    <div class="prog-modal-section-label">CERTIFICATIONS EARNED</div>
+    <div class="cert-modal-list">
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Getting Started with Semrush</div>
+    </div>
+  </div>
+</div>
+
+<!-- Adobe -->
+<div id="adobeModal" class="prog-modal-overlay" onclick="closeStampModal('adobe', event)">
+  <div class="prog-modal-card">
+    <button class="prog-modal-close" onclick="closeStampModal('adobe', null)">×</button>
+    <div class="prog-modal-top">
+      <div class="prog-modal-stamp-icon" style="border-color:var(--sky);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <div>
+        <div class="prog-modal-title">Adobe</div>
+        <div class="prog-modal-verified">STAMP VERIFIED</div>
+      </div>
+    </div>
+    <div class="prog-modal-section-label">CERTIFICATIONS EARNED</div>
+    <div class="cert-modal-list">
+      <div class="cert-modal-item"><span class="cert-modal-dot blue"></span>Generative AI Content Creation</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot blue"></span>Design Fundamentals</div>
+    </div>
+  </div>
+</div>
+
+<!-- Google -->
+<div id="googleCertModal" class="prog-modal-overlay" onclick="closeStampModal('googleCert', event)">
+  <div class="prog-modal-card">
+    <button class="prog-modal-close" onclick="closeStampModal('googleCert', null)">×</button>
+    <div class="prog-modal-top">
+      <div class="prog-modal-stamp-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <div>
+        <div class="prog-modal-title">Google</div>
+        <div class="prog-modal-verified">STAMP VERIFIED</div>
+      </div>
+    </div>
+    <div class="prog-modal-section-label">CERTIFICATIONS EARNED</div>
+    <div class="cert-modal-list">
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Foundations of Digital Marketing and E-commerce</div>
+    </div>
+  </div>
+</div>
+
+<!-- Google UX Design -->
+<div id="googleUXModal" class="prog-modal-overlay" onclick="closeStampModal('googleUX', event)">
+  <div class="prog-modal-card">
+    <button class="prog-modal-close" onclick="closeStampModal('googleUX', null)">×</button>
+    <div class="prog-modal-top">
+      <div class="prog-modal-stamp-icon" style="border-color:var(--sky);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <div>
+        <div class="prog-modal-title">Google UX Design</div>
+        <div class="prog-modal-verified">STAMP VERIFIED</div>
+      </div>
+    </div>
+    <div class="prog-modal-section-label">CERTIFICATIONS EARNED</div>
+    <div class="cert-modal-list">
+      <div class="cert-modal-item"><span class="cert-modal-dot blue"></span>Building Dynamic User Interfaces (UI) for Websites</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot blue"></span>Create High-Fidelity Designs and Prototypes in Figma</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot blue"></span>Conduct UX Research and Test Early Concepts</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot blue"></span>Build Wireframes and Low-Fidelity Prototypes</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot blue"></span>Start the UX Design Process: Empathize, Define, and Ideate</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot blue"></span>Foundations of User Experience (UX) Design</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
