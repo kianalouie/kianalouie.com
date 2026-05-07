@@ -1037,7 +1037,27 @@ footer {
 .footer-inner { max-width: 1120px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 .footer-txt { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; }
 
-/* ── Let's Connect CTA button ── */
+/* ── Case Studies full-page overlay ── */
+.cs-page-overlay {
+  position: fixed; inset: 0; z-index: 900;
+  background: var(--cream);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+  display: flex; flex-direction: column;
+}
+.cs-page-overlay.open { opacity: 1; pointer-events: all; }
+.cs-page-overlay iframe {
+  flex: 1; border: none; width: 100%; height: 100%;
+}
+.view-all-cs-btn {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 10px 22px; border-radius: 6px;
+  background: var(--beige); border: 1px solid var(--border);
+  color: var(--ink-mid); cursor: pointer; transition: all 0.2s;
+  white-space: nowrap;
+}
+.view-all-cs-btn:hover { background: var(--sage-light); color: var(--sage-dark); border-color: var(--sage-light); }
 .connect-cta {
   margin-top: 28px;
   display: inline-flex; align-items: center; gap: 10px;
@@ -1182,6 +1202,312 @@ footer {
   footer .footer-txt:last-child { display: none; }
   .about-grid { grid-template-columns: 1fr; }
 }
+
+/* ══ Case Studies Page CSS ══ */
+
+
+
+
+
+
+/* ── CASE STUDIES PAGE ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  background: rgba(248,244,238,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-back {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-mid); background: none; border: none;
+  cursor: pointer; transition: color 0.2s;
+}
+.nav-back:hover { color: var(--sage-dark); }
+.nav-back svg { transition: transform 0.2s; }
+.nav-back:hover svg { transform: translateX(-3px); }
+.nav-title {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-light);
+}
+
+/* ── PAGE WRAPPER ── */
+#list-view {
+  max-width: 1100px; margin: 0 auto;
+  padding: 110px 48px 80px;
+}
+#detail-view {
+  display: none;
+  padding: 90px 0 80px;
+}
+
+
+
+
+
+
+
+/* ── PAGE HEADER ── */
+.page-header { margin-bottom: 52px; }
+.page-tag {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 16px;
+}
+.page-tag-line { width: 36px; height: 1px; background: var(--sand); }
+.page-tag-label {
+  font-family: 'DM Mono', monospace; font-size: 9.5px;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--sage);
+}
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5vw, 60px); font-weight: 600;
+  color: var(--ink); line-height: 1.08; margin-bottom: 48px;
+}
+
+/* ── SEARCH + FILTER BAR ── */
+.search-bar-wrap {
+  display: flex; gap: 16px; align-items: center;
+  flex-wrap: wrap; margin-bottom: 40px;
+}
+.search-input-wrap {
+  position: relative; flex: 1; min-width: 220px;
+}
+.search-input-wrap svg {
+  position: absolute; left: 14px; top: 50%;
+  transform: translateY(-50%); color: var(--ink-light);
+  pointer-events: none;
+}
+.search-input {
+  width: 100%; padding: 12px 16px 12px 42px;
+  font-family: 'DM Sans', sans-serif; font-size: 14px;
+  color: var(--ink); background: white;
+  border: 1.5px solid var(--border); border-radius: 10px;
+  outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input:focus {
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(122,158,126,0.12);
+}
+.search-input::placeholder { color: var(--ink-light); }
+
+.cats { display: flex; gap: 8px; flex-wrap: wrap; }
+.cat-btn {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 9px 18px; border-radius: 20px; cursor: pointer;
+  background: white; border: 1.5px solid var(--border);
+  color: var(--ink-mid); transition: all 0.2s;
+}
+.cat-btn:hover { border-color: var(--sage); color: var(--sage-dark); }
+.cat-btn.active {
+  background: var(--sage-dark); color: white;
+  border-color: var(--sage-dark);
+}
+
+/* ── CASE STUDY GRID ── */
+.cs-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+.cs-cover-card {
+  border-radius: 18px; overflow: hidden;
+  cursor: pointer; position: relative;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+  background: white; border: 1px solid var(--border);
+}
+.cs-cover-card:hover { transform: translateY(-6px); box-shadow: 0 24px 56px rgba(44,42,36,0.13); }
+.cs-cover-bar { height: 8px; }
+.cs-cover-body { padding: 32px 30px 28px; }
+.cs-cover-cat {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--ink-light); margin-bottom: 12px;
+}
+.cs-cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 600; color: var(--ink);
+  line-height: 1.2; margin-bottom: 20px;
+}
+.cs-cover-meta {
+  display: flex; gap: 28px; margin-bottom: 20px;
+}
+.cs-cover-meta-item {}
+.cs-cover-meta-item .ml { font-family: 'DM Mono', monospace; font-size: 8.5px; letter-spacing: 0.18em; color: var(--ink-light); text-transform: uppercase; margin-bottom: 4px; }
+.cs-cover-meta-item .mv { font-size: 13px; font-weight: 500; color: var(--ink); }
+.cs-cover-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.cs-cover-tag {
+  font-family: 'DM Mono', monospace; font-size: 8.5px;
+  letter-spacing: 0.1em; padding: 4px 12px; border-radius: 4px;
+  background: var(--beige); color: var(--ink-mid);
+}
+.cs-cover-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 30px;
+  border-top: 1px solid var(--border);
+}
+.cs-cover-view {
+  font-family: 'DM Mono', monospace; font-size: 9.5px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--sage-dark); display: flex; align-items: center; gap: 6px;
+}
+.cs-cover-year {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  color: var(--ink-light); letter-spacing: 0.1em;
+}
+
+.no-results {
+  grid-column: 1/-1; text-align: center; padding: 60px 0;
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  letter-spacing: 0.2em; color: var(--ink-light); text-transform: uppercase;
+}
+
+/* ── DETAIL VIEW ── */
+.detail-back {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-mid); background: none; border: none;
+  cursor: pointer; margin-bottom: 40px; transition: color 0.2s;
+}
+.detail-back:hover { color: var(--sage-dark); }
+.detail-back:hover svg { transform: translateX(-3px); }
+.detail-back svg { transition: transform 0.2s; }
+
+.detail-hero {
+  border-radius: 18px; overflow: hidden; margin-bottom: 56px;
+  border: 1px solid var(--border);
+}
+.detail-hero-bar { height: 10px; }
+.detail-hero-body {
+  padding: 44px 48px;
+  background: white;
+  display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start;
+}
+.detail-cat {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--ink-light); margin-bottom: 12px;
+}
+.detail-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 48px); font-weight: 600;
+  color: var(--ink); line-height: 1.1; margin-bottom: 20px;
+}
+.detail-meta { display: flex; gap: 32px; flex-wrap: wrap; }
+.detail-meta-item .dml {
+  font-family: 'DM Mono', monospace; font-size: 8.5px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-light); margin-bottom: 5px;
+}
+.detail-meta-item .dmv { font-size: 14px; font-weight: 500; color: var(--ink); }
+.detail-badge {
+  background: var(--sage-light); color: var(--sage-dark);
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.18em; padding: 8px 18px; border-radius: 6px;
+  text-transform: uppercase; white-space: nowrap; align-self: flex-start;
+}
+
+/* process flow */
+.process-flow {
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: 0; margin-bottom: 56px;
+  background: white; border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px 28px; overflow-x: auto;
+}
+.pf-step {
+  display: flex; align-items: center; gap: 0;
+}
+.pf-box {
+  padding: 10px 22px; border-radius: 8px;
+  font-size: 13px; font-weight: 500; color: var(--ink-mid);
+  background: var(--beige); border: 1px solid var(--border);
+  white-space: nowrap; cursor: pointer; transition: all 0.2s;
+}
+.pf-box:hover, .pf-box.active {
+  background: var(--sage-dark); color: white; border-color: var(--sage-dark);
+}
+.pf-arrow { color: var(--sand); font-size: 16px; margin: 0 10px; }
+
+.detail-wrap {
+  max-width: 1140px; margin: 0 auto;
+  padding: 100px 48px 80px;
+}
+@media (max-width: 768px) {
+  .detail-wrap { padding: 90px 20px 60px; }
+}
+.ds-tag {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--sage); margin-bottom: 14px;
+}
+.ds-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 600; color: var(--ink); margin-bottom: 20px;
+}
+.ds-text {
+  font-size: 15px; line-height: 1.85; color: var(--ink-mid); max-width: 700px;
+}
+.ds-text strong { color: var(--ink); font-weight: 500; }
+.ds-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 24px; }
+.ds-card {
+  background: var(--beige); border-radius: 12px;
+  border: 1px solid var(--border); padding: 22px;
+}
+.ds-card-lbl {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--sage-dark); margin-bottom: 10px;
+}
+.ds-card-text { font-size: 13px; line-height: 1.7; color: var(--ink-mid); }
+.ds-outcomes { display: flex; gap: 0; margin-top: 28px; }
+.ds-outcome {
+  flex: 1; padding: 24px; border: 1px solid var(--border);
+  background: white; text-align: center;
+}
+.ds-outcome:first-child { border-radius: 12px 0 0 12px; }
+.ds-outcome:last-child  { border-radius: 0 12px 12px 0; }
+.ds-outcome + .ds-outcome { border-left: none; }
+.ds-outcome-lbl {
+  font-family: 'DM Mono', monospace; font-size: 8.5px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-light); margin-bottom: 8px;
+}
+.ds-outcome-stat {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px; font-weight: 600; color: var(--ink); line-height: 1;
+  margin-bottom: 6px;
+}
+.ds-outcome-desc { font-size: 11px; color: var(--ink-light); }
+
+/* wireframe placeholder */
+.wireframe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.wireframe-box {
+  aspect-ratio: 3/4; background: var(--beige);
+  border: 1.5px dashed var(--sand); border-radius: 10px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 10px;
+}
+.wireframe-box svg { color: var(--sand); }
+.wireframe-box span {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-light);
+}
+
+  .ds-outcome:first-child { border-radius: 12px 12px 0 0; }
+  .ds-outcome:last-child  { border-radius: 0 0 12px 12px; }
+  .ds-outcome + .ds-outcome { border-left: 1px solid var(--border); border-top: none; }
+  .detail-meta { gap: 20px; }
+}
+
+/* fade-in animation */
+.fade-in { animation: fadeUp 0.55s ease both; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 </style>
 </head>
 <body>
@@ -1198,7 +1524,7 @@ footer {
     <li><button onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'})">Skills</button></li>
     <li><button onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'})">Experience</button></li>
     <li><button onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">Projects</button></li>
-    <li><button onclick="document.getElementById('case-studies').scrollIntoView({behavior:'smooth'})">Case Studies</button></li>
+    <li><button onclick="openCaseStudiesPage()">Case Studies</button></li>
   </ul>
   <button class="nav-cta" onclick="openConnectModal()">Let's Connect</button>
 </nav>
@@ -1671,7 +1997,7 @@ footer {
         <div class="tl-dot"></div>
         <div class="tl-period">Feb 2026 — Present</div>
         <div class="tl-company">Olive & June</div>
-        <div class="tl-role">Campus Ambassador — Campus Collective</div>
+        <div class="tl-role">Campus Collective Ambassador</div>
         <div class="tl-desc">Represented Olive & June as a Campus Ambassador within the Campus Collective program, supporting marketing campaigns and audience engagement across digital and campus initiatives. Created and published branded social media content to increase awareness, engagement, and alignment with ongoing brand campaigns. Executed campus and digital marketing activations while completing weekly deliverables and providing product feedback through SocialLadder. Leveraged referral links and personalized discount codes to track performance and support conversions, while also assisting with campus events, product launches, and brand activations. Participated in product testing and shared insights to inform marketing strategies and product development.</div>
         <div class="tl-tags">
           <span class="tl-tag">Brand Marketing</span>
@@ -1737,8 +2063,8 @@ footer {
       <a class="bp-card reveal" href="#case-studies" tabindex="0">
         <div class="bp-color-bar" style="background:var(--sage)"></div>
         <div class="bp-card-top">
-          <div class="bp-carrier">UX Design Project</div>
-          <div class="bp-title">Wellness App Redesign</div>
+          <div class="bp-carrier">UX/UI · Mobile App</div>
+          <div class="bp-title">171 Trucks</div>
         </div>
         <div class="bp-route-row">
           <div class="bp-airport"><div class="ap-code">RSH</div><div class="ap-city">Research</div></div>
@@ -1746,14 +2072,14 @@ footer {
           <div class="bp-airport" style="text-align:right"><div class="ap-code">LNC</div><div class="ap-city">Launch</div></div>
         </div>
         <div class="bp-meta">
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Role</div><div class="bp-meta-val">Lead Designer</div></div>
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Duration</div><div class="bp-meta-val">3 months</div></div>
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Year</div><div class="bp-meta-val">2024</div></div>
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Role</div><div class="bp-meta-val">UX/UI Designer</div></div>
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Duration</div><div class="bp-meta-val">1 Quarter</div></div>
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Year</div><div class="bp-meta-val">2025</div></div>
         </div>
         <div class="bp-card-tags">
           <span class="bp-tag">Figma</span>
-          <span class="bp-tag">User Research</span>
-          <span class="bp-tag">iOS Design</span>
+          <span class="bp-tag">Mobile Design</span>
+          <span class="bp-tag">Systems Analysis</span>
         </div>
       </a>
 
@@ -1837,16 +2163,19 @@ footer {
       <div class="st-line"></div>
       <span class="st-label">Flight Reports</span>
     </div>
-    <h2 class="section-title reveal">Case Studies</h2>
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:48px;">
+      <h2 class="section-title reveal" style="margin-bottom:0">Case Studies</h2>
+      <button class="view-all-cs-btn reveal" onclick="openCaseStudiesPage()">View All Case Studies →</button>
+    </div>
 
     <!-- Case Study 1 -->
     <div class="cs-item reveal">
       <div class="cs-head">
         <div>
           <div class="cs-num">Case Study 01</div>
-          <div class="cs-title">Wellness App Redesign</div>
+          <div class="cs-title">171 Trucks</div>
         </div>
-        <div class="cs-badge">UX Design</div>
+        <div class="cs-badge">UX/UI Design</div>
       </div>
       <div class="cs-flow" aria-label="Design process">
         <div class="cs-step-box active">Problem</div>
@@ -1864,34 +2193,34 @@ footer {
       <div class="cs-cards">
         <div class="cs-card">
           <div class="cs-card-lbl">Problem</div>
-          <div class="cs-card-text">Users were abandoning the app within 3 sessions due to confusing navigation and a lack of personalization, resulting in a 42% drop-off rate post-onboarding.</div>
+          <div class="cs-card-text">UCR students lacked a way to discover nearby food trucks and couldn't use Dining Dollars or Bear Bucks at off-campus restaurants, limiting dining flexibility and local business support.</div>
         </div>
         <div class="cs-card">
           <div class="cs-card-lbl">Research & Process</div>
-          <div class="cs-card-text">Conducted 12 user interviews and competitive analysis across 5 wellness apps. Synthesized 3 key personas. Iterated through 3 rounds of wireframes before high-fidelity prototyping.</div>
+          <div class="cs-card-text">Applied systems analysis and design methodology (BUS 171) to define requirements, map user flows, and design a mobile app architecture for real-time vendor discovery and payment integration.</div>
         </div>
         <div class="cs-card">
           <div class="cs-card-lbl">Final Design</div>
-          <div class="cs-card-text">Redesigned onboarding flow with progressive disclosure, personalized home screen, and reduced cognitive load through clear visual hierarchy and micro-animation guidance.</div>
+          <div class="cs-card-text">Concept mobile app with an interactive vendor map, food truck profiles with menus and hours, and Dining Dollars / Bear Bucks payment flow for participating off-campus restaurants.</div>
         </div>
       </div>
       <div class="cs-outcome">
         <div>
-          <div class="cs-outcome-label">Drop-off Reduced</div>
-          <div class="cs-outcome-stat">28%</div>
-          <div class="cs-outcome-desc">Improvement in onboarding completion</div>
+          <div class="cs-outcome-label">University</div>
+          <div class="cs-outcome-stat">UCR</div>
+          <div class="cs-outcome-desc">University of California, Riverside</div>
         </div>
         <div style="width:1px; height:60px; background:var(--border);"></div>
         <div>
-          <div class="cs-outcome-label">Session Duration</div>
-          <div class="cs-outcome-stat">+3.2m</div>
-          <div class="cs-outcome-desc">Average increase per session</div>
+          <div class="cs-outcome-label">Year</div>
+          <div class="cs-outcome-stat">2025</div>
+          <div class="cs-outcome-desc">Spring Quarter 2025</div>
         </div>
         <div style="width:1px; height:60px; background:var(--border);"></div>
         <div>
-          <div class="cs-outcome-label">App Store Rating</div>
-          <div class="cs-outcome-stat">4.6★</div>
-          <div class="cs-outcome-desc">Up from 3.2 pre-redesign</div>
+          <div class="cs-outcome-label">Course</div>
+          <div class="cs-outcome-stat">BUS 171</div>
+          <div class="cs-outcome-desc">Systems Analysis & Design</div>
         </div>
       </div>
     </div>
@@ -2595,11 +2924,418 @@ function doStamp(el) {}
   });
 })();
 
+/* ── Case Studies page overlay ── */
+function openCaseStudiesPage() {
+  const overlay = document.getElementById('csPageOverlay');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // init the list view
+  renderGrid();
+  document.getElementById('list-view').style.display = 'block';
+  document.getElementById('detail-view').style.display = 'none';
+}
+
+function closeCaseStudiesPage() {
+  const overlay = document.getElementById('csPageOverlay');
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
 /* ── Scroll reveal ── */
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); obs.unobserve(e.target); } });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+
+/* ══ Case Studies Page JS ══ */
+/* ── Case Study Data ── */
+const STUDIES = [
+  {
+    id: '171-trucks',
+    title: '171 Trucks',
+    category: 'ux-research',
+    catLabel: 'UX/UI · Mobile App · Concept',
+    color: '#7A9E7E',
+    role: 'UX/UI Designer',
+    duration: '1 Quarter — 3 months',
+    year: '2025',
+    tags: ['Figma', 'UX/UI', 'Mobile Design', 'Systems Analysis'],
+    badge: 'UX/UI Design',
+    team: '5 people',
+    sections: {
+      problem: {
+        title: 'The Problem',
+        text: '171 Trucks is a concept mobile application developed for the University of California, Riverside to help students discover nearby food vendors, access real-time food truck information, and use Dining Dollars or Bear Bucks at participating off-campus restaurants. The project was created as part of <strong>BUS 171: Systems Analysis & Design</strong> by a team of 5, and focused on improving dining accessibility while supporting local small businesses around the UCR campus.',
+        cards: []
+      },
+      research: {
+        title: 'Research',
+        text: 'To better understand the current dining ecosystem at UCR, the team conducted stakeholder research and interviews.',
+        cards: [
+          { label: 'Students Wanted', text: 'More variety and flexibility in dining options. Convenience was a major factor — including location visibility, wait times, and operating hours.' },
+          { label: 'System Gaps', text: 'Existing campus dining systems were limited to a small number of partnered vendors. Small local businesses lacked the marketing reach to effectively target students.' },
+          { label: 'Stakeholder Interview', text: 'An interview was conducted with Kurt Duffner, Director of Retail and Restaurants at UCR Dining Services — covering vendor partnerships, Dining Dollar processing, and feasibility of digital payment integration.' },
+          { label: 'Key Insight', text: 'High smartphone usage across the UCR community made a mobile-first solution practical and accessible. Research reinforced the need for a centralized platform combining food discovery, payment integration, and real-time dining information.' }
+        ]
+      },
+      process: {
+        title: 'Process',
+        text: 'The project followed a systems analysis and UX-focused workflow to identify user needs and translate them into a functional platform concept. Core questions guiding the process: What problem are we solving for students? How can we simplify the dining experience? What features would provide the most value to both students and vendors? How can the system feel seamless and accessible?',
+        cards: [
+          { label: 'Features Identified', text: 'Real-time food truck locations · Updated menus and hours · Dining Dollar & Bear Bucks integration · Queue and wait-time tracking · User reviews and ratings · Personalized food recommendations · Vendor-to-student communication' },
+          { label: 'Technology Planning', text: 'Planned as a React Native mobile app supporting both iOS and Android, reducing development complexity and costs.' },
+          { label: 'Systems Planning', text: 'Relational database structure · Data flow diagrams · Entity relationship diagrams · Analytics and recommendation systems · CAS-authenticated login integration' }
+        ]
+      },
+      wireframes: {
+        title: 'Wireframes',
+        text: 'Initial planning focused on mapping the student dining journey and identifying the most important user flows. Key wireframe concepts included: Home feed displaying nearby food vendors · Interactive map with live food truck locations · Vendor detail pages with menus, reviews, and hours · Queue and wait-time indicators · Integrated checkout and Dining Dollar payment flow · Personalized recommendation sections. The wireframes prioritized clear navigation, mobile-first usability, accessibility and speed, and easy access to real-time information.',
+        wireframes: true
+      },
+      final: {
+        title: 'Final Design',
+        text: 'The final concept evolved into a centralized dining platform designed specifically for the UCR community. The platform modernized the traditional campus dining experience by combining food discovery, convenience, and digital payment systems into one connected ecosystem.',
+        cards: [
+          { label: 'App Experience', text: 'Clean mobile-friendly interface · Real-time food truck tracking · Dining Dollar and Bear Bucks payment integration · Personalized food recommendations' },
+          { label: 'Smart Features', text: 'Vendor reviews and feedback systems · Smart queue visibility and wait-time updates' },
+          { label: 'Platform Vision', text: 'A connected ecosystem combining food discovery, convenience, and digital payment — modernizing the traditional UCR dining experience' }
+        ]
+      },
+      outcome: {
+        title: 'Outcome',
+        text: '171 Trucks proposed a scalable solution that benefits both students and local businesses. The project demonstrated how UX strategy, systems analysis, and digital product thinking can work together to improve everyday campus experiences through thoughtful, user-focused design.',
+        cards: [
+          { label: 'Student Impact', text: 'Increased awareness of nearby food options · More flexibility and convenience · Faster decision-making through live wait times and reviews · Easier access to off-campus vendors using existing university payment systems' },
+          { label: 'Vendor & University Impact', text: 'Increased exposure for local businesses · Improved engagement between vendors and students · Expanded use cases for Dining Dollars and Bear Bucks · Data-driven insights through user feedback and analytics' }
+        ],
+        outcomes: [
+          { stat: 'UCR', label: 'University', desc: 'University of California, Riverside' },
+          { stat: '2025', label: 'Year', desc: 'Completed Spring 2025' },
+          { stat: 'BUS 171', label: 'Course', desc: 'Systems Analysis & Design' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'hotel-brand',
+    title: 'Boutique Hotel Identity',
+    category: 'branding',
+    catLabel: 'Brand Strategy · Identity',
+    color: '#89B4C8',
+    role: 'Brand Strategist',
+    duration: '6 weeks',
+    year: '2024',
+    tags: ['Illustrator', 'Strategy', 'Identity'],
+    badge: 'Brand Strategy',
+    sections: {
+      problem: {
+        title: 'The Problem',
+        text: 'A new boutique hotel needed a complete brand identity to stand out in a saturated luxury market and attract a <strong>design-forward, experience-driven traveler</strong>. They had no existing visual language and needed everything from logo to brand voice.',
+        cards: []
+      },
+      research: {
+        title: 'Research',
+        text: 'Ran stakeholder discovery workshops, competitive landscape analysis of 8 luxury boutique hotels, and reviewed target customer travel behavior data. Identified a positioning gap: most competitors leaned either ultra-minimal or maximalist — the opportunity was curated warmth.',
+        cards: [
+          { label: 'Discovery', text: 'Stakeholder workshops to extract brand values, guest experience goals, and competitive differentiators' },
+          { label: 'Competitive Analysis', text: '8 comparable boutique hotels analyzed for positioning, tone, and visual language' },
+          { label: 'Positioning Gap', text: 'Opportunity found in "curated warmth" — neither cold minimal nor ornate maximalist' }
+        ]
+      },
+      process: {
+        title: 'Design Process',
+        text: 'Developed mood boards across 3 visual directions and presented to stakeholders for alignment. Defined the brand archetype (The Host), crafted the brand voice, then built the visual identity system from that foundation outward.',
+        cards: [
+          { label: 'Brand Archetype', text: '"The Host" — warm, knowledgeable, quietly confident and always present' },
+          { label: 'Visual Directions', text: '3 distinct mood boards presented for stakeholder alignment before design began' },
+          { label: 'System Build', text: 'Logo suite → color palette → typography → photography style guide → brand voice' }
+        ]
+      },
+      wireframes: {
+        title: 'Design Explorations',
+        text: 'Explored multiple logo concepts and color palette directions before narrowing to the final system through iterative client reviews.',
+        wireframes: true
+      },
+      final: {
+        title: 'Final Design',
+        text: 'Delivered a complete 80-page brand guidelines document, full logo suite, color palette, typography system, social media templates, and signage specifications. The brand voice guide included tone examples across email, social, in-room materials, and staff scripts.',
+        cards: [
+          { label: 'Deliverables', text: '80-page brand guidelines, full asset library, social templates, signage specs' },
+          { label: 'Logo System', text: 'Primary mark + wordmark + icon variants for all use cases' },
+          { label: 'Handoff', text: '2-week onboarding sprint with in-house team to ensure consistent application' }
+        ]
+      },
+      outcome: {
+        title: 'Outcome',
+        text: 'Brand launched to strong reception from press and customers alike, with direct bookings exceeding projections in the opening quarter.',
+        outcomes: [
+          { stat: '+31%', label: 'Direct Bookings', desc: 'Above projections, first quarter post-launch' },
+          { stat: '2', label: 'Press Features', desc: 'Design publications covered the brand launch' },
+          { stat: '6wk', label: 'Timeline', desc: 'Discovery to final handoff delivered on time' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'social-campaign',
+    title: 'Seasonal Social Campaign',
+    category: 'marketing',
+    catLabel: 'Marketing · Content Strategy',
+    color: '#C4944A',
+    role: 'Art Director',
+    duration: '4 weeks',
+    year: '2023',
+    tags: ['Social Media', 'Photoshop', 'Content Strategy'],
+    badge: 'Marketing',
+    sections: {
+      problem: {
+        title: 'The Problem',
+        text: 'A lifestyle brand needed a <strong>cohesive seasonal campaign</strong> to drive engagement during a key sales period. Previous campaigns lacked visual consistency across platforms and failed to capture the brand\'s evolving identity.',
+        cards: []
+      },
+      research: {
+        title: 'Research',
+        text: 'Audited 6 months of previous social content performance. Identified highest-performing content types and analyzed competitor seasonal campaigns for gaps and opportunities.',
+        cards: [
+          { label: 'Content Audit', text: 'Analyzed 180+ posts across platforms to identify top-performing formats and themes' },
+          { label: 'Audience Insights', text: 'Carousel posts drove 3x more saves than single-image posts for this audience' },
+          { label: 'Competitor Gap', text: 'Most competitors used stock imagery — opportunity in original, warm lifestyle photography' }
+        ]
+      },
+      process: {
+        title: 'Design Process',
+        text: 'Developed a campaign visual system with a defined color palette, typographic style, and photography art direction. Created templates for Stories, Reels covers, feed posts, and email headers — all built for easy adaptation by the social team.',
+        cards: [
+          { label: 'Visual System', text: 'Campaign-specific palette, type system, and photography style guide' },
+          { label: 'Template Suite', text: 'Stories, Reels covers, feed posts, and email headers — 22 templates total' },
+          { label: 'Art Direction', text: 'Warm, natural lighting with textural backgrounds to evoke the seasonal theme' }
+        ]
+      },
+      wireframes: {
+        title: 'Content Layouts',
+        text: 'Mapped out content grid layouts and story sequences before finalizing the visual design system.',
+        wireframes: true
+      },
+      final: {
+        title: 'Final Design',
+        text: 'Delivered a full campaign asset library of 40+ files across platforms, including animated Story templates and a content calendar with copy direction for the 4-week campaign window.',
+        cards: [
+          { label: 'Asset Library', text: '40+ campaign files across Instagram, TikTok, Pinterest, and email' },
+          { label: 'Animation', text: 'Motion templates for Stories and Reels using After Effects' },
+          { label: 'Content Calendar', text: '28-day posting plan with copy direction and hashtag strategy' }
+        ]
+      },
+      outcome: {
+        title: 'Outcome',
+        text: 'Campaign ran across 4 weeks and delivered strong engagement improvements over the previous season.',
+        outcomes: [
+          { stat: '+47%', label: 'Engagement Rate', desc: 'Increase vs. prior seasonal campaign' },
+          { stat: '2.1M', label: 'Impressions', desc: 'Across all platforms during campaign window' },
+          { stat: '+22%', label: 'Click-through', desc: 'Email click-through rate improvement' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'ecommerce-checkout',
+    title: 'E-commerce Checkout Flow',
+    category: 'development',
+    catLabel: 'UX Research · Product Design',
+    color: '#B84040',
+    role: 'UX Researcher',
+    duration: '2 months',
+    year: '2023',
+    tags: ['A/B Testing', 'Figma', 'Analytics'],
+    badge: 'Product Design',
+    sections: {
+      problem: {
+        title: 'The Problem',
+        text: 'An e-commerce platform had a <strong>68% cart abandonment rate</strong> — significantly above the industry average. Analytics showed users dropping off at the shipping information step and again at payment confirmation.',
+        cards: []
+      },
+      research: {
+        title: 'Research',
+        text: 'Conducted a heuristic audit, reviewed session recordings from 500 user sessions, and ran a survey with 120 recent purchasers to understand trust signals and friction points.',
+        cards: [
+          { label: 'Session Analysis', text: '500 recorded sessions reviewed — 73% of drop-offs occurred at 2 specific form fields' },
+          { label: 'Survey Insights', text: '67% of non-completers cited "unexpected costs" as the top reason for abandonment' },
+          { label: 'Heuristic Audit', text: '11 usability violations identified, prioritized by impact vs. effort to fix' }
+        ]
+      },
+      process: {
+        title: 'Design Process',
+        text: 'Prioritized the top 3 friction points and designed targeted solutions for each. Ran A/B tests for 3 weeks with 50/50 traffic split before full rollout. Each variant was tested individually to isolate impact.',
+        cards: [
+          { label: 'A/B Testing', text: '3 separate tests run sequentially — form layout, cost transparency, and trust signals' },
+          { label: 'Priority Matrix', text: 'Ranked all 11 issues by abandonment impact and development effort' },
+          { label: 'Iteration', text: '2 rounds of design revision based on mid-test data analysis' }
+        ]
+      },
+      wireframes: {
+        title: 'Wireframes',
+        text: 'Wireframed new checkout layouts focusing on reducing form fields, surfacing total cost earlier, and adding trust signals at key decision points.',
+        wireframes: true
+      },
+      final: {
+        title: 'Final Design',
+        text: 'Redesigned checkout reduced form fields from 14 to 8 using smart defaults and address autocomplete. Added a persistent order summary, surfaced shipping cost on the cart page, and added security badges at payment step.',
+        cards: [
+          { label: 'Form Reduction', text: 'Fields cut from 14 to 8 using smart defaults and autocomplete' },
+          { label: 'Cost Transparency', text: 'Shipping and total surfaced 2 steps earlier in the flow' },
+          { label: 'Trust Signals', text: 'Security badges, return policy snippet, and customer review count added at checkout' }
+        ]
+      },
+      outcome: {
+        title: 'Outcome',
+        text: 'The redesigned checkout shipped after 6 weeks of testing and iteration, with significant measurable improvements to conversion.',
+        outcomes: [
+          { stat: '21%', label: 'Cart Abandonment Reduction', desc: 'Down from 68% to 47%' },
+          { stat: '+34%', label: 'Checkout Completion', desc: 'Improvement in full purchase completion rate' },
+          { stat: '$180K', label: 'Revenue Recovered', desc: 'Estimated monthly from reduced abandonment' }
+        ]
+      }
+    }
+  }
+];
+
+let activeCategory = 'all';
+let activeStudy = null;
+let showingAll = false;
+let activeStep = 'problem';
+
+function renderGrid() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const grid = document.getElementById('csGrid');
+  const filtered = STUDIES.filter(s => {
+    const matchCat = activeCategory === 'all' || s.category === activeCategory;
+    const matchQ = !query || s.title.toLowerCase().includes(query) || s.catLabel.toLowerCase().includes(query) || s.tags.some(t => t.toLowerCase().includes(query));
+    return matchCat && matchQ;
+  });
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="no-results">No case studies found</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map((s, i) => `
+    <div class="cs-cover-card fade-in" style="animation-delay:${i*0.08}s" onclick="showDetail('${s.id}')">
+      <div class="cs-cover-bar" style="background:${s.color}"></div>
+      <div class="cs-cover-body">
+        <div class="cs-cover-cat">${s.catLabel}</div>
+        <div class="cs-cover-title">${s.title}</div>
+        <div class="cs-cover-meta">
+          <div class="cs-cover-meta-item"><div class="ml">Role</div><div class="mv">${s.role}</div></div>
+          <div class="cs-cover-meta-item"><div class="ml">Duration</div><div class="mv">${s.duration}</div></div>
+        </div>
+        <div class="cs-cover-tags">${s.tags.map(t => `<span class="cs-cover-tag">${t}</span>`).join('')}</div>
+      </div>
+      <div class="cs-cover-footer">
+        <div class="cs-cover-view">View Case Study →</div>
+        <div class="cs-cover-year">${s.year}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function setCategory(btn) {
+  activeCategory = btn.dataset.cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterStudies();
+}
+
+function filterStudies() { renderGrid(); }
+
+function goBack() { closeCaseStudiesPage(); }
+
+function showList() {
+  document.getElementById('list-view').style.display = 'block';
+  document.getElementById('detail-view').style.display = 'none';
+  document.title = 'Case Studies — Kiana Louie';
+  window.scrollTo(0, 0);
+}
+
+function showDetail(id) {
+  const s = STUDIES.find(x => x.id === id);
+  if (!s) return;
+  activeStudy = s;
+
+  document.getElementById('list-view').style.display = 'none';
+  document.getElementById('detail-view').style.display = 'block';
+  document.title = `${s.title} — Kiana Louie`;
+
+  // scroll the overlay container to top
+  const container = document.getElementById('cs-embedded-page');
+  if (container) container.scrollTop = 0;
+
+  // Hero
+  document.getElementById('detailBar').style.background = s.color;
+  document.getElementById('detailCat').textContent = s.catLabel;
+  document.getElementById('detailTitle').textContent = s.title;
+  document.getElementById('detailBadge').textContent = s.badge;
+  document.getElementById('detailMeta').innerHTML = `
+    <div class="detail-meta-item"><div class="dml">Role</div><div class="dmv">${s.role}</div></div>
+    <div class="detail-meta-item"><div class="dml">Duration</div><div class="dmv">${s.duration}</div></div>
+    <div class="detail-meta-item"><div class="dml">Year</div><div class="dmv">${s.year}</div></div>
+    ${s.team ? `<div class="detail-meta-item"><div class="dml">Team</div><div class="dmv">${s.team}</div></div>` : ''}
+    <div class="detail-meta-item"><div class="dml">Tags</div><div class="dmv" style="display:flex;gap:6px;flex-wrap:wrap">${s.tags.map(t=>`<span class="cs-cover-tag">${t}</span>`).join('')}</div></div>
+  `;
+
+  renderSections(s);
+}
+
+
+
+
+
+
+
+function renderSections(s) {
+  const steps = ['problem','research','process','wireframes','final','outcome'];
+  const labels = { problem:'Problem', research:'Research', process:'Process', wireframes:'Wireframes', final:'Final Design', outcome:'Outcome' };
+  const container = document.getElementById('detailSections');
+
+  container.innerHTML = steps.map((step, idx) => {
+    const sec = s.sections[step];
+    let inner = '';
+
+    if (sec.text) inner += `<div class="ds-text">${sec.text}</div>`;
+    if (sec.cards && sec.cards.length) {
+      inner += `<div class="ds-cards">${sec.cards.map(c => `
+        <div class="ds-card">
+          <div class="ds-card-lbl">${c.label}</div>
+          <div class="ds-card-text">${c.text}</div>
+        </div>`).join('')}</div>`;
+    }
+    if (sec.wireframes) {
+      inner += `<div class="wireframe-grid">
+        ${[1,2,3].map(n => `<div class="wireframe-box">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 9v12"/></svg>
+          <span>Screen ${n}</span>
+        </div>`).join('')}
+      </div>`;
+    }
+    if (sec.outcomes) {
+      inner += `<div class="ds-outcomes">${sec.outcomes.map(o => `
+        <div class="ds-outcome">
+          <div class="ds-outcome-lbl">${o.label}</div>
+          <div class="ds-outcome-stat">${o.stat}</div>
+          <div class="ds-outcome-desc">${o.desc}</div>
+        </div>`).join('')}</div>`;
+    }
+
+    return `
+      <div class="detail-section fade-in" id="section-${step}" style="animation-delay:${idx*0.07}s">
+        <div class="ds-title">${sec.title}</div>
+        ${inner}
+      </div>`;
+  }).join('');
+}
+
+// Init
+renderGrid();
+
 </script>
 <!-- ─── UX Research Modal ─── -->
 <div id="uxResearchModal" class="prog-modal-overlay" onclick="closeStampModal('uxResearch', event)">
@@ -3041,6 +3777,86 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       <div class="connect-success-title">Message Sent!</div>
       <div class="connect-success-sub">Thanks for reaching out — I'll get back to you soon.</div>
     </div>
+  </div>
+</div>
+
+<!-- ─── Case Studies Full Page (embedded) ─── -->
+<div id="csPageOverlay" class="cs-page-overlay">
+  <div id="cs-embedded-page" style="width:100%;height:100%;overflow-y:auto;overflow-x:hidden;background:var(--cream);position:relative;">
+<!-- NAV -->
+<nav>
+  <button class="nav-logo" onclick="closeCaseStudiesPage(); setTimeout(()=>document.getElementById('hero').scrollIntoView({behavior:'smooth'}),300)">KL · Portfolio</button>
+  <ul class="nav-links">
+    <li><button onclick="closeCaseStudiesPage(); setTimeout(()=>document.getElementById('about').scrollIntoView({behavior:'smooth'}),300)">About</button></li>
+    <li><button onclick="closeCaseStudiesPage(); setTimeout(()=>document.getElementById('skills').scrollIntoView({behavior:'smooth'}),300)">Skills</button></li>
+    <li><button onclick="closeCaseStudiesPage(); setTimeout(()=>document.getElementById('experience').scrollIntoView({behavior:'smooth'}),300)">Experience</button></li>
+    <li><button onclick="closeCaseStudiesPage(); setTimeout(()=>document.getElementById('projects').scrollIntoView({behavior:'smooth'}),300)">Projects</button></li>
+    <li><button onclick="document.getElementById('list-view').style.display='block'; document.getElementById('detail-view').style.display='none';">Case Studies</button></li>
+  </ul>
+  <button class="nav-cta" onclick="openConnectModal()">Let's Connect</button>
+</nav>
+
+<!-- ══════════════════════════════════
+     LIST VIEW
+══════════════════════════════════ -->
+<div id="list-view">
+  <div class="page-header">
+    <div class="page-tag">
+      <div class="page-tag-line"></div>
+      <span class="page-tag-label">Flight Reports</span>
+    </div>
+    <h1 class="page-title">Case Studies</h1>
+
+    <!-- Search + Filter -->
+    <div class="search-bar-wrap">
+      <div class="search-input-wrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="search-input" id="searchInput" type="text" placeholder="Search case studies…" oninput="filterStudies()">
+      </div>
+      <div class="cats" id="catBtns">
+        <button class="cat-btn active" data-cat="all" onclick="setCategory(this)">All</button>
+        <button class="cat-btn" data-cat="redesign" onclick="setCategory(this)">Redesign</button>
+        <button class="cat-btn" data-cat="branding" onclick="setCategory(this)">Branding</button>
+        <button class="cat-btn" data-cat="marketing" onclick="setCategory(this)">Marketing</button>
+        <button class="cat-btn" data-cat="development" onclick="setCategory(this)">Development</button>
+        <button class="cat-btn" data-cat="ux-research" onclick="setCategory(this)">UX Research</button>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="cs-grid" id="csGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     DETAIL VIEW
+══════════════════════════════════ -->
+<div id="detail-view">
+ <div class="detail-wrap">
+
+  <button class="detail-back" onclick="showList()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    All Case Studies
+  </button>
+
+  <!-- Hero header -->
+  <div class="detail-hero" id="detailHero">
+    <div class="detail-hero-bar" id="detailBar"></div>
+    <div class="detail-hero-body">
+      <div>
+        <div class="detail-cat" id="detailCat"></div>
+        <div class="detail-title" id="detailTitle"></div>
+        <div class="detail-meta" id="detailMeta"></div>
+      </div>
+      <div class="detail-badge" id="detailBadge"></div>
+    </div>
+  </div>
+
+  <!-- Sections -->
+  <div id="detailSections"></div>
+
+ </div>
+</div>
   </div>
 </div>
 
