@@ -82,14 +82,16 @@ nav {
   font-family: 'DM Mono', monospace;
   font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
   color: var(--ink-mid); text-decoration: none;
+  background: none; border: none; cursor: pointer; padding: 0;
 }
 .nav-links { display: flex; gap: 36px; list-style: none; }
-.nav-links a {
+.nav-links button {
+  font-family: 'DM Sans', sans-serif;
   font-size: 11.5px; font-weight: 500; letter-spacing: 0.1em;
-  text-decoration: none; color: var(--ink-mid);
-  text-transform: uppercase; transition: color 0.2s;
+  color: var(--ink-mid); text-transform: uppercase; transition: color 0.2s;
+  background: none; border: none; cursor: pointer; padding: 0;
 }
-.nav-links a:hover { color: var(--sage-dark); }
+.nav-links button:hover { color: var(--sage-dark); }
 .nav-cta {
   font-family: 'DM Mono', monospace;
   font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
@@ -536,6 +538,7 @@ nav {
   letter-spacing: 0.15em; text-transform: uppercase;
   padding: 10px 22px; border-radius: 5px;
   text-decoration: none; transition: all 0.22s;
+  background: none; border: none; cursor: pointer; display: inline-block;
 }
 .about-link.primary { background: var(--sage-dark); color: white; }
 .about-link.primary:hover { background: var(--sage); }
@@ -1034,6 +1037,114 @@ footer {
 .footer-inner { max-width: 1120px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 .footer-txt { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; }
 
+/* ── Let's Connect CTA button ── */
+.connect-cta {
+  margin-top: 28px;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 32px;
+  background: var(--sage-light); color: var(--sage-dark);
+  border: 1.5px solid var(--sage); border-radius: 40px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.connect-cta:hover {
+  background: var(--sage); color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(74,110,78,0.25);
+}
+
+/* ── Let's Connect modal ── */
+.connect-overlay {
+  position: fixed; inset: 0; z-index: 1100;
+  background: rgba(44,42,36,0.5);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+.connect-overlay.open { opacity: 1; pointer-events: all; }
+.connect-card {
+  background: white; border-radius: 24px;
+  padding: 40px; width: 100%; max-width: 520px; margin: 20px;
+  position: relative;
+  box-shadow: 0 32px 80px rgba(44,42,36,0.2);
+  transform: scale(0.93) translateY(16px);
+  transition: transform 0.32s cubic-bezier(0.34,1.56,0.64,1);
+  max-height: 90vh; overflow-y: auto;
+}
+.connect-overlay.open .connect-card { transform: scale(1) translateY(0); }
+.connect-close {
+  position: absolute; top: 18px; right: 18px;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--beige); border: none;
+  font-size: 20px; color: var(--ink-mid);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s; line-height: 1;
+}
+.connect-close:hover { background: var(--sand); }
+.connect-header { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 28px; }
+.connect-icon {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--sage-light); color: var(--sage-dark);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0; margin-top: 4px;
+}
+.connect-kicker {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.28em; color: var(--sage-dark);
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.connect-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 600; color: var(--ink);
+  line-height: 1.1; margin-bottom: 8px;
+}
+.connect-sub { font-size: 13.5px; line-height: 1.65; color: var(--ink-mid); }
+.connect-form { display: flex; flex-direction: column; gap: 16px; }
+.connect-field { display: flex; flex-direction: column; gap: 6px; }
+.connect-field label {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-light);
+}
+.connect-field input,
+.connect-field textarea {
+  font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink);
+  background: var(--cream); border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 12px 16px; outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s; resize: none;
+}
+.connect-field input:focus,
+.connect-field textarea:focus {
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(122,158,126,0.15);
+  background: white;
+}
+.connect-field input::placeholder,
+.connect-field textarea::placeholder { color: var(--ink-light); }
+.connect-submit {
+  margin-top: 4px; padding: 14px;
+  background: var(--sage-dark); color: white;
+  border: none; border-radius: 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.connect-submit:hover {
+  background: var(--sage); transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(74,110,78,0.28);
+}
+.connect-success { display: none; text-align: center; padding: 24px 0 8px; }
+.connect-success.show { display: block; }
+.connect-success-icon { font-size: 48px; margin-bottom: 16px; }
+.connect-success-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; font-weight: 600; color: var(--ink); margin-bottom: 8px;
+}
+.connect-success-sub { font-size: 14px; color: var(--ink-mid); line-height: 1.6; }
+
 /* ─── SCROLL ANIMATIONS ─── */
 .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.75s ease, transform 0.75s ease; }
 .reveal.show { opacity: 1; transform: translateY(0); }
@@ -1081,15 +1192,15 @@ footer {
 
 <!-- ─── NAV ─── -->
 <nav>
-  <a class="nav-logo" href="#hero">KL · Portfolio</a>
+  <button class="nav-logo" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})">KL · Portfolio</button>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#case-studies">Case Studies</a></li>
+    <li><button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">About</button></li>
+    <li><button onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'})">Skills</button></li>
+    <li><button onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'})">Experience</button></li>
+    <li><button onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">Projects</button></li>
+    <li><button onclick="document.getElementById('case-studies').scrollIntoView({behavior:'smooth'})">Case Studies</button></li>
   </ul>
-  <a class="nav-cta" href="#contact">Let's Connect</a>
+  <button class="nav-cta" onclick="openConnectModal()">Let's Connect</button>
 </nav>
 
 <!-- ─── HERO ─── -->
@@ -1166,8 +1277,8 @@ footer {
         <p>I'm drawn to design that balances <strong>visual clarity with intention</strong> — work that feels refined, natural, and effortless to use. I see visual and digital experiences as something that shapes how we move through the world, often without us consciously noticing. My inspiration comes from everyday environments, especially <strong>cafés, travel, and thoughtful design details</strong>. Outside of work, I recharge through café hopping and exploring matcha spots, which helps me stay grounded and observant.</p>
         <p>Outside of design, I'm interested in visual culture, branding in daily life, and emerging creative tools. I also enjoy <strong>vibe coding</strong> and use AI as a collaborative tool to support ideation, streamline workflows, and expand my approach to problem-solving and design thinking.</p>
         <div class="about-links">
-          <a class="about-link primary" href="#projects">View Projects</a>
-          <a class="about-link ghost" href="#contact">Get in Touch</a>
+          <button class="about-link primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">View Projects</button>
+          <button class="about-link ghost" onclick="openConnectModal()">Get in Touch</button>
         </div>
       </div>
 
@@ -1860,6 +1971,9 @@ footer {
           <div><span class="cb-lbl">LinkedIn</span><span class="cb-val">linkedin.com/in/kianalouie</span></div>
         </a>
       </div>
+      <button class="connect-cta" onclick="openConnectModal()">
+        <span>✦</span> Let's Connect
+      </button>
     </div>
     <div class="contact-stamp-side">
       <div class="stamp-ring" role="img" aria-label="Available for hire">
@@ -2243,7 +2357,44 @@ class DecryptedText {
 
 /* ── Flip card click is handled inline via classList.toggle ── */
 
-/* ── Unified stamp modal system ── */
+/* ── Let's Connect modal ── */
+function openConnectModal() {
+  document.getElementById('connectModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeConnectModal(event) {
+  const overlay = document.getElementById('connectModal');
+  if (event && event.target !== overlay) return;
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  // reset form after close animation
+  setTimeout(() => {
+    document.getElementById('connectSuccess').classList.remove('show');
+    document.querySelector('.connect-form').style.display = 'flex';
+    document.getElementById('connect-btn-text').textContent = 'Send Message ✈';
+    document.getElementById('cf-name').value = '';
+    document.getElementById('cf-email').value = '';
+    document.getElementById('cf-msg').value = '';
+  }, 300);
+}
+
+function submitConnectForm(e) {
+  e.preventDefault();
+  const btn = document.getElementById('connect-btn-text');
+  btn.textContent = 'Sending…';
+  // Simulate send delay then show success
+  setTimeout(() => {
+    document.querySelector('.connect-form').style.display = 'none';
+    document.getElementById('connectSuccess').classList.add('show');
+  }, 1200);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('connectModal').classList.contains('open')) {
+    closeConnectModal(null);
+  }
+});
 const _stampModalMap = {
   uxResearch:   { modalId: 'uxResearchModal',   stampEl: null },
   data:         { modalId: 'dataModal',          stampEl: null },
@@ -2849,6 +3000,46 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       <div class="cert-modal-item"><span class="cert-modal-dot blue"></span>Build Wireframes and Low-Fidelity Prototypes</div>
       <div class="cert-modal-item"><span class="cert-modal-dot blue"></span>Start the UX Design Process: Empathize, Define, and Ideate</div>
       <div class="cert-modal-item"><span class="cert-modal-dot blue"></span>Foundations of User Experience (UX) Design</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Let's Connect Modal ─── -->
+<div id="connectModal" class="connect-overlay" onclick="closeConnectModal(event)">
+  <div class="connect-card">
+    <button class="connect-close" onclick="closeConnectModal(null)" aria-label="Close">×</button>
+
+    <div class="connect-header">
+      <div class="connect-icon">✦</div>
+      <div>
+        <div class="connect-kicker">Get in Touch</div>
+        <h3 class="connect-title">LET'S CONNECT</h3>
+        <p class="connect-sub">Have a project in mind, a question, or just want to say hello? I'd love to hear from you.</p>
+      </div>
+    </div>
+
+    <form class="connect-form" onsubmit="submitConnectForm(event)">
+      <div class="connect-field">
+        <label for="cf-name">Your Name</label>
+        <input type="text" id="cf-name" placeholder="Kiana Louie" required autocomplete="name">
+      </div>
+      <div class="connect-field">
+        <label for="cf-email">Email Address</label>
+        <input type="email" id="cf-email" placeholder="hello@example.com" required autocomplete="email">
+      </div>
+      <div class="connect-field">
+        <label for="cf-msg">Message</label>
+        <textarea id="cf-msg" rows="4" placeholder="Tell me about your project, idea, or just say hi..." required></textarea>
+      </div>
+      <button type="submit" class="connect-submit">
+        <span id="connect-btn-text">Send Message ✈</span>
+      </button>
+    </form>
+
+    <div class="connect-success" id="connectSuccess">
+      <div class="connect-success-icon">🎉</div>
+      <div class="connect-success-title">Message Sent!</div>
+      <div class="connect-success-sub">Thanks for reaching out — I'll get back to you soon.</div>
     </div>
   </div>
 </div>
