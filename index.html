@@ -1445,12 +1445,20 @@ nav {
 }
 .ds-title {
   font-family: 'Playfair Display', serif;
-  font-size: 28px; font-weight: 600; color: var(--ink); margin-bottom: 20px;
+  font-size: 28px; font-weight: 600; color: var(--ink); margin-bottom: 16px; margin-top: 8px;
 }
 .ds-text {
   font-size: 15px; line-height: 1.85; color: var(--ink-mid); max-width: 700px;
+  margin-bottom: 4px;
 }
 .ds-text strong { color: var(--ink); font-weight: 500; }
+
+.detail-section {
+  padding: 52px 0;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 100px;
+}
+.detail-section:last-child { border-bottom: none; }
 .ds-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 24px; }
 .ds-card {
   background: var(--beige); border-radius: 12px;
@@ -1482,8 +1490,36 @@ nav {
 }
 .ds-outcome-desc { font-size: 11px; color: var(--ink-light); }
 
-/* wireframe placeholder */
+/* ── Wireframe images ── */
+.cs-wireframe-imgs {
+  display: flex; flex-direction: column; gap: 32px; margin-top: 24px;
+}
+.cs-wf-wrap { display: flex; flex-direction: column; gap: 12px; }
+.cs-wf-label {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-light);
+}
+.cs-wf-img {
+  width: 100%; border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 24px rgba(44,42,36,0.08);
+}
+.cs-wf-single { align-items: flex-start; }
+.cs-wf-img-sm {
+  width: 40%; border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 24px rgba(44,42,36,0.08);
+}
 .wireframe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+/* ── Embedded wireframe HTML wrapper ── */
+.wf-embed-outer {
+  margin-top: 24px;
+  background: #f8f6f2;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 20px;
+  overflow-x: auto;
+}
 .wireframe-box {
   aspect-ratio: 3/4; background: var(--beige);
   border: 1.5px dashed var(--sand); border-radius: 10px;
@@ -1494,6 +1530,26 @@ nav {
 .wireframe-box span {
   font-family: 'DM Mono', monospace; font-size: 9px;
   letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-light);
+}
+
+
+.wireframe-screens {
+  display: flex; flex-direction: column; gap: 28px; margin-top: 28px;
+}
+.wireframe-img-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.wireframe-img {
+  width: 100%; max-width: 860px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 32px rgba(44,42,36,0.1);
+}
+.wireframe-img-solo .wireframe-img-small {
+  max-width: 340px;
+}
+.wireframe-img-cap {
+  font-family: 'DM Mono', monospace; font-size: 9.5px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-light);
 }
 
   .ds-outcome:first-child { border-radius: 12px 12px 0 0; }
@@ -1957,12 +2013,19 @@ nav {
             <div class="pn-stamp-year">2024</div>
           </div>
 
+          <!-- Canva Design School -->
+          <div class="pn-stamp green" id="canvaStamp" onclick="openStampModal('canva', this)" style="cursor:pointer;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            <div class="pn-stamp-name">Canva Design School</div>
+            <div class="pn-stamp-year">2024</div>
+          </div>
+
         </div>
       </div>
 
       <!-- footer bar -->
       <div class="pn-footer">
-        <span id="pn-count">STAMPS COLLECTED: 15</span>
+        <span id="pn-count">STAMPS COLLECTED: 16</span>
         <span>STATUS: ACTIVE</span>
       </div>
     </div>
@@ -2060,229 +2123,34 @@ nav {
     <h2 class="section-title reveal">Projects</h2>
 
     <div class="projects-grid">
-      <a class="bp-card reveal" href="#case-studies" tabindex="0">
+      <div class="bp-card reveal" tabindex="0">
         <div class="bp-color-bar" style="background:var(--sage)"></div>
         <div class="bp-card-top">
-          <div class="bp-carrier">UX/UI · Mobile App</div>
-          <div class="bp-title">171 Trucks</div>
+          <div class="bp-carrier">Small Business · Brand & Product Design</div>
+          <div class="bp-title">The Leibel</div>
         </div>
         <div class="bp-route-row">
-          <div class="bp-airport"><div class="ap-code">RSH</div><div class="ap-city">Research</div></div>
+          <div class="bp-airport"><div class="ap-code">BRD</div><div class="ap-city">Brand</div></div>
           <div class="bp-arrow-icon">→</div>
-          <div class="bp-airport" style="text-align:right"><div class="ap-code">LNC</div><div class="ap-city">Launch</div></div>
+          <div class="bp-airport" style="text-align:right"><div class="ap-code">OPS</div><div class="ap-city">Operations</div></div>
         </div>
         <div class="bp-meta">
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Role</div><div class="bp-meta-val">UX/UI Designer</div></div>
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Duration</div><div class="bp-meta-val">1 Quarter</div></div>
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Year</div><div class="bp-meta-val">2025</div></div>
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Role</div><div class="bp-meta-val">Founder & Designer</div></div>
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Since</div><div class="bp-meta-val">2017</div></div>
+          <div class="bp-meta-col"><div class="bp-meta-lbl">Type</div><div class="bp-meta-val">Ongoing</div></div>
         </div>
         <div class="bp-card-tags">
-          <span class="bp-tag">Figma</span>
-          <span class="bp-tag">Mobile Design</span>
-          <span class="bp-tag">Systems Analysis</span>
+          <span class="bp-tag">Brand Identity</span>
+          <span class="bp-tag">Product Design</span>
+          <span class="bp-tag">Customer Experience</span>
+          <span class="bp-tag" style="background:var(--gold-light);color:var(--gold);">✦ Coming Soon</span>
         </div>
-      </a>
-
-      <a class="bp-card reveal reveal-delay-1" href="#case-studies" tabindex="0">
-        <div class="bp-color-bar" style="background:var(--sky)"></div>
-        <div class="bp-card-top">
-          <div class="bp-carrier">Brand Strategy</div>
-          <div class="bp-title">Boutique Hotel Identity</div>
-        </div>
-        <div class="bp-route-row">
-          <div class="bp-airport"><div class="ap-code">DSC</div><div class="ap-city">Discovery</div></div>
-          <div class="bp-arrow-icon">→</div>
-          <div class="bp-airport" style="text-align:right"><div class="ap-code">BRD</div><div class="ap-city">Brand</div></div>
-        </div>
-        <div class="bp-meta">
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Role</div><div class="bp-meta-val">Brand Strategist</div></div>
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Duration</div><div class="bp-meta-val">6 weeks</div></div>
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Year</div><div class="bp-meta-val">2024</div></div>
-        </div>
-        <div class="bp-card-tags">
-          <span class="bp-tag">Illustrator</span>
-          <span class="bp-tag">Strategy</span>
-          <span class="bp-tag">Identity</span>
-        </div>
-      </a>
-
-      <a class="bp-card reveal reveal-delay-2" href="#" tabindex="0">
-        <div class="bp-color-bar" style="background:var(--gold)"></div>
-        <div class="bp-card-top">
-          <div class="bp-carrier">Marketing Campaign</div>
-          <div class="bp-title">Seasonal Social Campaign</div>
-        </div>
-        <div class="bp-route-row">
-          <div class="bp-airport"><div class="ap-code">STG</div><div class="ap-city">Strategy</div></div>
-          <div class="bp-arrow-icon">→</div>
-          <div class="bp-airport" style="text-align:right"><div class="ap-code">CMP</div><div class="ap-city">Campaign</div></div>
-        </div>
-        <div class="bp-meta">
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Role</div><div class="bp-meta-val">Art Director</div></div>
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Duration</div><div class="bp-meta-val">4 weeks</div></div>
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Year</div><div class="bp-meta-val">2023</div></div>
-        </div>
-        <div class="bp-card-tags">
-          <span class="bp-tag">Social Media</span>
-          <span class="bp-tag">Photoshop</span>
-          <span class="bp-tag">Content Strategy</span>
-        </div>
-      </a>
-
-      <a class="bp-card reveal reveal-delay-3" href="#" tabindex="0">
-        <div class="bp-color-bar" style="background:var(--stamp-red)"></div>
-        <div class="bp-card-top">
-          <div class="bp-carrier">Product Design</div>
-          <div class="bp-title">E-commerce Checkout Flow</div>
-        </div>
-        <div class="bp-route-row">
-          <div class="bp-airport"><div class="ap-code">AUD</div><div class="ap-city">Audit</div></div>
-          <div class="bp-arrow-icon">→</div>
-          <div class="bp-airport" style="text-align:right"><div class="ap-code">OPT</div><div class="ap-city">Optimized</div></div>
-        </div>
-        <div class="bp-meta">
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Role</div><div class="bp-meta-val">UX Researcher</div></div>
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Duration</div><div class="bp-meta-val">2 months</div></div>
-          <div class="bp-meta-col"><div class="bp-meta-lbl">Year</div><div class="bp-meta-val">2023</div></div>
-        </div>
-        <div class="bp-card-tags">
-          <span class="bp-tag">A/B Testing</span>
-          <span class="bp-tag">Figma</span>
-          <span class="bp-tag">Analytics</span>
-        </div>
-      </a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ─── CASE STUDIES ─── -->
-<section id="case-studies">
-  <div class="section-wrap">
-    <div class="section-tag reveal">
-      <span class="st-num">05</span>
-      <div class="st-line"></div>
-      <span class="st-label">Flight Reports</span>
-    </div>
-    <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:48px;">
-      <h2 class="section-title reveal" style="margin-bottom:0">Case Studies</h2>
-      <button class="view-all-cs-btn reveal" onclick="openCaseStudiesPage()">View All Case Studies →</button>
-    </div>
-
-    <!-- Case Study 1 -->
-    <div class="cs-item reveal">
-      <div class="cs-head">
-        <div>
-          <div class="cs-num">Case Study 01</div>
-          <div class="cs-title">171 Trucks</div>
-        </div>
-        <div class="cs-badge">UX/UI Design</div>
-      </div>
-      <div class="cs-flow" aria-label="Design process">
-        <div class="cs-step-box active">Problem</div>
-        <div class="cs-arrow" aria-hidden="true">→</div>
-        <div class="cs-step-box">Research</div>
-        <div class="cs-arrow" aria-hidden="true">→</div>
-        <div class="cs-step-box">Process</div>
-        <div class="cs-arrow" aria-hidden="true">→</div>
-        <div class="cs-step-box">Wireframes</div>
-        <div class="cs-arrow" aria-hidden="true">→</div>
-        <div class="cs-step-box">Final Design</div>
-        <div class="cs-arrow" aria-hidden="true">→</div>
-        <div class="cs-step-box">Outcome</div>
-      </div>
-      <div class="cs-cards">
-        <div class="cs-card">
-          <div class="cs-card-lbl">Problem</div>
-          <div class="cs-card-text">UCR students lacked a way to discover nearby food trucks and couldn't use Dining Dollars or Bear Bucks at off-campus restaurants, limiting dining flexibility and local business support.</div>
-        </div>
-        <div class="cs-card">
-          <div class="cs-card-lbl">Research & Process</div>
-          <div class="cs-card-text">Applied systems analysis and design methodology (BUS 171) to define requirements, map user flows, and design a mobile app architecture for real-time vendor discovery and payment integration.</div>
-        </div>
-        <div class="cs-card">
-          <div class="cs-card-lbl">Final Design</div>
-          <div class="cs-card-text">Concept mobile app with an interactive vendor map, food truck profiles with menus and hours, and Dining Dollars / Bear Bucks payment flow for participating off-campus restaurants.</div>
-        </div>
-      </div>
-      <div class="cs-outcome">
-        <div>
-          <div class="cs-outcome-label">University</div>
-          <div class="cs-outcome-stat">UCR</div>
-          <div class="cs-outcome-desc">University of California, Riverside</div>
-        </div>
-        <div style="width:1px; height:60px; background:var(--border);"></div>
-        <div>
-          <div class="cs-outcome-label">Year</div>
-          <div class="cs-outcome-stat">2025</div>
-          <div class="cs-outcome-desc">Spring Quarter 2025</div>
-        </div>
-        <div style="width:1px; height:60px; background:var(--border);"></div>
-        <div>
-          <div class="cs-outcome-label">Course</div>
-          <div class="cs-outcome-stat">BUS 171</div>
-          <div class="cs-outcome-desc">Systems Analysis & Design</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cs-divider"></div>
-
-    <!-- Case Study 2 -->
-    <div class="cs-item reveal">
-      <div class="cs-head">
-        <div>
-          <div class="cs-num">Case Study 02</div>
-          <div class="cs-title">Boutique Hotel Brand Identity</div>
-        </div>
-        <div class="cs-badge">Brand Strategy</div>
-      </div>
-      <div class="cs-flow">
-        <div class="cs-step-box active">Discovery</div>
-        <div class="cs-arrow" aria-hidden="true">→</div>
-        <div class="cs-step-box">Positioning</div>
-        <div class="cs-arrow" aria-hidden="true">→</div>
-        <div class="cs-step-box">Visual System</div>
-        <div class="cs-arrow" aria-hidden="true">→</div>
-        <div class="cs-step-box">Guidelines</div>
-        <div class="cs-arrow" aria-hidden="true">→</div>
-        <div class="cs-step-box">Delivery</div>
-      </div>
-      <div class="cs-cards">
-        <div class="cs-card">
-          <div class="cs-card-lbl">Challenge</div>
-          <div class="cs-card-text">A new boutique hotel needed a complete brand identity to stand out in a saturated luxury market and attract a design-forward, experience-driven traveler.</div>
-        </div>
-        <div class="cs-card">
-          <div class="cs-card-lbl">Process</div>
-          <div class="cs-card-text">Developed mood boards, ran stakeholder workshops, defined brand archetypes, then created full logo suite, color palette, typography system, and brand voice guidelines.</div>
-        </div>
-        <div class="cs-card">
-          <div class="cs-card-lbl">Delivery</div>
-          <div class="cs-card-text">80-page brand guidelines document, complete asset library, social templates, and signage specifications handed off to in-house team with a two-week onboarding sprint.</div>
-        </div>
-      </div>
-      <div class="cs-outcome">
-        <div>
-          <div class="cs-outcome-label">Direct Bookings</div>
-          <div class="cs-outcome-stat">+31%</div>
-          <div class="cs-outcome-desc">Above projections, first quarter</div>
-        </div>
-        <div style="width:1px; height:60px; background:var(--border);"></div>
-        <div>
-          <div class="cs-outcome-label">Press Features</div>
-          <div class="cs-outcome-stat">2</div>
-          <div class="cs-outcome-desc">Design publications at launch</div>
-        </div>
-        <div style="width:1px; height:60px; background:var(--border);"></div>
-        <div>
-          <div class="cs-outcome-label">Timeline</div>
-          <div class="cs-outcome-stat">6wk</div>
-          <div class="cs-outcome-desc">Discovery to final handoff</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ─── CONTACT ─── -->
 <section id="contact" style="padding:0; margin:0;">
@@ -2735,7 +2603,9 @@ const _stampModalMap = {
   semrush:      { modalId: 'semrushModal',       stampEl: null },
   adobe:        { modalId: 'adobeModal',         stampEl: null },
   googleCert:   { modalId: 'googleCertModal',    stampEl: null },
-  googleUX:     { modalId: 'googleUXModal',      stampEl: null }
+  googleUX:     { modalId: 'googleUXModal',      stampEl: null },
+  canva:        { modalId: 'canvaModal',          stampEl: null },
+  canva:        { modalId: 'canvaModal',          stampEl: null }
 };
 
 function openStampModal(key, stampEl) {
@@ -2949,6 +2819,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 
 /* ══ Case Studies Page JS ══ */
+
 /* ── Case Study Data ── */
 const STUDIES = [
   {
@@ -2990,8 +2861,9 @@ const STUDIES = [
       },
       wireframes: {
         title: 'Wireframes',
-        text: 'Initial planning focused on mapping the student dining journey and identifying the most important user flows. Key wireframe concepts included: Home feed displaying nearby food vendors · Interactive map with live food truck locations · Vendor detail pages with menus, reviews, and hours · Queue and wait-time indicators · Integrated checkout and Dining Dollar payment flow · Personalized recommendation sections. The wireframes prioritized clear navigation, mobile-first usability, accessibility and speed, and easy access to real-time information.',
-        wireframes: true
+        text: 'Initial planning focused on mapping the student dining journey and identifying the most important user flows — across 4 key screens: campus map, vendor search, order detail, and funds wallet.',
+        wireframes: true,
+        embedHTML: "<style>\n  .wf-scope {\n    --color-background-primary: #ffffff;\n    --color-background-secondary: #f3f4f6;\n    --color-text-primary: #2C2A24;\n    --color-text-secondary: #6b7280;\n    --color-border-tertiary: #e5e7eb;\n    --color-border-secondary: #d1d5db;\n    font-family: 'DM Sans', sans-serif;\n  }\n\n  .wf-scope .wf-scope * { box-sizing: border-box; margin: 0; padding: 0; }\n  .wf-scope .wf-scope { font-family: var(--font-sans); }\n  .wf-scope .app-wrapper { display: flex; flex-direction: column; gap: 24px; padding: 16px 0; }\n  .wf-scope .section-label { font-size: 13px; color: var(--color-text-secondary); font-weight: 500; margin-bottom: 8px; letter-spacing: 0.04em; }\n  .wf-scope .screens-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }\n  .wf-scope .phone-frame { width: 180px; background: #1a1a1a; border-radius: 28px; padding: 10px; flex-shrink: 0; box-shadow: none; border: 2px solid #333; }\n  .wf-scope .phone-screen { background: var(--color-background-primary); border-radius: 20px; overflow: hidden; min-height: 340px; display: flex; flex-direction: column; }\n  .wf-scope .status-bar { background: #1E5C38; height: 20px; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; }\n  .wf-scope .status-bar span { font-size: 9px; color: #fff; }\n  .wf-scope .screen-header { background: #1E5C38; padding: 8px 10px 10px; color: #fff; }\n  .wf-scope .screen-header h3 { font-size: 13px; font-weight: 500; }\n  .wf-scope .screen-header p { font-size: 9px; opacity: 0.8; margin-top: 1px; }\n  .wf-scope .screen-body { flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 6px; overflow: hidden; }\n  .wf-scope .map-bg { background: #e8f0e0; border-radius: 8px; flex: 1; position: relative; overflow: hidden; min-height: 140px; }\n  .wf-scope .map-grid { position: absolute; inset: 0; }\n  .wf-scope .road-h { position: absolute; height: 5px; background: #fff; left: 0; right: 0; }\n  .wf-scope .road-v { position: absolute; width: 5px; background: #fff; top: 0; bottom: 0; }\n  .wf-scope .map-label { position: absolute; font-size: 7px; color: #555; font-weight: 500; }\n  .wf-scope .building { position: absolute; background: #c8d8c0; border-radius: 2px; border: 0.5px solid #aac4aa; }\n  .wf-scope .truck-pin { position: absolute; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8px; color: #fff; font-weight: 700; border: 2px solid #fff; cursor: pointer; }\n  .wf-scope .pin-teal { background: #1E5C38; }\n  .wf-scope .pin-amber { background: #D97706; }\n  .wf-scope .pin-red { background: #DC2626; }\n  .wf-scope .search-bar { background: var(--color-background-secondary); border-radius: 8px; padding: 5px 8px; display: flex; align-items: center; gap: 4px; border: 0.5px solid var(--color-border-tertiary); }\n  .wf-scope .search-bar span { font-size: 9px; color: var(--color-text-secondary); }\n  .wf-scope .vendor-card { display: flex; align-items: center; gap: 6px; padding: 5px 6px; border-radius: 8px; border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); }\n  .wf-scope .vendor-img { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }\n  .wf-scope .vendor-info h4 { font-size: 9px; font-weight: 500; color: var(--color-text-primary); }\n  .wf-scope .vendor-info p { font-size: 8px; color: var(--color-text-secondary); }\n  .wf-scope .badge { font-size: 7px; padding: 1px 4px; border-radius: 4px; }\n  .wf-scope .badge-green { background: #d1fae5; color: #065f46; }\n  .wf-scope .badge-amber { background: #fef3c7; color: #92400e; }\n  .wf-scope .badge-gray { background: var(--color-background-secondary); color: var(--color-text-secondary); }\n  .wf-scope .bottom-nav { display: flex; justify-content: space-around; padding: 6px 4px 4px; border-top: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); }\n  .wf-scope .nav-item { display: flex; flex-direction: column; align-items: center; gap: 1px; }\n  .wf-scope .nav-item i { font-size: 14px; color: var(--color-text-secondary); }\n  .wf-scope .nav-item.active i { color: #1E5C38; }\n  .wf-scope .nav-item span { font-size: 7px; color: var(--color-text-secondary); }\n  .wf-scope .nav-item.active span { color: #1E5C38; }\n  .wf-scope .wallet-row { display: flex; gap: 4px; }\n  .wf-scope .wallet-card { flex: 1; background: #1E5C38; border-radius: 8px; padding: 6px; color: #fff; }\n  .wf-scope .wallet-card.amber { background: #D97706; }\n  .wf-scope .wallet-card p { font-size: 7px; opacity: 0.85; }\n  .wf-scope .wallet-card h4 { font-size: 11px; font-weight: 500; margin-top: 2px; }\n  .wf-scope .detail-img-row { display: flex; gap: 3px; height: 45px; }\n  .wf-scope .detail-img { flex: 1; border-radius: 6px; background: #d1fae5; display: flex; align-items: center; justify-content: center; font-size: 14px; }\n  .wf-scope .stars { color: #D97706; font-size: 10px; }\n  .wf-scope .menu-item { display: flex; align-items: center; gap: 6px; padding: 4px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }\n  .wf-scope .menu-item-img { width: 24px; height: 24px; border-radius: 4px; background: #d1fae5; display: flex; align-items: center; justify-content: center; font-size: 10px; }\n  .wf-scope .menu-item-info { flex: 1; }\n  .wf-scope .menu-item-info h4 { font-size: 9px; font-weight: 500; }\n  .wf-scope .menu-item-info p { font-size: 8px; color: var(--color-text-secondary); }\n  .wf-scope .add-btn { width: 16px; height: 16px; border-radius: 50%; background: #1E5C38; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 10px; line-height: 1; }\n  .wf-scope .order-btn { background: #1E5C38; color: #fff; border-radius: 8px; padding: 6px; text-align: center; font-size: 9px; font-weight: 500; margin-top: 4px; }\n  .wf-scope .pay-row { display: flex; gap: 3px; }\n  .wf-scope .pay-opt { flex: 1; padding: 4px; border-radius: 6px; border: 0.5px solid var(--color-border-secondary); text-align: center; font-size: 7px; color: var(--color-text-secondary); }\n  .wf-scope .pay-opt.active { border-color: #1E5C38; color: #1E5C38; background: #d1fae5; }\n  .wf-scope .section-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 6px; }\n  .wf-scope .notif-row { display: flex; align-items: center; gap: 6px; padding: 5px; border-radius: 8px; background: var(--color-background-secondary); }\n  .wf-scope .notif-row i { font-size: 14px; color: #1E5C38; }\n  .wf-scope .notif-row p { font-size: 8px; color: var(--color-text-secondary); }\n  .wf-scope .campus-map { background: #f0f7eb; border-radius: 12px; padding: 12px; border: 0.5px solid var(--color-border-tertiary); position: relative; height: 280px; overflow: hidden; }\n  .wf-scope .map-legend { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }\n  .wf-scope .legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--color-text-secondary); }\n  .wf-scope .legend-dot { width: 10px; height: 10px; border-radius: 50%; }\n\n</style>\n<div class=\"wf-scope\"><div class=\"app-wrapper\">\n  <p class=\"section-label\">171 Trucks \u2014 UCR food app \u00b7 screen wireframes</p>\n\n  <div class=\"screens-row\">\n\n    <!-- Screen 1: Map -->\n    <div>\n      <p class=\"section-label\" style=\"text-align:center\">1 \u00b7 campus map</p>\n      <div class=\"phone-frame\">\n        <div class=\"phone-screen\">\n          <div class=\"status-bar\"><span>9:41</span><span>\u25cf\u25cf\u25cf \u25b2 \u25ae</span></div>\n          <div class=\"screen-header\">\n            <h3>171 Trucks</h3>\n            <p>UCR campus \u00b7 6 trucks nearby</p>\n          </div>\n          <div class=\"screen-body\">\n            <div class=\"search-bar\">\n              <i class=\"ti ti-search\" style=\"font-size:10px; color:var(--color-text-secondary)\" aria-hidden=\"true\"></i>\n              <span>Search food trucks...</span>\n            </div>\n            <div class=\"map-bg\">\n              <div class=\"road-h\" style=\"top:40%\"></div>\n              <div class=\"road-h\" style=\"top:65%\"></div>\n              <div class=\"road-v\" style=\"left:35%\"></div>\n              <div class=\"road-v\" style=\"left:65%\"></div>\n              <div class=\"building\" style=\"width:28px;height:20px;top:15%;left:10%\"></div>\n              <div class=\"building\" style=\"width:22px;height:18px;top:15%;left:50%\"></div>\n              <div class=\"building\" style=\"width:30px;height:24px;top:15%;left:72%\"></div>\n              <div class=\"building\" style=\"width:24px;height:16px;top:70%;left:10%\"></div>\n              <div class=\"building\" style=\"width:20px;height:20px;top:70%;left:72%\"></div>\n              <div class=\"map-label\" style=\"top:16%;left:11%\">HUB</div>\n              <div class=\"map-label\" style=\"top:16%;left:52%\">SCI</div>\n              <div class=\"map-label\" style=\"top:16%;left:73%\">ENG</div>\n              <div class=\"map-label\" style=\"top:71%;left:11%\">REC</div>\n              <div class=\"map-label\" style=\"top:71%;left:73%\">LIB</div>\n              <div class=\"truck-pin pin-teal\" style=\"top:34%;left:28%\" title=\"Taco Loco\">T</div>\n              <div class=\"truck-pin pin-amber\" style=\"top:34%;left:58%\" title=\"Bear Bites\">B</div>\n              <div class=\"truck-pin pin-red\" style=\"top:55%;left:42%\" title=\"Highlander Grille\">H</div>\n              <div class=\"truck-pin pin-teal\" style=\"top:55%;left:68%\" title=\"UCR Noodles\">N</div>\n              <div class=\"truck-pin pin-amber\" style=\"top:20%;left:80%\" title=\"Campus Bowls\">C</div>\n              <div class=\"map-label\" style=\"bottom:4%;left:5%;font-size:6px;color:#888\">\u25cf open \u25cf closing soon \u25cf closed</div>\n            </div>\n          </div>\n          <div class=\"bottom-nav\">\n            <div class=\"nav-item active\"><i class=\"ti ti-map-pin\" aria-hidden=\"true\"></i><span>Map</span></div>\n            <div class=\"nav-item\"><i class=\"ti ti-search\" aria-hidden=\"true\"></i><span>Search</span></div>\n            <div class=\"nav-item\"><i class=\"ti ti-wallet\" aria-hidden=\"true\"></i><span>Funds</span></div>\n            <div class=\"nav-item\"><i class=\"ti ti-receipt\" aria-hidden=\"true\"></i><span>Orders</span></div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Screen 2: Vendor List -->\n    <div>\n      <p class=\"section-label\" style=\"text-align:center\">2 \u00b7 search vendors</p>\n      <div class=\"phone-frame\">\n        <div class=\"phone-screen\">\n          <div class=\"status-bar\"><span>9:41</span><span>\u25cf\u25cf\u25cf \u25b2 \u25ae</span></div>\n          <div class=\"screen-header\">\n            <h3>Search vendors</h3>\n            <p>Dining dollars \u00b7 Bear Bucks accepted</p>\n          </div>\n          <div class=\"screen-body\">\n            <div class=\"search-bar\">\n              <i class=\"ti ti-search\" style=\"font-size:10px; color:var(--color-text-secondary)\" aria-hidden=\"true\"></i>\n              <span>Tacos, bowls, noodles...</span>\n            </div>\n            <div style=\"display:flex; gap:4px; flex-wrap:wrap;\">\n              <span class=\"badge badge-green\">\ud83d\udfe2 Open now</span>\n              <span class=\"badge badge-gray\">Near me</span>\n              <span class=\"badge badge-gray\">Bear Bucks</span>\n              <span class=\"badge badge-gray\">Meal swipe</span>\n            </div>\n            <div class=\"vendor-card\">\n              <div class=\"vendor-img\" style=\"background:#d1fae5\">\ud83c\udf2e</div>\n              <div class=\"vendor-info\" style=\"flex:1\">\n                <h4>Taco Loco</h4>\n                <p>Near HUB \u00b7 5 min walk</p>\n              </div>\n              <div style=\"text-align:right\">\n                <span class=\"badge badge-green\">Open</span>\n                <p style=\"font-size:7px;color:var(--color-text-secondary);margin-top:1px\">~8 min wait</p>\n              </div>\n            </div>\n            <div class=\"vendor-card\">\n              <div class=\"vendor-img\" style=\"background:#fef3c7\">\ud83c\udf5c</div>\n              <div class=\"vendor-info\" style=\"flex:1\">\n                <h4>UCR Noodle Bar</h4>\n                <p>Near Eng. \u00b7 8 min walk</p>\n              </div>\n              <div style=\"text-align:right\">\n                <span class=\"badge badge-green\">Open</span>\n                <p style=\"font-size:7px;color:var(--color-text-secondary);margin-top:1px\">~15 min wait</p>\n              </div>\n            </div>\n            <div class=\"vendor-card\">\n              <div class=\"vendor-img\" style=\"background:#ede9fe\">\ud83e\udd57</div>\n              <div class=\"vendor-info\" style=\"flex:1\">\n                <h4>Bear Bites Bowls</h4>\n                <p>Near Rec \u00b7 3 min walk</p>\n              </div>\n              <div style=\"text-align:right\">\n                <span class=\"badge badge-amber\">~Close</span>\n                <p style=\"font-size:7px;color:var(--color-text-secondary);margin-top:1px\">~5 min wait</p>\n              </div>\n            </div>\n            <div class=\"vendor-card\">\n              <div class=\"vendor-img\" style=\"background:#fee2e2\">\ud83c\udf54</div>\n              <div class=\"vendor-info\" style=\"flex:1\">\n                <h4>Highlander Grille</h4>\n                <p>Near Library \u00b7 10 min</p>\n              </div>\n              <div style=\"text-align:right\">\n                <span class=\"badge badge-gray\">Closed</span>\n              </div>\n            </div>\n          </div>\n          <div class=\"bottom-nav\">\n            <div class=\"nav-item\"><i class=\"ti ti-map-pin\" aria-hidden=\"true\"></i><span>Map</span></div>\n            <div class=\"nav-item active\"><i class=\"ti ti-search\" aria-hidden=\"true\"></i><span>Search</span></div>\n            <div class=\"nav-item\"><i class=\"ti ti-wallet\" aria-hidden=\"true\"></i><span>Funds</span></div>\n            <div class=\"nav-item\"><i class=\"ti ti-receipt\" aria-hidden=\"true\"></i><span>Orders</span></div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Screen 3: Vendor Detail + Order -->\n    <div>\n      <p class=\"section-label\" style=\"text-align:center\">3 \u00b7 vendor & order</p>\n      <div class=\"phone-frame\">\n        <div class=\"phone-screen\">\n          <div class=\"status-bar\"><span>9:41</span><span>\u25cf\u25cf\u25cf \u25b2 \u25ae</span></div>\n          <div style=\"background:#1E5C38;padding:6px 10px;display:flex;align-items:center;gap:6px;\">\n            <i class=\"ti ti-arrow-left\" style=\"color:#fff;font-size:12px\" aria-hidden=\"true\"></i>\n            <span style=\"color:#fff;font-size:11px;font-weight:500\">Taco Loco</span>\n            <span class=\"badge badge-green\" style=\"margin-left:auto\">Open \u00b7 ~8 min</span>\n          </div>\n          <div class=\"screen-body\">\n            <div class=\"detail-img-row\">\n              <div class=\"detail-img\">\ud83c\udf2e</div>\n              <div class=\"detail-img\" style=\"background:#fef3c7\">\ud83c\udf2f</div>\n              <div class=\"detail-img\" style=\"background:#ede9fe\">\ud83e\udd64</div>\n            </div>\n            <div style=\"font-size:8px;color:var(--color-text-secondary)\">\ud83d\udccd Near HUB \u00b7 Opens until 3PM \u00b7 (951) 555-0172</div>\n            <div style=\"display:flex;align-items:center;gap:4px\">\n              <span class=\"stars\">\u2605\u2605\u2605\u2605\u2606</span>\n              <span style=\"font-size:8px;color:var(--color-text-secondary)\">4.2 (87 reviews)</span>\n            </div>\n            <div class=\"section-title\">Menu</div>\n            <div class=\"menu-item\">\n              <div class=\"menu-item-img\">\ud83c\udf2e</div>\n              <div class=\"menu-item-info\"><h4>Carne Asada Taco</h4><p>$4.50 \u00b7 Bear Bucks \u2713</p></div>\n              <div class=\"add-btn\">+</div>\n            </div>\n            <div class=\"menu-item\">\n              <div class=\"menu-item-img\">\ud83c\udf2f</div>\n              <div class=\"menu-item-info\"><h4>Burrito Bowl</h4><p>$7.00 \u00b7 Dining $ \u2713</p></div>\n              <div class=\"add-btn\">+</div>\n            </div>\n            <div class=\"menu-item\">\n              <div class=\"menu-item-img\">\ud83e\udd64</div>\n              <div class=\"menu-item-info\"><h4>Horchata</h4><p>$3.00 \u00b7 Cash \u2713</p></div>\n              <div class=\"add-btn\">+</div>\n            </div>\n            <div class=\"pay-row\">\n              <div class=\"pay-opt active\">Bear Bucks</div>\n              <div class=\"pay-opt\">Dining $</div>\n              <div class=\"pay-opt\">Card</div>\n            </div>\n            <div class=\"order-btn\">Place order \u00b7 $11.50</div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <!-- Screen 4: Funds/Wallet -->\n    <div>\n      <p class=\"section-label\" style=\"text-align:center\">4 \u00b7 funds & wallet</p>\n      <div class=\"phone-frame\">\n        <div class=\"phone-screen\">\n          <div class=\"status-bar\"><span>9:41</span><span>\u25cf\u25cf\u25cf \u25b2 \u25ae</span></div>\n          <div class=\"screen-header\">\n            <h3>My Funds</h3>\n            <p>UCR student account</p>\n          </div>\n          <div class=\"screen-body\">\n            <div class=\"wallet-row\">\n              <div class=\"wallet-card\">\n                <p>Bear Bucks</p>\n                <h4>$124.50</h4>\n              </div>\n              <div class=\"wallet-card amber\">\n                <p>Dining Dollars</p>\n                <h4>$87.25</h4>\n              </div>\n            </div>\n            <div style=\"background:var(--color-background-secondary);border-radius:8px;padding:6px;\">\n              <p style=\"font-size:8px;color:var(--color-text-secondary)\">Meal swipes remaining</p>\n              <h4 style=\"font-size:13px;color:var(--color-text-primary);margin-top:2px\">14 / week</h4>\n              <div style=\"height:4px;background:var(--color-border-tertiary);border-radius:4px;margin-top:4px\">\n                <div style=\"height:4px;width:56%;background:#1E5C38;border-radius:4px\"></div>\n              </div>\n            </div>\n            <div class=\"section-title\" style=\"margin-top:4px\">Recent transactions</div>\n            <div class=\"notif-row\">\n              <i class=\"ti ti-building-store\" aria-hidden=\"true\"></i>\n              <div>\n                <p style=\"font-weight:500;font-size:8px;color:var(--color-text-primary)\">Taco Loco \u00b7 -$11.50</p>\n                <p>Today 12:34 \u00b7 Bear Bucks</p>\n              </div>\n            </div>\n            <div class=\"notif-row\">\n              <i class=\"ti ti-building-store\" aria-hidden=\"true\"></i>\n              <div>\n                <p style=\"font-weight:500;font-size:8px;color:var(--color-text-primary)\">Bear Bites Bowls \u00b7 -$8.00</p>\n                <p>Yesterday \u00b7 Dining Dollars</p>\n              </div>\n            </div>\n            <div class=\"notif-row\">\n              <i class=\"ti ti-building-store\" aria-hidden=\"true\"></i>\n              <div>\n                <p style=\"font-weight:500;font-size:8px;color:var(--color-text-primary)\">UCR Noodle Bar \u00b7 -$9.75</p>\n                <p>Mon \u00b7 Dining Dollars</p>\n              </div>\n            </div>\n          </div>\n          <div class=\"bottom-nav\">\n            <div class=\"nav-item\"><i class=\"ti ti-map-pin\" aria-hidden=\"true\"></i><span>Map</span></div>\n            <div class=\"nav-item\"><i class=\"ti ti-search\" aria-hidden=\"true\"></i><span>Search</span></div>\n            <div class=\"nav-item active\"><i class=\"ti ti-wallet\" aria-hidden=\"true\"></i><span>Funds</span></div>\n            <div class=\"nav-item\"><i class=\"ti ti-receipt\" aria-hidden=\"true\"></i><span>Orders</span></div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n  </div>\n\n  <!-- Campus Map Section -->\n  <p class=\"section-label\">UCR campus \u2014 food truck location map</p>\n  <div class=\"campus-map\">\n    <svg width=\"100%\" height=\"100%\" viewBox=\"0 0 620 260\" xmlns=\"http://www.w3.org/2000/svg\" aria-label=\"UCR campus map showing food truck locations\">\n      <title>UCR campus food truck map</title>\n      <!-- Roads -->\n      <rect x=\"0\" y=\"0\" width=\"620\" height=\"260\" fill=\"#eef5e8\" rx=\"8\"/>\n      <!-- Main roads -->\n      <rect x=\"0\" y=\"118\" width=\"620\" height=\"10\" fill=\"#fff\" opacity=\"0.9\"/>\n      <rect x=\"0\" y=\"168\" width=\"620\" height=\"8\" fill=\"#fff\" opacity=\"0.8\"/>\n      <rect x=\"200\" y=\"0\" width=\"8\" height=\"260\" fill=\"#fff\" opacity=\"0.9\"/>\n      <rect x=\"390\" y=\"0\" width=\"8\" height=\"260\" fill=\"#fff\" opacity=\"0.9\"/>\n      <rect x=\"110\" y=\"0\" width=\"5\" height=\"260\" fill=\"#fff\" opacity=\"0.7\"/>\n      <rect x=\"500\" y=\"0\" width=\"5\" height=\"260\" fill=\"#fff\" opacity=\"0.7\"/>\n      <!-- Buildings -->\n      <rect x=\"20\" y=\"20\" width=\"75\" height=\"45\" fill=\"#b8d4b0\" stroke=\"#8aaa82\" stroke-width=\"0.5\" rx=\"3\"/>\n      <text x=\"57\" y=\"47\" text-anchor=\"middle\" font-size=\"8\" fill=\"#2d5a27\" font-family=\"sans-serif\">HUB / Dining</text>\n      <rect x=\"120\" y=\"20\" width=\"65\" height=\"38\" fill=\"#b8d4b0\" stroke=\"#8aaa82\" stroke-width=\"0.5\" rx=\"3\"/>\n      <text x=\"152\" y=\"43\" text-anchor=\"middle\" font-size=\"8\" fill=\"#2d5a27\" font-family=\"sans-serif\">Student Rec</text>\n      <rect x=\"215\" y=\"20\" width=\"80\" height=\"42\" fill=\"#c4c8e0\" stroke=\"#8a8eaa\" stroke-width=\"0.5\" rx=\"3\"/>\n      <text x=\"255\" y=\"45\" text-anchor=\"middle\" font-size=\"8\" fill=\"#333\" font-family=\"sans-serif\">Science Complex</text>\n      <rect x=\"400\" y=\"15\" width=\"90\" height=\"50\" fill=\"#c4c8e0\" stroke=\"#8a8eaa\" stroke-width=\"0.5\" rx=\"3\"/>\n      <text x=\"445\" y=\"44\" text-anchor=\"middle\" font-size=\"8\" fill=\"#333\" font-family=\"sans-serif\">Engineering</text>\n      <rect x=\"510\" y=\"20\" width=\"95\" height=\"42\" fill=\"#d4c8b4\" stroke=\"#aaa08a\" stroke-width=\"0.5\" rx=\"3\"/>\n      <text x=\"557\" y=\"45\" text-anchor=\"middle\" font-size=\"8\" fill=\"#5a4a20\" font-family=\"sans-serif\">Rivera Library</text>\n      <rect x=\"20\" y=\"185\" width=\"75\" height=\"50\" fill=\"#c4c8e0\" stroke=\"#8a8eaa\" stroke-width=\"0.5\" rx=\"3\"/>\n      <text x=\"57\" y=\"214\" text-anchor=\"middle\" font-size=\"8\" fill=\"#333\" font-family=\"sans-serif\">Bourns Hall</text>\n      <rect x=\"215\" y=\"185\" width=\"90\" height=\"50\" fill=\"#b8d4b0\" stroke=\"#8aaa82\" stroke-width=\"0.5\" rx=\"3\"/>\n      <text x=\"260\" y=\"214\" text-anchor=\"middle\" font-size=\"8\" fill=\"#2d5a27\" font-family=\"sans-serif\">Glasgow Hall</text>\n      <rect x=\"410\" y=\"185\" width=\"80\" height=\"50\" fill=\"#c4c8e0\" stroke=\"#8a8eaa\" stroke-width=\"0.5\" rx=\"3\"/>\n      <text x=\"450\" y=\"214\" text-anchor=\"middle\" font-size=\"8\" fill=\"#333\" font-family=\"sans-serif\">Sproul Hall</text>\n      <rect x=\"510\" y=\"185\" width=\"95\" height=\"50\" fill=\"#d4c8b4\" stroke=\"#aaa08a\" stroke-width=\"0.5\" rx=\"3\"/>\n      <text x=\"557\" y=\"214\" text-anchor=\"middle\" font-size=\"8\" fill=\"#5a4a20\" font-family=\"sans-serif\">Arts Building</text>\n      <!-- Parking / open areas -->\n      <rect x=\"120\" y=\"185\" width=\"80\" height=\"50\" fill=\"#e8e0c8\" stroke=\"#c0b898\" stroke-width=\"0.5\" rx=\"3\"/>\n      <text x=\"160\" y=\"214\" text-anchor=\"middle\" font-size=\"8\" fill=\"#7a6a40\" font-family=\"sans-serif\">Lot 6 / Open</text>\n      <!-- Food truck pins -->\n      <!-- Truck 1: Taco Loco near HUB -->\n      <circle cx=\"95\" cy=\"115\" r=\"11\" fill=\"#1E5C38\" stroke=\"#fff\" stroke-width=\"2\"/>\n      <text x=\"95\" y=\"119\" text-anchor=\"middle\" font-size=\"9\" fill=\"#fff\" font-weight=\"700\" font-family=\"sans-serif\">T</text>\n      <text x=\"95\" y=\"135\" text-anchor=\"middle\" font-size=\"7\" fill=\"#1E5C38\" font-family=\"sans-serif\">Taco Loco</text>\n      <!-- Truck 2: Noodle Bar near Sci -->\n      <circle cx=\"300\" cy=\"115\" r=\"11\" fill=\"#D97706\" stroke=\"#fff\" stroke-width=\"2\"/>\n      <text x=\"300\" y=\"119\" text-anchor=\"middle\" font-size=\"9\" fill=\"#fff\" font-weight=\"700\" font-family=\"sans-serif\">N</text>\n      <text x=\"300\" y=\"135\" text-anchor=\"middle\" font-size=\"7\" fill=\"#D97706\" font-family=\"sans-serif\">Noodle Bar</text>\n      <!-- Truck 3: Highlander near Eng -->\n      <circle cx=\"480\" cy=\"115\" r=\"11\" fill=\"#1E5C38\" stroke=\"#fff\" stroke-width=\"2\"/>\n      <text x=\"480\" y=\"119\" text-anchor=\"middle\" font-size=\"9\" fill=\"#fff\" font-weight=\"700\" font-family=\"sans-serif\">H</text>\n      <text x=\"480\" y=\"135\" text-anchor=\"middle\" font-size=\"7\" fill=\"#1E5C38\" font-family=\"sans-serif\">Highlander</text>\n      <!-- Truck 4: Bear Bites Lot 6 -->\n      <circle cx=\"160\" cy=\"165\" r=\"11\" fill=\"#DC2626\" stroke=\"#fff\" stroke-width=\"2\"/>\n      <text x=\"160\" y=\"169\" text-anchor=\"middle\" font-size=\"9\" fill=\"#fff\" font-weight=\"700\" font-family=\"sans-serif\">B</text>\n      <text x=\"160\" y=\"182\" text-anchor=\"middle\" font-size=\"7\" fill=\"#DC2626\" font-family=\"sans-serif\">Bear Bites</text>\n      <!-- Truck 5: Campus Bowls near Library -->\n      <circle cx=\"560\" cy=\"115\" r=\"11\" fill=\"#D97706\" stroke=\"#fff\" stroke-width=\"2\"/>\n      <text x=\"560\" y=\"119\" text-anchor=\"middle\" font-size=\"9\" fill=\"#fff\" font-weight=\"700\" font-family=\"sans-serif\">C</text>\n      <text x=\"560\" y=\"135\" text-anchor=\"middle\" font-size=\"7\" fill=\"#D97706\" font-family=\"sans-serif\">Campus Bowls</text>\n      <!-- Truck 6: Fusion near Glasgow -->\n      <circle cx=\"370\" cy=\"165\" r=\"11\" fill=\"#1E5C38\" stroke=\"#fff\" stroke-width=\"2\"/>\n      <text x=\"370\" y=\"169\" text-anchor=\"middle\" font-size=\"9\" fill=\"#fff\" font-weight=\"700\" font-family=\"sans-serif\">F</text>\n      <text x=\"370\" y=\"182\" text-anchor=\"middle\" font-size=\"7\" fill=\"#1E5C38\" font-family=\"sans-serif\">Fusion Co.</text>\n      <!-- Legend -->\n      <circle cx=\"15\" cy=\"248\" r=\"5\" fill=\"#1E5C38\"/>\n      <text x=\"24\" y=\"252\" font-size=\"8\" fill=\"#555\" font-family=\"sans-serif\">Open</text>\n      <circle cx=\"60\" cy=\"248\" r=\"5\" fill=\"#D97706\"/>\n      <text x=\"69\" y=\"252\" font-size=\"8\" fill=\"#555\" font-family=\"sans-serif\">Closing soon</text>\n      <circle cx=\"130\" cy=\"248\" r=\"5\" fill=\"#DC2626\"/>\n      <text x=\"139\" y=\"252\" font-size=\"8\" fill=\"#555\" font-family=\"sans-serif\">Closing</text>\n      <rect x=\"195\" y=\"243\" width=\"10\" height=\"8\" fill=\"#b8d4b0\" rx=\"1\"/>\n      <text x=\"209\" y=\"252\" font-size=\"8\" fill=\"#555\" font-family=\"sans-serif\">Campus buildings</text>\n    </svg>\n  </div>\n\n</div></div>"
       },
       final: {
         title: 'Final Design',
@@ -3018,61 +2890,66 @@ const STUDIES = [
     }
   },
   {
-    id: 'hotel-brand',
-    title: 'Boutique Hotel Identity',
+    id: 'katchify',
+    title: 'Katchify',
     category: 'branding',
-    catLabel: 'Brand Strategy · Identity',
+    catLabel: 'Brand Design · Marketing · Tech Entrepreneurship',
     color: '#89B4C8',
-    role: 'Brand Strategist',
-    duration: '6 weeks',
-    year: '2024',
-    tags: ['Illustrator', 'Strategy', 'Identity'],
-    badge: 'Brand Strategy',
+    role: 'Product Designer & Video Editor',
+    duration: '1 Quarter — 3 months',
+    year: '2026',
+    team: '5 people',
+    tags: ['Brand Design', 'Video Production', 'Product Design', 'Marketing'],
+    badge: 'BUS 173',
     sections: {
       problem: {
         title: 'The Problem',
-        text: 'A new boutique hotel needed a complete brand identity to stand out in a saturated luxury market and attract a <strong>design-forward, experience-driven traveler</strong>. They had no existing visual language and needed everything from logo to brand voice.',
+        text: 'Falls are one of the leading causes of injury among seniors, yet most existing solutions are either invasive, unreliable, or reactive. Wearable devices require user compliance — elderly individuals often forget to wear them or find them uncomfortable. Camera-based systems raise serious privacy concerns. There was a clear gap in the market for a <strong>proactive, privacy-first, non-wearable fall detection system</strong> that could predict emergencies before they happen.',
         cards: []
       },
       research: {
         title: 'Research',
-        text: 'Ran stakeholder discovery workshops, competitive landscape analysis of 8 luxury boutique hotels, and reviewed target customer travel behavior data. Identified a positioning gap: most competitors leaned either ultra-minimal or maximalist — the opportunity was curated warmth.',
+        text: 'As part of <strong>BUS 173: Technology Entrepreneurship</strong> at UC Riverside, our team of 5 developed Katchify — a health-technology company built around AI-powered, non-wearable fall detection. We conducted market research to validate the opportunity and understand the competitive landscape.',
         cards: [
-          { label: 'Discovery', text: 'Stakeholder workshops to extract brand values, guest experience goals, and competitive differentiators' },
-          { label: 'Competitive Analysis', text: '8 comparable boutique hotels analyzed for positioning, tone, and visual language' },
-          { label: 'Positioning Gap', text: 'Opportunity found in "curated warmth" — neither cold minimal nor ornate maximalist' }
+          { label: 'Market Size', text: 'The U.S. elderly care services market is projected to surpass $403 billion by 2026, driven by a doubling of the elderly population since 1980' },
+          { label: 'Customer Segments', text: 'Families monitoring elderly relatives living independently, and assisted living facilities seeking efficient, privacy-respecting resident monitoring' },
+          { label: 'Competitive Gap', text: 'Direct competitors (Vayyar, Milesight) detect falls after they happen. Katchify\'s AI algorithms predict and prevent emergencies before they occur — a fundamentally different model' }
         ]
       },
       process: {
-        title: 'Design Process',
-        text: 'Developed mood boards across 3 visual directions and presented to stakeholders for alignment. Defined the brand archetype (The Host), crafted the brand voice, then built the visual identity system from that foundation outward.',
+        title: 'Process',
+        text: 'The project followed a full entrepreneurship workflow — from company formation and MVP development through beta testing, market entry, and financial planning. As the team\'s <strong>Product Designer and Video Editor</strong>, I led the visual identity, product design, and the creation of the marketing video.',
         cards: [
-          { label: 'Brand Archetype', text: '"The Host" — warm, knowledgeable, quietly confident and always present' },
-          { label: 'Visual Directions', text: '3 distinct mood boards presented for stakeholder alignment before design began' },
-          { label: 'System Build', text: 'Logo suite → color palette → typography → photography style guide → brand voice' }
+          { label: 'My Role', text: 'Designed the product visual identity, created brand assets, and produced and edited the Katchify marketing video from concept through final cut' },
+          { label: 'Business Model', text: 'Hardware leasing at $300/month per device + $20/month subscription for app monitoring access — a dual-revenue model delivering predictable recurring cash flow' },
+          { label: 'Milestones', text: '2024 Q1: Company formation & hardware prototype · 2024 Q3: MVP algorithm & mobile app · 2025 Q1: Beta test in assisted living facility · 2025 Q3: First facility contract secured & manufacturer procured' }
         ]
       },
       wireframes: {
-        title: 'Design Explorations',
-        text: 'Explored multiple logo concepts and color palette directions before narrowing to the final system through iterative client reviews.',
+        title: 'Product & Brand Design',
+        text: 'Developed the visual identity and brand system for Katchify, as well as concepted and edited the marketing video. The brand was designed to communicate trust, privacy, and technological confidence — qualities essential for families making safety decisions for vulnerable loved ones.',
         wireframes: true
       },
       final: {
         title: 'Final Design',
-        text: 'Delivered a complete 80-page brand guidelines document, full logo suite, color palette, typography system, social media templates, and signage specifications. The brand voice guide included tone examples across email, social, in-room materials, and staff scripts.',
+        text: 'Katchify\'s final product concept includes ceiling and wall-mounted LiDAR sensors connected to a subscription-based mobile app delivering real-time alerts, movement trend analysis, and proactive safety suggestions. The system operates passively — no wearables, no cameras, no user compliance required.',
         cards: [
-          { label: 'Deliverables', text: '80-page brand guidelines, full asset library, social templates, signage specs' },
-          { label: 'Logo System', text: 'Primary mark + wordmark + icon variants for all use cases' },
-          { label: 'Handoff', text: '2-week onboarding sprint with in-house team to ensure consistent application' }
+          { label: 'Hardware', text: 'Ceiling/wall-mounted LiDAR & radar sensors — discreet, USB-powered, no cameras, no wearables required' },
+          { label: 'Software', text: 'Mobile app with real-time alerts, movement trend analysis, AI-driven risk predictions, and emergency service notifications' },
+          { label: 'Marketing Video', text: 'Produced and edited the Katchify marketing video — communicating the product\'s value proposition through storytelling, motion, and brand voice · <a href="https://youtube.com/watch?v=_IWZQXO6u68" target="_blank" style="color:var(--sage-dark);font-weight:500;">Watch the video →</a>' }
         ]
       },
       outcome: {
         title: 'Outcome',
-        text: 'Brand launched to strong reception from press and customers alike, with direct bookings exceeding projections in the opening quarter.',
+        text: 'Katchify was developed as a fully realized business plan and presented as part of BUS 173: Technology Entrepreneurship. The project demonstrated how UX thinking, brand design, and systems-level product development can come together to address a real, underserved market.',
+        cards: [
+          { label: 'Business Results', text: 'First assisted living facility contract secured · Manufacturer procured overseas · Beta test completed successfully · Seeking $1M venture capital investment' },
+          { label: 'Financial Projections', text: 'Projected $4M+ revenue in Year 1 · Break-even by Month 12 · ROI for investors beginning Year 2 · Exit strategy: IPO or private acquisition' }
+        ],
         outcomes: [
-          { stat: '+31%', label: 'Direct Bookings', desc: 'Above projections, first quarter post-launch' },
-          { stat: '2', label: 'Press Features', desc: 'Design publications covered the brand launch' },
-          { stat: '6wk', label: 'Timeline', desc: 'Discovery to final handoff delivered on time' }
+          { stat: 'UCR', label: 'University', desc: 'University of California, Riverside' },
+          { stat: '2026', label: 'Year', desc: 'BUS 173: Technology Entrepreneurship' },
+          { stat: '$403B', label: 'Market Size', desc: 'U.S. elderly care services by 2026' }
         ]
       }
     }
@@ -3205,8 +3082,10 @@ let showingAll = false;
 let activeStep = 'problem';
 
 function renderGrid() {
-  const query = document.getElementById('searchInput').value.toLowerCase();
+  const searchEl = document.getElementById('searchInput');
   const grid = document.getElementById('csGrid');
+  if (!searchEl || !grid) return;
+  const query = searchEl.value.toLowerCase();
   const filtered = STUDIES.filter(s => {
     const matchCat = activeCategory === 'all' || s.category === activeCategory;
     const matchQ = !query || s.title.toLowerCase().includes(query) || s.catLabel.toLowerCase().includes(query) || s.tags.some(t => t.toLowerCase().includes(query));
@@ -3309,12 +3188,16 @@ function renderSections(s) {
         </div>`).join('')}</div>`;
     }
     if (sec.wireframes) {
-      inner += `<div class="wireframe-grid">
-        ${[1,2,3].map(n => `<div class="wireframe-box">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 9v12"/></svg>
-          <span>Screen ${n}</span>
-        </div>`).join('')}
-      </div>`;
+      if (sec.embedHTML) {
+        inner += `<div class="wf-embed-outer">${sec.embedHTML}</div>`;
+      } else {
+        inner += `<div class="wireframe-grid">
+          ${[1,2,3].map(n => `<div class="wireframe-box">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 9v12"/></svg>
+            <span>Screen ${n}</span>
+          </div>`).join('')}
+        </div>`;
+      }
     }
     if (sec.outcomes) {
       inner += `<div class="ds-outcomes">${sec.outcomes.map(o => `
@@ -3333,8 +3216,7 @@ function renderSections(s) {
   }).join('');
 }
 
-// Init
-renderGrid();
+// renderGrid is called lazily when openCaseStudiesPage() is triggered
 
 </script>
 <!-- ─── UX Research Modal ─── -->
@@ -3669,6 +3551,7 @@ renderGrid();
     </div>
     <div class="prog-modal-section-label">CERTIFICATIONS EARNED</div>
     <div class="cert-modal-list">
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Content Marketing Essentials for SEO and AI Search with Semrush</div>
       <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Getting Started with Semrush</div>
     </div>
   </div>
@@ -3857,6 +3740,57 @@ renderGrid();
 
  </div>
 </div>
+  </div>
+</div>
+
+<!-- ─── Canva Design School Modal ─── -->
+<div id="canvaModal" class="prog-modal-overlay" onclick="closeStampModal('canva', event)">
+  <div class="prog-modal-card">
+    <button class="prog-modal-close" onclick="closeStampModal('canva', null)">×</button>
+    <div class="prog-modal-top">
+      <div class="prog-modal-stamp-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <div>
+        <div class="prog-modal-title">Canva Design School</div>
+        <div class="prog-modal-verified">STAMP VERIFIED</div>
+      </div>
+    </div>
+    <div class="prog-modal-section-label">CERTIFICATIONS EARNED</div>
+    <div class="cert-modal-list">
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>AI Skills for Students</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Canva Essentials</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Graphic Design Essentials</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Marketing with Canva</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Scale Creative Campaigns</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>The Field Guide to Human-Centered Design</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Canva Design School Modal ─── -->
+<div id="canvaModal" class="prog-modal-overlay" onclick="closeStampModal('canva', event)">
+  <div class="prog-modal-card">
+    <button class="prog-modal-close" onclick="closeStampModal('canva', null)">×</button>
+    <div class="prog-modal-top">
+      <div class="prog-modal-stamp-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <div>
+        <div class="prog-modal-title">Canva Design School</div>
+        <div class="prog-modal-verified">STAMP VERIFIED</div>
+      </div>
+    </div>
+    <div class="prog-modal-section-label">CERTIFICATIONS EARNED</div>
+    <div class="cert-modal-list">
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>AI Skills for Students</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Canva Essentials</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Graphic Design Essentials</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Marketing with Canva</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Scale Creative Campaigns</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>The Field Guide to Human-Centered Design</div>
+      <div class="cert-modal-item"><span class="cert-modal-dot green"></span>Work Smarter with AI</div>
+    </div>
   </div>
 </div>
 
